@@ -16,12 +16,12 @@ public class Rotate90 : MonoBehaviour {
 	void Update () {
 		float yRotation = 90.0f;
 		if(Input.GetKeyDown("a")){
-			Debug.Log ("Left key pressed!");
+			//Debug.Log ("Left key pressed!");
 			desiredRotation=(float)mod((int)(desiredRotation+yRotation),360);
 			turnDir=1.0f;
 			orientation=mod(orientation-1,4);
 		}else if(Input.GetKeyDown ("d")){
-			Debug.Log ("Right key pressed!");
+			//Debug.Log ("Right key pressed!");
 			desiredRotation=(float)mod((int)(desiredRotation-yRotation),360);
 			turnDir=-1.0f;
 			orientation=mod(orientation+1,4);
@@ -29,10 +29,10 @@ public class Rotate90 : MonoBehaviour {
 		float curAngle=transform.rotation.eulerAngles.y;
 		if(Mathf.Abs(curAngle-desiredRotation) > 3){
 			transform.rotation = Quaternion.AngleAxis(curAngle + turnDir*(Time.deltaTime * 45f), Vector3.up);
-			Debug.Log ("Current Angle: "+curAngle+" Desired Angle: "+desiredRotation);
+			//Debug.Log ("Current Angle: "+curAngle+" Desired Angle: "+desiredRotation);
 		}else if(Mathf.Abs(curAngle-desiredRotation) <= 3 && turnDir!=0.0f){
 			transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x,desiredRotation,transform.rotation.eulerAngles.z);
-			Debug.Log ("Snapped to Angle: " + desiredRotation);
+			//Debug.Log ("Snapped to Angle: " + desiredRotation);
 			turnDir=0.0f;
 		}
 	}
