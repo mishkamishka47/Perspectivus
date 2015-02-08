@@ -54,19 +54,26 @@ public class PlayerMovement : MonoBehaviour {
 		}
 		
 	}
-	bool pathPresent(float x, float y, float z) { //Checks if there's a cube underneath the direction the player wants to go
+	bool pathPresent(float x, float y, float z) { //Returns true if translation should still take place (no successful perspective jump, path clear), false otherwise
 		Vector3 center = new Vector3(x,y,z);
 		
 		Collider[] collidersThere = Physics.OverlapSphere(center+transform.position, 0.0f);
 		if(collidersThere.Length!=0){
 			//Debug.Log(collidersThere[0].name);
+			bool pathBlocked = false;
 			for(int i = 0; i<collidersThere.Length; i++){
 				if(collidersThere[i].name.Equals("PerspectiveWarper")){
-					perspectiveJump(collidersThere[i]);
+					if(perspectiveJump(collidersThere[i])){
+						return false;
+					}
+				}else{
+					Debug.Log(collidersThere[i].name);
+					pathBlocked=true;	
 				}
 			}
-			
-			return false;
+			if(pathBlocked){
+				return false;
+			}
 		}
 		
 		Vector3 belowCenter = new Vector3(x,y-1,z);
@@ -75,9 +82,9 @@ public class PlayerMovement : MonoBehaviour {
 			//Debug.Log(collidersBelow[0].name);
 		}
 		
-        return collidersThere.Length==0&&collidersBelow.Length!=0;
+        return collidersBelow.Length!=0;
 	}
-	void perspectiveJump(Collider warpCollider){
+	bool perspectiveJump(Collider warpCollider){ //Returns true if perspective jump was made
 		GameObject warper = warpCollider.gameObject;
 		PerspectiveWarpVars warpVars = warper.GetComponent<PerspectiveWarpVars>();
 		int orientationRequired = warpVars.OrientationRequired;
@@ -85,6 +92,8 @@ public class PlayerMovement : MonoBehaviour {
 		warpCoords.y=warpCoords.y-0.25f;
 		if(orientationRequired==target.orientation){
 			transform.position=warpCoords;
+			return true;
 		}
+		return false;
 	}
 }
