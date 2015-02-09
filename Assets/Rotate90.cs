@@ -47,23 +47,18 @@ public class Rotate90 : MonoBehaviour {
 	}
 
 	private void CheckViewpoint() {
-		int viewpointChange = 0;
 		if (Input.GetKeyDown (KeyCode.Alpha1)) {
 			currentLerpTime = 0f;
-			viewpointChange = 0 - orientation;
-			orientation = 0;
+			degree = mod ((int)degree + 90, 360);
+			orientation = mod (orientation - 1, 4);
 		} else if (Input.GetKeyDown (KeyCode.Alpha2)) {
 			currentLerpTime = 0f;
-			viewpointChange = 1 - orientation;
-			orientation = 1;
+			degree = mod ((int)degree - 180, 360);
+			orientation = mod (orientation + 2, 4);
 		} else if (Input.GetKeyDown (KeyCode.Alpha3)) {
 			currentLerpTime = 0f;
-			viewpointChange = 2 - orientation;
-			orientation = 2;
-		} else if (Input.GetKeyDown (KeyCode.Alpha4)) {
-			currentLerpTime = 0f;
-			viewpointChange = 3 - orientation;
-			orientation = 3;
+			degree = mod ((int)degree - 90, 360);
+			orientation = mod (orientation + 1, 4);
 		}
 
 		currentLerpTime += Time.deltaTime;
@@ -71,13 +66,6 @@ public class Rotate90 : MonoBehaviour {
 			currentLerpTime = lerpTime;
 		float percentage = currentLerpTime / lerpTime;
 		percentage *= bounceCurve.Evaluate (percentage);
-
-		if (viewpointChange == 3 || viewpointChange == -1)
-			degree += 90f;
-		else if (viewpointChange == 2 || viewpointChange == -2)
-			degree -= 180f;
-		else if (viewpointChange == 1 || viewpointChange == -3)
-			degree -= 90f;
 
 		transform.rotation = Quaternion.Slerp (transform.rotation, Quaternion.Euler (0, degree, 0), percentage);
 	}
