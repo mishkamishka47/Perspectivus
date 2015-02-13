@@ -100,6 +100,23 @@ public class PlayerMovement : MonoBehaviour {
 		PerspectiveWarpVars warpVars = warper.GetComponent<PerspectiveWarpVars>();
 		int orientationRequired = warpVars.OrientationRequired;
 		Vector3 warpCoords = warpVars.warpCoords;
+		Vector3 belowWarp = new Vector3(0,-1,0);
+		Collider[] collidersBelowWarp = Physics.OverlapSphere(warpCoords+belowWarp,0.0f); //Check that they're actually landing on something
+		bool cubeBelow=false;
+		if(collidersBelowWarp.Length!=0){
+			for(int i = 0; i<collidersBelowWarp.Length; i++){
+				if(collidersBelowWarp[i].name.Equals("Cube")){
+					cubeBelow=true;
+				}
+				if(collidersBelowWarp[i].name.Equals("RotateButton")){
+					cubeBelow=true;
+					rotateObject(collidersBelowWarp[i]);
+				}
+			}
+		}
+		if(!cubeBelow){
+			return false;
+		}
 		warpCoords.y=warpCoords.y-0.25f;
 		if((orientationRequired==target.orientation||orientationRequired==4)&&(upDirection==warpVars.moveRequired||warpVars.moveRequired==4)){
 			transform.position=warpCoords;
