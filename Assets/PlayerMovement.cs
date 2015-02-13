@@ -86,6 +86,10 @@ public class PlayerMovement : MonoBehaviour {
 				if(collidersBelow[i].name.Equals("Cube")){
 					cubeBelow=true;
 				}
+				if(collidersBelow[i].name.Equals("RotateButton")){
+					cubeBelow=true;
+					rotateObject(collidersBelow[i]);
+				}
 			}
 		}
 		
@@ -102,5 +106,16 @@ public class PlayerMovement : MonoBehaviour {
 			return true;
 		}
 		return false;
+	}
+	void rotateObject(Collider rotateCollider){
+		GameObject button = rotateCollider.gameObject;
+		RotateButtonVars rotateVars = button.GetComponent<RotateButtonVars>();
+		GameObject rotationTarget = rotateVars.rotateTarget;
+		int rotationDirection = rotateVars.rotateDirection;
+		if(rotationDirection==0){
+			rotationTarget.transform.eulerAngles = new Vector3(rotationTarget.transform.eulerAngles.x,rotationTarget.transform.eulerAngles.y+90,rotationTarget.transform.eulerAngles.z);
+		}else{
+			rotationTarget.transform.eulerAngles = new Vector3(rotationTarget.transform.eulerAngles.x,rotationTarget.transform.eulerAngles.y-90,rotationTarget.transform.eulerAngles.z);
+		}
 	}
 }
