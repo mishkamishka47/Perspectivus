@@ -86,7 +86,7 @@ public class PlayerMovement : MonoBehaviour {
         Collider[] collidersBelow = Physics.OverlapSphere(belowCenter+transform.position, 0.0f);
 		if(collidersBelow.Length!=0){
 			for(int i = 0; i<collidersBelow.Length; i++){
-				if(collidersBelow[i].name.Equals("Cube")){
+				if(collidersBelow[i].name.Equals("Cube")||collidersBelow[i].name.Equals("endpoint")){
 					cubeBelow=true;
 				}
 				if(collidersBelow[i].name.Equals("RotateButton")){
