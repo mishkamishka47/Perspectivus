@@ -3,9 +3,12 @@ using System.Collections;
 
 public class PlayerMovement : MonoBehaviour {
 	public Rotate90 target;
+	public GameObject lastButtonPressed;
+	public Material offColor;
+	public Material onColor;
 	// Use this for initialization
 	void Start () {
-		
+		lastButtonPressed=null;
 	}
 	
 	// Update is called once per frame
@@ -83,7 +86,7 @@ public class PlayerMovement : MonoBehaviour {
         Collider[] collidersBelow = Physics.OverlapSphere(belowCenter+transform.position, 0.0f);
 		if(collidersBelow.Length!=0){
 			for(int i = 0; i<collidersBelow.Length; i++){
-				if(collidersBelow[i].name.Equals("Cube")||collidersBelow[i].name.Equals("endpoint")){
+				if(collidersBelow[i].name.Equals("Cube")){
 					cubeBelow=true;
 				}
 				if(collidersBelow[i].name.Equals("RotateButton")){
@@ -105,12 +108,14 @@ public class PlayerMovement : MonoBehaviour {
 		bool cubeBelow=false;
 		if(collidersBelowWarp.Length!=0){
 			for(int i = 0; i<collidersBelowWarp.Length; i++){
-				if(collidersBelowWarp[i].name.Equals("Cube")||collidersBelowWarp[i].name.Equals("endpoint")){
+				if(collidersBelowWarp[i].name.Equals("Cube")){
 					cubeBelow=true;
 				}
 				if(collidersBelowWarp[i].name.Equals("RotateButton")){
 					cubeBelow=true;
-					rotateObject(collidersBelowWarp[i]);
+					if((orientationRequired==target.orientation||orientationRequired==4)&&(upDirection==warpVars.moveRequired||warpVars.moveRequired==4)){
+						rotateObject(collidersBelowWarp[i]);
+					}
 				}
 			}
 		}
@@ -126,13 +131,24 @@ public class PlayerMovement : MonoBehaviour {
 	}
 	void rotateObject(Collider rotateCollider){
 		GameObject button = rotateCollider.gameObject;
+		if(lastButtonPressed==null){
+			lastButtonPressed=button;
+		}else if(lastButtonPressed==button){
+			return;
+		}
+		lastButtonPressed.renderer.material=onColor;
+		lastButtonPressed=button;
+		button.renderer.material=offColor;
+		lastButtonPressed=button;
 		RotateButtonVars rotateVars = button.GetComponent<RotateButtonVars>();
-		GameObject rotationTarget = rotateVars.rotateTarget;
 		int rotationDirection = rotateVars.rotateDirection;
-		if(rotationDirection==0){
-			rotationTarget.transform.eulerAngles = new Vector3(rotationTarget.transform.eulerAngles.x,rotationTarget.transform.eulerAngles.y+90,rotationTarget.transform.eulerAngles.z);
-		}else{
-			rotationTarget.transform.eulerAngles = new Vector3(rotationTarget.transform.eulerAngles.x,rotationTarget.transform.eulerAngles.y-90,rotationTarget.transform.eulerAngles.z);
+		for(int i = 0; i <rotateVars.rotateTargets.Length; i++){
+			GameObject rotationTarget = rotateVars.rotateTargets[i];
+			if(rotationDirection==0){
+				rotationTarget.transform.eulerAngles = new Vector3(rotationTarget.transform.eulerAngles.x,rotationTarget.transform.eulerAngles.y+90,rotationTarget.transform.eulerAngles.z);
+			}else{
+				rotationTarget.transform.eulerAngles = new Vector3(rotationTarget.transform.eulerAngles.x,rotationTarget.transform.eulerAngles.y-90,rotationTarget.transform.eulerAngles.z);
+			}
 		}
 	}
 }
