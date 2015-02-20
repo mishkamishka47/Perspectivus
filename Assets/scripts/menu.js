@@ -18,25 +18,43 @@ function OnGUI () {
 	GUI.skin = labelSkin;
 	if(time < 0){
 		GUI.skin = labelAnotherSkin;
-		GUI.Label(Rect(250, 150, 500, 90), "Failed :(");
-		if(GUI.Button(Rect(500,300,250,50),"Retry")){
-			Application.LoadLevel("Tutorial"+level);
+		GUILayout.BeginArea(Rect(0, Screen.height*0.3, Screen.width, Screen.height*0.2));
+		GUILayout.BeginHorizontal();
+		GUILayout.BeginVertical();
+		GUILayout.Label("Failed o(╯□╰)o");
+		if(GUILayout.Button("Retry")){
+			Application.LoadLevel("Level"+level);
 		}
+		GUILayout.EndHorizontal();
+		GUILayout.EndVertical();
+		GUILayout.EndArea();
 	}
 	else if(distance <= 1 && time >= 0){
 		scores = time + (100 - steps);
 		GUI.skin = labelAnotherSkin;
-		GUI.Label(Rect(250, 150, 500, 90), "Succeed!!!");
+		GUILayout.BeginArea(Rect(0, Screen.height*0.2, Screen.width, Screen.height*0.4));
+		GUILayout.BeginVertical();
+		GUILayout.Label("Succeed!!!");
 		
-		if(GUI.Button(Rect(250,400,250,50),"Next Level")){
-			level++;
-			Application.LoadLevel("Tutorial"+level);
-		}
-		if(GUI.Button(Rect(500,400,250,50),"Retry")){
-			Application.LoadLevel("Tutorial"+level);
-		}
 		GUI.skin = labelSkin;
-		GUI.Label(Rect(375, 250, 500, 90), "Scores: "+scores);
+		//GUILayout.Space(20);
+		GUILayout.Label("Scores: "+scores);
+		GUILayout.EndVertical();
+		//GUILayout.EndHorizontal();
+		GUILayout.EndArea();
+		
+		GUILayout.BeginArea(Rect(0, Screen.height*0.5, Screen.width, Screen.height*0.2));
+		GUILayout.BeginHorizontal();
+		GUI.skin = labelAnotherSkin;
+		if(GUILayout.Button("Next Level")){
+			level++;
+			Application.LoadLevel("Level"+level);
+		}
+		if(GUILayout.Button("Retry")){
+			Application.LoadLevel("Level"+level);
+		}
+		GUILayout.EndHorizontal();
+		GUILayout.EndArea();
 	}
 	else{
 		GUI.Label(Rect(10, 10, 200, 90), "Time: " + time +"\n" + "Steps: " + steps);
