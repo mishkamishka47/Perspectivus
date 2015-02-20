@@ -2,7 +2,7 @@
 import UnityEngine.UI;
 
 public var labelSkin : GUISkin;
-private var maxLevel : int = 8;
+private var maxLevel : int = 10;
 private var firstMenu : boolean = true;
 private var current : int = 1;
 private var name : String;
@@ -13,12 +13,12 @@ function OnGUI(){
 		GUILayout.BeginHorizontal();
 		GUILayout.Label("Perspective");
 		GUILayout.EndArea();
-		GUILayout.BeginArea(Rect(Screen.width*0.4, Screen.height*0.5, Screen.width*0.2, Screen.height*0.3));
+		GUILayout.BeginArea(Rect(Screen.width*0.4, Screen.height*0.5, Screen.width*0.3, Screen.height*0.3));
 		GUILayout.BeginHorizontal();
 		GUILayout.BeginVertical();
 
 		if(GUILayout.Button("Play!!!")){
-			Application.LoadLevel("Tutorial1");
+			Application.LoadLevel("Level1");
 		}
 		GUILayout.Space(20);
 		if(GUILayout.Button("load")){
@@ -31,7 +31,7 @@ function OnGUI(){
 		GUILayout.EndArea();
 	}
 	if(!firstMenu){
-		GUILayout.BeginArea(Rect(Screen.width*0.4, Screen.height*0.2, Screen.width*0.2, Screen.height*0.5));
+		GUILayout.BeginArea(Rect(Screen.width*0.35, Screen.height*0.2, Screen.width*0.3, Screen.height*0.5));
 		GUILayout.BeginVertical();
 		if(current >= maxLevel){
 		
@@ -40,8 +40,8 @@ function OnGUI(){
 		var i = current;
 		
 		while(i<=(5+current) && i<=maxLevel){
-			if(GUILayout.Button("level"+i)){
-				Application.LoadLevel("Tutorial"+i);
+			if(GUILayout.Button("level "+i)){
+				Application.LoadLevel("Level"+i);
 			}
 			GUILayout.Space(20);
 			i++;
@@ -59,7 +59,7 @@ function OnGUI(){
 			firstMenu = true;
 		}
 		if(GUILayout.Button("Next")){
-			if(current < maxLevel)
+			if(current + 6 < maxLevel)
 				current += 6;
 		}
 		GUILayout.EndHorizontal();
