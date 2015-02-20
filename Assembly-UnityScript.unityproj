@@ -50,6 +50,7 @@
      <Compile Include="Assets\scripts\buttonEvent.js" />
      <Compile Include="Assets\scripts\menu.js" />
      <Compile Include="Assets\scripts\startMenu.js" />
+     <None Include="Assets\Standard Assets\Skyboxes\_skybox info.txt" />
  <Reference Include="UnityEngine.UI">
  <HintPath>D:/Program Files (x86)/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/4.6.2/UnityEngine.UI.dll</HintPath>
  </Reference>
