@@ -108,7 +108,7 @@ public class PlayerMovement : MonoBehaviour {
 		bool cubeBelow=false;
 		if(collidersBelowWarp.Length!=0){
 			for(int i = 0; i<collidersBelowWarp.Length; i++){
-				if(collidersBelowWarp[i].name.Equals("Cube")){
+				if(collidersBelowWarp[i].name.Equals("Cube")||collidersBelowWarp[i].name.Equals("endpoint")){
 					cubeBelow=true;
 				}
 				if(collidersBelowWarp[i].name.Equals("RotateButton")){
