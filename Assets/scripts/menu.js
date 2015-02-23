@@ -21,10 +21,10 @@ function OnGUI () {
 		GUILayout.BeginArea(Rect(0, Screen.height*0.3, Screen.width, Screen.height*0.2));
 		GUILayout.BeginHorizontal();
 		GUILayout.BeginVertical();
-		GUILayout.Label("Failed o(╯□╰)o");
-		if(GUILayout.Button("Retry")){
-			Application.LoadLevel("Level"+level);
-		}
+		//GUILayout.Label("Failed o(╯□╰)o");
+		//if(GUILayout.Button("Retry")){
+		//	Application.LoadLevel("Level"+level);
+		//}
 		GUILayout.EndHorizontal();
 		GUILayout.EndVertical();
 		GUILayout.EndArea();
