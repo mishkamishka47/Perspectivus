@@ -2,7 +2,7 @@
 import UnityEngine.UI;
 
 public var labelSkin : GUISkin;
-private var maxLevel : int = 10;
+private var maxLevel : int = 14;
 private var firstMenu : boolean = true;
 private var current : int = 1;
 private var name : String;
@@ -18,14 +18,17 @@ function OnGUI(){
 		GUILayout.BeginVertical();
 
 		if(GUILayout.Button("Play!!!")){
+			DontDestroyOnLoad(GameObject.Find("musicBox"));
 			Application.LoadLevel("Level1");
 		}
 		GUILayout.Space(20);
 		if(GUILayout.Button("load")){
+			DontDestroyOnLoad(GameObject.Find("musicBox"));
 			firstMenu = false;
 		}
 		GUILayout.Space(20);
 		if(GUILayout.Button("quit")){
+			DontDestroyOnLoad(GameObject.Find("musicBox"));
 			Application.Quit();
 		}
 		GUILayout.EndArea();
@@ -41,6 +44,7 @@ function OnGUI(){
 		
 		while(i<=(5+current) && i<=maxLevel){
 			if(GUILayout.Button("level "+i)){
+				DontDestroyOnLoad(GameObject.Find("musicBox"));
 				Application.LoadLevel("Level"+i);
 			}
 			GUILayout.Space(20);

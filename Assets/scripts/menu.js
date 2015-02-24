@@ -2,7 +2,7 @@
 import UnityEngine.UI;
 
 static var windowSwitch : boolean = false;
-private var windowExit = Rect(300, 280, 300, 400);
+private var windowExit = Rect(Screen.width*0.25, Screen.height*0.25, Screen.width*0.6, Screen.height*0.5);
 private var info : Text;
 private var distance : float = 100;
 private var scores: int = 0;
@@ -11,56 +11,64 @@ var time : float = 50.0;
 var steps : int = 0;
 public var labelSkin : GUISkin;
 public var labelAnotherSkin : GUISkin;
+public var settingSkin : GUISkin;
 function OnGUI () {
-	if(windowSwitch){
-		windowExit = GUI.Window(0, windowExit, windowContain, "Settings");
-	}
-	GUI.skin = labelSkin;
 	if(time < 0){
 		GUI.skin = labelAnotherSkin;
-		GUILayout.BeginArea(Rect(0, Screen.height*0.3, Screen.width, Screen.height*0.2));
-		GUILayout.BeginHorizontal();
+		GUILayout.BeginArea(Rect(Screen.width*0.15, Screen.height*0.2, Screen.width*0.7, Screen.height*0.4));
 		GUILayout.BeginVertical();
-		//GUILayout.Label("Failed o(╯□╰)o");
-		//if(GUILayout.Button("Retry")){
-		//	Application.LoadLevel("Level"+level);
-		//}
-		GUILayout.EndHorizontal();
+		GUILayout.Label("~Failed~");
 		GUILayout.EndVertical();
+		GUILayout.BeginHorizontal();
+		if(GUILayout.Button("Retry")){
+			DontDestroyOnLoad(GameObject.Find("musicBox"));
+			Application.LoadLevel("Level"+level);
+		}
+		if(GUILayout.Button("Main Menu")){
+			Destroy(GameObject.Find("musicBox"));
+			Application.LoadLevel("menu");
+		}
+		GUILayout.EndHorizontal();
 		GUILayout.EndArea();
 	}
 	else if(distance <= 1 && time >= 0){
 		scores = time + (100 - steps);
 		GUI.skin = labelAnotherSkin;
-		GUILayout.BeginArea(Rect(0, Screen.height*0.2, Screen.width, Screen.height*0.4));
+		GUILayout.BeginArea(Rect(Screen.width*0.15, Screen.height*0.2, Screen.width*0.7, Screen.height*0.4));
 		GUILayout.BeginVertical();
 		GUILayout.Label("Succeed!!!");
 		
 		GUI.skin = labelSkin;
-		//GUILayout.Space(20);
 		GUILayout.Label("Scores: "+scores);
 		GUILayout.EndVertical();
-		//GUILayout.EndHorizontal();
 		GUILayout.EndArea();
 		
-		GUILayout.BeginArea(Rect(0, Screen.height*0.5, Screen.width, Screen.height*0.2));
+		GUILayout.BeginArea(Rect(Screen.width*0.15, Screen.height*0.5, Screen.width*0.7, Screen.height*0.2));
 		GUILayout.BeginHorizontal();
 		GUI.skin = labelAnotherSkin;
 		if(GUILayout.Button("Next Level")){
 			level++;
+			DontDestroyOnLoad(GameObject.Find("musicBox"));
 			Application.LoadLevel("Level"+level);
 		}
 		if(GUILayout.Button("Retry")){
+			DontDestroyOnLoad(GameObject.Find("musicBox"));
 			Application.LoadLevel("Level"+level);
 		}
 		GUILayout.EndHorizontal();
 		GUILayout.EndArea();
 	}
 	else{
+		GUI.skin = labelSkin;
 		GUI.Label(Rect(10, 10, 200, 90), "Time: " + time +"\n" + "Steps: " + steps);
+	}
+	if(windowSwitch){
+		GUI.skin = settingSkin;
+		windowExit = GUI.Window(0, windowExit, windowContain, "Settings");
 	}
 }
 function Start(){
+	windowSwitch = false;
 	InvokeRepeating("subtime", 0, 1);
 }
 
@@ -70,23 +78,43 @@ function subtime(){
 }
 
 function windowContain(windowID: int){
-	GUI.skin = labelSkin;
-	if(GUI.Button(Rect(70,70,150,40), "Turn off Music")){
-		
+	GUILayout.BeginHorizontal();
+	GUILayout.BeginVertical();
+	GUILayout.Space(60);
+	if(GUILayout.Button("Turn off Music")){
+		GameObject.Find("musicBox").audio.Pause();
 	}
-	if(GUI.Button(Rect(70,120,150,40), "Turn on Music")){
+	GUILayout.Space(20);
+	if(GUILayout.Button("Turn on Music")){
+		GameObject.Find("musicBox").audio.Play();
+	}
+	GUILayout.Space(20);
+	if(GUILayout.Button("Resume")){
+		time+=1;
+		InvokeRepeating("subtime", 0, 1);
 		windowSwitch = false;
 	}
-	if(GUI.Button(Rect(70,170,150,40), "Close")){
-		windowSwitch = false;
+	GUILayout.Space(20);
+	if(GUILayout.Button("Main Menu")){
+		Destroy(GameObject.Find("musicBox"));
+		Application.LoadLevel("menu");
 	}
-	if(GUI.Button(Rect(70,220,150,40), "Quit")){
+	GUILayout.Space(20);
+	if(GUILayout.Button("Quit")){
 		Application.Quit();
 	}
+	GUILayout.EndVertical();
+	GUILayout.EndHorizontal();
 }
 
 function Update () {
 	if(Input.GetKeyDown(KeyCode.Escape)){
+		if(!windowSwitch)
+			CancelInvoke();
+		else{
+			time+=1;
+			InvokeRepeating("subtime", 0, 1);
+		}
 		windowSwitch = !windowSwitch;
 	}
 	if(Input.GetKeyDown("up")||Input.GetKeyDown("down")||Input.GetKeyDown("left")||Input.GetKeyDown("right")){
