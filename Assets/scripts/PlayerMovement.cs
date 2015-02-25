@@ -141,14 +141,10 @@ public class PlayerMovement : MonoBehaviour {
 		button.renderer.material=offColor;
 		lastButtonPressed=button;
 		RotateButtonVars rotateVars = button.GetComponent<RotateButtonVars>();
-		int rotationDirection = rotateVars.rotateDirection;
 		for(int i = 0; i <rotateVars.rotateTargets.Length; i++){
 			GameObject rotationTarget = rotateVars.rotateTargets[i];
-			if(rotationDirection==0){
-				rotationTarget.transform.eulerAngles = new Vector3(rotationTarget.transform.eulerAngles.x,rotationTarget.transform.eulerAngles.y+90,rotationTarget.transform.eulerAngles.z);
-			}else{
-				rotationTarget.transform.eulerAngles = new Vector3(rotationTarget.transform.eulerAngles.x,rotationTarget.transform.eulerAngles.y-90,rotationTarget.transform.eulerAngles.z);
-			}
+			var rotatePlatform = rotationTarget.GetComponent<RotatePlatform>();
+			rotatePlatform.Rotate();
 		}
 	}
 }
