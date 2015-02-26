@@ -45,6 +45,7 @@ function OnGUI(){
 		while(i<=(5+current) && i<=maxLevel){
 			if(GUILayout.Button("level "+i)){
 				DontDestroyOnLoad(GameObject.Find("musicBox"));
+				GameObject.Find("musicBox").GetComponent(passValue).setValue(i);
 				Application.LoadLevel("Level"+i);
 			}
 			GUILayout.Space(20);
