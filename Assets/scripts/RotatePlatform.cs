@@ -7,10 +7,11 @@ public class RotatePlatform : MonoBehaviour {
 	private float lerpTime = 1f, currentLerpTime = 0f;
 	private bool  isRotating = false;
 	private float shakeRange = .1f;
+	private Vector3 properPosition;
 
 	// Use this for initialization
 	void Start () {
-	
+		properPosition = transform.position;
 	}
 	
 	// Update is called once per frame
@@ -22,7 +23,7 @@ public class RotatePlatform : MonoBehaviour {
 		}
 		float percentage = currentLerpTime / lerpTime;
 		transform.rotation = Quaternion.Slerp (transform.rotation, Quaternion.Euler (0, degree, 0), percentage);
-		Shake ();
+		//Shake ();
 	}
 
 	public void Rotate() {
@@ -33,12 +34,12 @@ public class RotatePlatform : MonoBehaviour {
 
 	private void Shake() {
 		if (isRotating) {
-			var newPosition = transform.localPosition;
-			newPosition.x = Random.Range (-shakeRange, shakeRange);
-			newPosition.z = Random.Range (-shakeRange, shakeRange);
-			transform.localPosition = newPosition;
+			Vector3 newPosition = transform.position;
+			newPosition.x = newPosition.x+Random.Range (-shakeRange, shakeRange);
+			newPosition.z = newPosition.z+Random.Range (-shakeRange, shakeRange);
+			transform.position = newPosition;
 		} else {
-			transform.localPosition = new Vector3(0, 0, 0);
+			transform.position = properPosition;
 		}
 	}
 }
