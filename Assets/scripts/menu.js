@@ -25,10 +25,12 @@ function OnGUI () {
 		GUILayout.BeginHorizontal();
 		if(GUILayout.Button("Retry")){
 			DontDestroyOnLoad(GameObject.Find("musicBox"));
+			DontDestroyOnLoad(GameObject.Find("pass"));
 			Application.LoadLevel("Level"+level);
 		}
 		if(GUILayout.Button("Main Menu")){
 			Destroy(GameObject.Find("musicBox"));
+			DontDestroyOnLoad(GameObject.Find("pass"));
 			Application.LoadLevel("menu");
 		}
 		GUILayout.EndHorizontal();
@@ -59,13 +61,21 @@ function OnGUI () {
 		GUILayout.BeginHorizontal();
 		GUI.skin = labelAnotherSkin;
 		if(GUILayout.Button("Next Level")){
+			var ori = GameObject.Find("pass").GetComponent(passValue).starlist[level-1];
+			if(stars > ori)
+				GameObject.Find("pass").GetComponent(passValue).starlist[level-1] = stars;
 			level++;
-			GameObject.Find("musicBox").GetComponent(passValue).setValue(level);
+			GameObject.Find("pass").GetComponent(passValue).setValue(level);
+			DontDestroyOnLoad(GameObject.Find("pass"));
 			DontDestroyOnLoad(GameObject.Find("musicBox"));
 			Application.LoadLevel("Level"+level);
 		}
 		if(GUILayout.Button("Retry")){
+			ori = GameObject.Find("pass").GetComponent(passValue).starlist[level-1];
+			if(stars > ori)
+				GameObject.Find("pass").GetComponent(passValue).starlist[level-1] = stars;
 			DontDestroyOnLoad(GameObject.Find("musicBox"));
+			DontDestroyOnLoad(GameObject.Find("pass"));
 			Application.LoadLevel("Level"+level);
 		}
 		GUILayout.EndHorizontal();
@@ -84,7 +94,7 @@ function Start(){
 	windowSwitch = false;
 	ori = time;
 	InvokeRepeating("subtime", 0, 1);
-	level = GameObject.Find("musicBox").GetComponent(passValue).getValue();
+	level = GameObject.Find("pass").GetComponent(passValue).getValue();
 	
 }
 
@@ -93,16 +103,24 @@ function subtime(){
 	time -= 1;
 }
 
+function save(){
+	GameObject.Find("pass").GetComponent(PlayerPrefsX).SetIntArray("starlist", GameObject.Find("pass").GetComponent(passValue).starlist);
+}
+
 function windowContain(windowID: int){
 	GUILayout.BeginHorizontal();
 	GUILayout.BeginVertical();
-	GUILayout.Space(60);
+	GUILayout.Space(40);
 	if(GUILayout.Button("Turn off Music")){
 		GameObject.Find("musicBox").audio.Pause();
 	}
 	GUILayout.Space(20);
 	if(GUILayout.Button("Turn on Music")){
 		GameObject.Find("musicBox").audio.Play();
+	}
+	GUILayout.Space(20);
+	if(GUILayout.Button("Save")){
+		save();
 	}
 	GUILayout.Space(20);
 	if(GUILayout.Button("Resume")){
@@ -112,6 +130,7 @@ function windowContain(windowID: int){
 	}
 	GUILayout.Space(20);
 	if(GUILayout.Button("Main Menu")){
+		DontDestroyOnLoad(GameObject.Find("pass"));
 		Destroy(GameObject.Find("musicBox"));
 		Application.LoadLevel("menu");
 	}

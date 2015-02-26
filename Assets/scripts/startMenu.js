@@ -13,45 +13,55 @@ function OnGUI(){
 		GUILayout.BeginHorizontal();
 		GUILayout.Label("Perspective");
 		GUILayout.EndArea();
-		GUILayout.BeginArea(Rect(Screen.width*0.4, Screen.height*0.5, Screen.width*0.3, Screen.height*0.3));
+		GUILayout.BeginArea(Rect(Screen.width*0.4, Screen.height*0.5, Screen.width*0.3, Screen.height*0.5));
 		GUILayout.BeginHorizontal();
 		GUILayout.BeginVertical();
 
 		if(GUILayout.Button("Play!!!")){
 			DontDestroyOnLoad(GameObject.Find("musicBox"));
+			DontDestroyOnLoad(GameObject.Find("pass"));
 			Application.LoadLevel("Level1");
+		}
+		GUILayout.Space(20);
+		if(GUILayout.Button("Continue")){
+			DontDestroyOnLoad(GameObject.Find("musicBox"));
+			DontDestroyOnLoad(GameObject.Find("pass"));
+			GameObject.Find("pass").GetComponent(passValue).starlist = GameObject.Find("pass").GetComponent(PlayerPrefsX).GetIntArray("starlist");
 		}
 		GUILayout.Space(20);
 		if(GUILayout.Button("load")){
 			DontDestroyOnLoad(GameObject.Find("musicBox"));
+			DontDestroyOnLoad(GameObject.Find("pass"));
 			firstMenu = false;
 		}
 		GUILayout.Space(20);
 		if(GUILayout.Button("quit")){
 			DontDestroyOnLoad(GameObject.Find("musicBox"));
+			DontDestroyOnLoad(GameObject.Find("pass"));
 			Application.Quit();
 		}
 		GUILayout.EndArea();
 	}
 	if(!firstMenu){
-		GUILayout.BeginArea(Rect(Screen.width*0.35, Screen.height*0.2, Screen.width*0.3, Screen.height*0.5));
-		GUILayout.BeginVertical();
-		if(current >= maxLevel){
-		
-		}
+		GUILayout.BeginArea(Rect(Screen.width*0.2, Screen.height*0.2, Screen.width*0.6, Screen.height*0.5));
 		
 		var i = current;
 		
 		while(i<=(5+current) && i<=maxLevel){
+			GUILayout.BeginHorizontal();
 			if(GUILayout.Button("level "+i)){
 				DontDestroyOnLoad(GameObject.Find("musicBox"));
-				GameObject.Find("musicBox").GetComponent(passValue).setValue(i);
+				DontDestroyOnLoad(GameObject.Find("pass"));
+				GameObject.Find("pass").GetComponent(passValue).setValue(i);
 				Application.LoadLevel("Level"+i);
 			}
-			GUILayout.Space(20);
+			var label2 : GUIStyle = GUI.skin.GetStyle("label2");
+			var number = GameObject.Find("pass").GetComponent(passValue).starlist[i-1];
+			GUILayout.Label(number +" stars", label2);
 			i++;
+			GUILayout.EndHorizontal();
+			GUILayout.Space(20);
 		}
-		GUILayout.EndVertical();
 		GUILayout.EndArea();
 		GUILayout.BeginArea(Rect(0, Screen.height*0.8, Screen.width, Screen.height*0.2));
 		GUILayout.BeginHorizontal();

@@ -47,6 +47,8 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\scripts\Mike1Solution.js" />
+     <Compile Include="Assets\scripts\NewBehaviourScript.js" />
+     <Compile Include="Assets\scripts\PlayerPrefsX.js" />
      <Compile Include="Assets\scripts\buttonEvent.js" />
      <Compile Include="Assets\scripts\menu.js" />
      <Compile Include="Assets\scripts\passValue.js" />

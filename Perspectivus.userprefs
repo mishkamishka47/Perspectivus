@@ -1,23 +1,21 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\scripts\passValue.js">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\scripts\menu.js">
     <Files>
-      <File FileName="Assets\scripts\startMenu.js" Line="51" Column="24" />
+      <File FileName="Assets\scripts\PlayerPrefsX.js" Line="1" Column="1" />
+      <File FileName="Assets\scripts\startMenu.js" Line="16" Column="100" />
       <File FileName="Assets\scripts\RotateButtonVars.cs" Line="1" Column="1" />
       <File FileName="Assets\scripts\PlayerMovement.cs" Line="1" Column="1" />
       <File FileName="Assets\scripts\Rotate90.cs" Line="1" Column="1" />
-      <File FileName="Assets\scripts\menu.js" Line="58" Column="41" />
-      <File FileName="Assets\scripts\passValue.js" Line="5" Column="8" />
+      <File FileName="Assets\scripts\menu.js" Line="113" Column="22" />
+      <File FileName="Assets\scripts\passValue.js" Line="1" Column="1" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State expanded="True">
-          <Node name="Assembly-CSharp" expanded="True">
-            <Node name="scripts" expanded="True" />
-          </Node>
           <Node name="Assembly-UnityScript" expanded="True">
             <Node name="scripts" expanded="True">
-              <Node name="passValue.js" selected="True" />
+              <Node name="menu.js" selected="True" />
             </Node>
           </Node>
         </State>
