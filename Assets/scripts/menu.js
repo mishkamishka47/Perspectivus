@@ -12,6 +12,7 @@ var steps : int = 0;
 public var labelSkin : GUISkin;
 public var labelAnotherSkin : GUISkin;
 public var settingSkin : GUISkin;
+
 function OnGUI () {
 	if(time < 0){
 		GUI.skin = labelAnotherSkin;
@@ -48,6 +49,7 @@ function OnGUI () {
 		GUI.skin = labelAnotherSkin;
 		if(GUILayout.Button("Next Level")){
 			level++;
+			GameObject.Find("musicBox").GetComponent(passValue).setValue(level);
 			DontDestroyOnLoad(GameObject.Find("musicBox"));
 			Application.LoadLevel("Level"+level);
 		}
@@ -70,6 +72,8 @@ function OnGUI () {
 function Start(){
 	windowSwitch = false;
 	InvokeRepeating("subtime", 0, 1);
+	level = GameObject.Find("musicBox").GetComponent(passValue).getValue();
+	
 }
 
 function subtime(){

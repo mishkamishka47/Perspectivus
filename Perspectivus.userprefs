@@ -1,17 +1,22 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/scripts/PlayerMovement.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\scripts\startMenu.js">
     <Files>
-      <File FileName="Assets/scripts/RotateButtonVars.cs" Line="1" Column="1" />
-      <File FileName="Assets/scripts/PlayerMovement.cs" Line="147" Column="28" />
-      <File FileName="Assets/scripts/Rotate90.cs" Line="38" Column="49" />
+      <File FileName="Assets\scripts\startMenu.js" Line="49" Column="7" />
+      <File FileName="Assets\scripts\RotateButtonVars.cs" Line="1" Column="1" />
+      <File FileName="Assets\scripts\PlayerMovement.cs" Line="147" Column="28" />
+      <File FileName="Assets\scripts\Rotate90.cs" Line="38" Column="49" />
+      <File FileName="Assets\scripts\menu.js" Line="14" Column="34" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State expanded="True">
           <Node name="Assembly-CSharp" expanded="True">
+            <Node name="scripts" expanded="True" />
+          </Node>
+          <Node name="Assembly-UnityScript" expanded="True">
             <Node name="scripts" expanded="True">
-              <Node name="PlayerMovement.cs" selected="True" />
+              <Node name="startMenu.js" selected="True" />
             </Node>
           </Node>
         </State>
