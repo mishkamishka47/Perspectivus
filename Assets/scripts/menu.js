@@ -6,9 +6,11 @@ private var windowExit = Rect(Screen.width*0.25, Screen.height*0.25, Screen.widt
 private var info : Text;
 private var distance : float = 100;
 private var scores: int = 0;
+private var stars : int = 0;
+private var ori : int;
 static private var level : int = 1;
-var time : float = 50.0;
-var steps : int = 0;
+public var time : float = 50.0;
+private var steps : int = 0;
 public var labelSkin : GUISkin;
 public var labelAnotherSkin : GUISkin;
 public var settingSkin : GUISkin;
@@ -33,7 +35,14 @@ function OnGUI () {
 		GUILayout.EndArea();
 	}
 	else if(distance <= 1 && time >= 0){
+		CancelInvoke();
 		scores = time + (100 - steps);
+		if(time > 10)
+			stars = 3;
+		else if(time >= 5)
+			stars = 2;
+		else 
+			stars = 1;
 		GUI.skin = labelAnotherSkin;
 		GUILayout.BeginArea(Rect(Screen.width*0.15, Screen.height*0.2, Screen.width*0.7, Screen.height*0.4));
 		GUILayout.BeginVertical();
@@ -41,10 +50,12 @@ function OnGUI () {
 		
 		GUI.skin = labelSkin;
 		GUILayout.Label("Scores: "+scores);
+		GUILayout.Space(20);
+		GUILayout.Label(stars + " stars");
 		GUILayout.EndVertical();
 		GUILayout.EndArea();
 		
-		GUILayout.BeginArea(Rect(Screen.width*0.15, Screen.height*0.5, Screen.width*0.7, Screen.height*0.2));
+		GUILayout.BeginArea(Rect(Screen.width*0.15, Screen.height*0.6, Screen.width*0.7, Screen.height*0.2));
 		GUILayout.BeginHorizontal();
 		GUI.skin = labelAnotherSkin;
 		if(GUILayout.Button("Next Level")){
@@ -71,6 +82,7 @@ function OnGUI () {
 }
 function Start(){
 	windowSwitch = false;
+	ori = time;
 	InvokeRepeating("subtime", 0, 1);
 	level = GameObject.Find("musicBox").GetComponent(passValue).getValue();
 	
