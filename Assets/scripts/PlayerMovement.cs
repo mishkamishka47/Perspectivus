@@ -86,7 +86,7 @@ public class PlayerMovement : MonoBehaviour {
         Collider[] collidersBelow = Physics.OverlapSphere(belowCenter+transform.position, 0.0f);
 		if(collidersBelow.Length!=0){
 			for(int i = 0; i<collidersBelow.Length; i++){
-				if(collidersBelow[i].name.Equals("Cube")||collidersBelow[i].name.Equals("endpoint")){
+				if(collidersBelow[i].name.Equals("Generic Cube")||collidersBelow[i].name.Equals("endpoint")){
 					cubeBelow=true;
 				}
 				if(collidersBelow[i].name.Equals("RotateButton")){
@@ -108,7 +108,7 @@ public class PlayerMovement : MonoBehaviour {
 		bool cubeBelow=false;
 		if(collidersBelowWarp.Length!=0){
 			for(int i = 0; i<collidersBelowWarp.Length; i++){
-				if(collidersBelowWarp[i].name.Equals("Cube")||collidersBelowWarp[i].name.Equals("endpoint")){
+				if(collidersBelowWarp[i].name.Equals("Generic Cube")||collidersBelowWarp[i].name.Equals("endpoint")){
 					cubeBelow=true;
 				}
 				if(collidersBelowWarp[i].name.Equals("RotateButton")){
@@ -136,9 +136,9 @@ public class PlayerMovement : MonoBehaviour {
 		}else if(lastButtonPressed==button){
 			return;
 		}
-		lastButtonPressed.renderer.material=onColor;
+		lastButtonPressed.GetComponent<Renderer>().material=onColor;
 		lastButtonPressed=button;
-		button.renderer.material=offColor;
+		button.GetComponent<Renderer>().material=offColor;
 		lastButtonPressed=button;
 		RotateButtonVars rotateVars = button.GetComponent<RotateButtonVars>();
 		for(int i = 0; i <rotateVars.rotateTargets.Length; i++){

@@ -112,11 +112,11 @@ function windowContain(windowID: int){
 	GUILayout.BeginVertical();
 	GUILayout.Space(40);
 	if(GUILayout.Button("Turn off Music")){
-		GameObject.Find("musicBox").audio.Pause();
+		GameObject.Find("musicBox").GetComponent.<AudioSource>().Pause();
 	}
 	GUILayout.Space(20);
 	if(GUILayout.Button("Turn on Music")){
-		GameObject.Find("musicBox").audio.Play();
+		GameObject.Find("musicBox").GetComponent.<AudioSource>().Play();
 	}
 	GUILayout.Space(20);
 	if(GUILayout.Button("Save")){
