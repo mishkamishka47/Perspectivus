@@ -86,7 +86,8 @@ public class PlayerMovement : MonoBehaviour {
         Collider[] collidersBelow = Physics.OverlapSphere(belowCenter+transform.position, 0.0f);
 		if(collidersBelow.Length!=0){
 			for(int i = 0; i<collidersBelow.Length; i++){
-				if(collidersBelow[i].name.Equals("Generic Cube")||collidersBelow[i].name.Equals("endpoint")){
+				print (collidersBelow[i].transform.parent.gameObject.name);
+				if(collidersBelow[i].transform.parent.gameObject.name.StartsWith("Walkway") || collidersBelow[i].transform.parent.gameObject.name.Equals("endpoint")){
 					cubeBelow=true;
 				}
 				if(collidersBelow[i].name.Equals("RotateButton")){
@@ -108,7 +109,8 @@ public class PlayerMovement : MonoBehaviour {
 		bool cubeBelow=false;
 		if(collidersBelowWarp.Length!=0){
 			for(int i = 0; i<collidersBelowWarp.Length; i++){
-				if(collidersBelowWarp[i].name.Equals("Generic Cube")||collidersBelowWarp[i].name.Equals("endpoint")){
+				if(collidersBelowWarp[i].transform.parent.gameObject.name.StartsWith("Walkway") ||
+				   	collidersBelowWarp[i].transform.parent.gameObject.name.Equals("endpoint")){
 					cubeBelow=true;
 				}
 				if(collidersBelowWarp[i].name.Equals("RotateButton")){
