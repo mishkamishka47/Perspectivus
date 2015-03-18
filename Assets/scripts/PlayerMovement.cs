@@ -93,6 +93,10 @@ public class PlayerMovement : MonoBehaviour {
 					cubeBelow=true;
 					rotateObject(collidersBelow[i]);
 				}
+				if(collidersBelow[i].name.Equals("BallButton")){
+					cubeBelow=true;
+					spawnBall(collidersBelow[i]);
+				}
 			}
 		}
 		
@@ -136,9 +140,9 @@ public class PlayerMovement : MonoBehaviour {
 		}else if(lastButtonPressed==button){
 			return;
 		}
-		lastButtonPressed.renderer.material=onColor;
+		lastButtonPressed.GetComponent<Renderer>().material=onColor;
 		lastButtonPressed=button;
-		button.renderer.material=offColor;
+		button.GetComponent<Renderer>().material=offColor;
 		lastButtonPressed=button;
 		RotateButtonVars rotateVars = button.GetComponent<RotateButtonVars>();
 		for(int i = 0; i <rotateVars.rotateTargets.Length; i++){
@@ -146,5 +150,12 @@ public class PlayerMovement : MonoBehaviour {
 			var rotatePlatform = rotationTarget.GetComponent<RotatePlatform>();
 			rotatePlatform.Rotate();
 		}
+	}
+	void spawnBall(Collider spawnCollider){
+		GameObject button = spawnCollider.gameObject;
+		ballButtonVars ballVars = button.GetComponent<ballButtonVars>();
+		GameObject spawnTarget = ballVars.spawnerTarget;
+		BallSpawner spawner = spawnTarget.GetComponent<BallSpawner>();
+		spawner.spawnBall();
 	}
 }
