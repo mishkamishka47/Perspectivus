@@ -3,6 +3,7 @@ using System.Collections;
 
 public class ballController : MonoBehaviour {
 	public Rotate90 target;
+	public int direction;
 	// Use this for initialization
 	void Start () {
 		GetComponent<Rigidbody>().velocity=new Vector3(5,0,0);
@@ -10,7 +11,15 @@ public class ballController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		GetComponent<Rigidbody>().velocity=new Vector3(5,GetComponent<Rigidbody>().velocity.y,GetComponent<Rigidbody>().velocity.z);
+		if(direction==0){
+			GetComponent<Rigidbody>().velocity=new Vector3(5,GetComponent<Rigidbody>().velocity.y,0);
+		}else if(direction==1){
+			GetComponent<Rigidbody>().velocity=new Vector3(0,GetComponent<Rigidbody>().velocity.y,5);
+		}else if(direction==2){
+			GetComponent<Rigidbody>().velocity=new Vector3(-5,GetComponent<Rigidbody>().velocity.y,0);
+		}else if(direction==3){
+			GetComponent<Rigidbody>().velocity=new Vector3(0,GetComponent<Rigidbody>().velocity.y,-5);
+		}
 		Collider[] collidersThere = Physics.OverlapSphere(transform.position, 0.0f);
 		if(collidersThere.Length!=0){
 
