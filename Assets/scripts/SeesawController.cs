@@ -22,8 +22,8 @@ public class SeesawController : MonoBehaviour {
 					sisterSaw.rise();
 				}
 			}
-		}else{
-			//rise();
+		}else if(transform.position.y<originalHeight){
+			returnToOriginal();
 		}
 	}
 	void sink(){
@@ -50,5 +50,9 @@ public class SeesawController : MonoBehaviour {
 			this.transform.Translate(0,.01f,0, Space.World);
 
 		}
+	}
+	void returnToOriginal(){
+		this.transform.Translate(0,.01f,0, Space.World);
+		sisterSaw.transform.Translate(0,-.01f,0, Space.World);
 	}
 }

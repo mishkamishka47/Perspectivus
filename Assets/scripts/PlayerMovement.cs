@@ -121,6 +121,10 @@ public class PlayerMovement : MonoBehaviour {
 						rotateObject(collidersBelowWarp[i]);
 					}
 				}
+				if(collidersBelowWarp[i].name.Equals("BallButton")){
+					cubeBelow=true;
+					spawnBall(collidersBelowWarp[i]);
+				}
 			}
 		}
 		if(!cubeBelow){
