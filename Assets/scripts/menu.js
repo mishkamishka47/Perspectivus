@@ -2,7 +2,7 @@
 import UnityEngine.UI;
 
 static var windowSwitch : boolean = false;
-private var windowExit = Rect(Screen.width*0.25, Screen.height*0.2, Screen.width*0.6, Screen.height*0.6);
+private var windowExit = Rect(Screen.width*0.25, Screen.height*0.15, Screen.width*0.6, Screen.height*0.7);
 private var info : Text;
 private var distance : float = 100;
 private var scores: int = 0;
@@ -19,7 +19,7 @@ public var settingSkin : GUISkin;
 function OnGUI () {
 	if(time < 0){
 		GUI.skin = labelAnotherSkin;
-		GUILayout.BeginArea(Rect(Screen.width*0.15, Screen.height*0.2, Screen.width*0.7, Screen.height*0.4));
+		GUILayout.BeginArea(Rect(Screen.width*0.15, Screen.height*0.2, Screen.width*0.7, Screen.height*0.6));
 		GUILayout.BeginVertical();
 		GUILayout.Label("~Failed~");
 		GUILayout.EndVertical();
@@ -47,7 +47,7 @@ function OnGUI () {
 		else 
 			stars = 1;
 		GUI.skin = labelAnotherSkin;
-		GUILayout.BeginArea(Rect(Screen.width*0.15, Screen.height*0.2, Screen.width*0.7, Screen.height*0.4));
+		GUILayout.BeginArea(Rect(Screen.width*0.15, Screen.height*0.1, Screen.width*0.7, Screen.height*0.5));
 		GUILayout.BeginVertical();
 		GUILayout.Label("Succeed!!!");
 		
@@ -144,12 +144,14 @@ function windowContain(windowID: int){
 	}
 	GUILayout.Space(15);
 	if(GUILayout.Button("Main Menu")){
+		save();
 		DontDestroyOnLoad(GameObject.Find("pass"));
 		Destroy(GameObject.Find("musicBox"));
 		Application.LoadLevel("menu");
 	}
 	GUILayout.Space(15);
 	if(GUILayout.Button("Quit")){
+		save();
 		Application.Quit();
 	}
 	GUILayout.EndVertical();
