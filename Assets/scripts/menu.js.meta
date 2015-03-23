@@ -1,16 +1,11 @@
 fileFormatVersion: 2
 guid: be8d5169708c642bca5e7f81928c505e
-timeCreated: 1427124530
-licenseType: Free
 MonoImporter:
   serializedVersion: 2
   defaultReferences:
-  - starTexture: {fileID: 2800000, guid: d6a015119954b734ca24429cb986039a, type: 3}
   - labelSkin: {fileID: 11400000, guid: cc8530a7890ec4f029937660e9942366, type: 2}
   - labelAnotherSkin: {fileID: 11400000, guid: 125918bf5b8b84db79c9066e719091c5, type: 2}
   - settingSkin: {fileID: 11400000, guid: da8453365169f8f42a1d031ede2f71a6, type: 2}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
-  assetBundleName: 
-  assetBundleVariant: 

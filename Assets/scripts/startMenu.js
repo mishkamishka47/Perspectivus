@@ -52,7 +52,6 @@ function OnGUI(){
 		GUILayout.EndHorizontal();
 		GUILayout.EndArea();
 		GUILayout.BeginArea(Rect(Screen.width*0.2, Screen.height*0.2, Screen.width*0.6, Screen.height*0.5));
-		GUILayout.BeginArea(Rect(Screen.width*0.2, Screen.height*0.2, Screen.width*0.6, Screen.height*0.6));
 		
 		var i = current;
 		
@@ -78,7 +77,7 @@ function OnGUI(){
 			//GUILayout.Label(number +" stars", label2);
 			i++;
 			GUILayout.EndHorizontal();
-			GUILayout.Space(15);
+			GUILayout.Space(20);
 		}
 		GUILayout.EndArea();
 		GUILayout.BeginArea(Rect(0, Screen.height*0.8, Screen.width, Screen.height*0.2));
