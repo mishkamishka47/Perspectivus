@@ -107,6 +107,7 @@ function OnGUI () {
 function Start(){
 	windowSwitch = false;
 	ori = time;
+	level = GameObject.Find("pass").GetComponent(passValue).getLevel();
 	InvokeRepeating("subtime", 0, 1);
 	level = GameObject.Find("pass").GetComponent(passValue).getValue();
 	
