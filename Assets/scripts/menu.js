@@ -2,13 +2,14 @@
 import UnityEngine.UI;
 
 static var windowSwitch : boolean = false;
-private var windowExit = Rect(Screen.width*0.25, Screen.height*0.25, Screen.width*0.6, Screen.height*0.5);
+private var windowExit = Rect(Screen.width*0.25, Screen.height*0.2, Screen.width*0.6, Screen.height*0.6);
 private var info : Text;
 private var distance : float = 100;
 private var scores: int = 0;
 private var stars : int = 0;
 private var ori : int;
 static private var level : int = 1;
+public var starTexture : Texture;
 public var time : float = 50.0;
 private var steps : int = 0;
 public var labelSkin : GUISkin;
@@ -51,10 +52,23 @@ function OnGUI () {
 		GUILayout.Label("Succeed!!!");
 		
 		GUI.skin = labelSkin;
+		var label1 : GUIStyle = GUI.skin.GetStyle("label1");
+		var label2 : GUIStyle = GUI.skin.GetStyle("label2");
 		GUILayout.Label("Scores: "+scores);
 		GUILayout.Space(20);
-		GUILayout.Label(stars + " stars");
 		GUILayout.EndVertical();
+		GUILayout.BeginHorizontal();
+		GUILayout.FlexibleSpace();
+		var a = 0;
+		while(a<3){
+			if(a<stars)
+				GUILayout.Label(starTexture, label1);
+			else
+				GUILayout.Label(starTexture, label2);
+			a++;
+		}
+		GUILayout.FlexibleSpace();
+		GUILayout.EndHorizontal();
 		GUILayout.EndArea();
 		
 		GUILayout.BeginArea(Rect(Screen.width*0.15, Screen.height*0.6, Screen.width*0.7, Screen.height*0.2));
@@ -110,31 +124,31 @@ function save(){
 function windowContain(windowID: int){
 	GUILayout.BeginHorizontal();
 	GUILayout.BeginVertical();
-	GUILayout.Space(40);
+	GUILayout.Space(30);
 	if(GUILayout.Button("Turn off Music")){
 		GameObject.Find("musicBox").GetComponent.<AudioSource>().Pause();
 	}
-	GUILayout.Space(20);
+	GUILayout.Space(15);
 	if(GUILayout.Button("Turn on Music")){
 		GameObject.Find("musicBox").GetComponent.<AudioSource>().Play();
 	}
-	GUILayout.Space(20);
+	GUILayout.Space(15);
 	if(GUILayout.Button("Save")){
 		save();
 	}
-	GUILayout.Space(20);
+	GUILayout.Space(15);
 	if(GUILayout.Button("Resume")){
 		time+=1;
 		InvokeRepeating("subtime", 0, 1);
 		windowSwitch = false;
 	}
-	GUILayout.Space(20);
+	GUILayout.Space(15);
 	if(GUILayout.Button("Main Menu")){
 		DontDestroyOnLoad(GameObject.Find("pass"));
 		Destroy(GameObject.Find("musicBox"));
 		Application.LoadLevel("menu");
 	}
-	GUILayout.Space(20);
+	GUILayout.Space(15);
 	if(GUILayout.Button("Quit")){
 		Application.Quit();
 	}
