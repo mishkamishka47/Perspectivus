@@ -4,56 +4,28 @@ using System.Collections;
 public class ballController : MonoBehaviour {
 	public Rotate90 target;
 	public int direction;
-	private bool hasCollided;
 	// Use this for initialization
 	void Start () {
-		GetComponent<Rigidbody>().velocity=new Vector3(5f,0f,0f);
-		hasCollided=false;
+		GetComponent<Rigidbody>().velocity=new Vector3(5,0,0);
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		Vector3 inFront = new Vector3(0f,0f,0f);
 		if(direction==0){
-			inFront = new Vector3(.6f,0f,0f);
+			GetComponent<Rigidbody>().velocity=new Vector3(5,GetComponent<Rigidbody>().velocity.y,0);
 		}else if(direction==1){
-			inFront = new Vector3(0f,0f,.6f);
+			GetComponent<Rigidbody>().velocity=new Vector3(0,GetComponent<Rigidbody>().velocity.y,5);
 		}else if(direction==2){
-			inFront = new Vector3(-.6f,0f,0f);
+			GetComponent<Rigidbody>().velocity=new Vector3(-5,GetComponent<Rigidbody>().velocity.y,0);
 		}else if(direction==3){
-			inFront = new Vector3(0f,0f,-.6f);
-		}
-
-
-		Collider[] collidersInFront = Physics.OverlapSphere(this.transform.position+inFront,0.05f);
-		if(collidersInFront.Length!=0){
-			for(int i = 0; i<collidersInFront.Length; i++){
-				Debug.Log(collidersInFront[i].name);
-				if(!collidersInFront[i].name.Equals("PerspectiveWarper")){
-					hasCollided=true;
-				}
-			}
-		}
-
-		if(!hasCollided){
-			if(direction==0){
-				GetComponent<Rigidbody>().velocity=new Vector3(5f,GetComponent<Rigidbody>().velocity.y,0f);
-			}else if(direction==1){
-				GetComponent<Rigidbody>().velocity=new Vector3(0f,GetComponent<Rigidbody>().velocity.y,5f);
-			}else if(direction==2){
-				GetComponent<Rigidbody>().velocity=new Vector3(-5f,GetComponent<Rigidbody>().velocity.y,0f);
-			}else if(direction==3){
-				GetComponent<Rigidbody>().velocity=new Vector3(0f,GetComponent<Rigidbody>().velocity.y,-5f);
-			}
-		}else{
-			GetComponent<Rigidbody>().velocity=new Vector3(0f,GetComponent<Rigidbody>().velocity.y,0f);
+			GetComponent<Rigidbody>().velocity=new Vector3(0,GetComponent<Rigidbody>().velocity.y,-5);
 		}
 		Collider[] collidersThere = Physics.OverlapSphere(transform.position, 0.0f);
 		if(collidersThere.Length!=0){
 
 			for(int i = 0; i<collidersThere.Length; i++){
 				if(collidersThere[i].name.Equals("PerspectiveWarper")){
-					//Debug.Log("Perspective Warper exists!");
+					Debug.Log("Perspective Warper exists!");
 					perspectiveJump(collidersThere[i]);
 				}
 			}

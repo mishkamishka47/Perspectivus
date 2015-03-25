@@ -72,7 +72,7 @@ public class PlayerMovement : MonoBehaviour {
 						return false;
 					}
 				}else{
-					//Debug.Log(collidersThere[i].name);
+					Debug.Log(collidersThere[i].name);
 					pathBlocked=true;	
 				}
 			}

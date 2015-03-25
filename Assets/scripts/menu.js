@@ -170,6 +170,6 @@ function Update () {
 	if(Input.GetKeyDown("up")||Input.GetKeyDown("down")||Input.GetKeyDown("left")||Input.GetKeyDown("right")){
 		steps++;
 	}
-	//distance = Vector3.Distance(GameObject.Find("Player").transform.position, GameObject.Find("endpoint").transform.position);
+	distance = Vector3.Distance(GameObject.Find("Player").transform.position, GameObject.Find("endpoint").transform.position);
 }
 
