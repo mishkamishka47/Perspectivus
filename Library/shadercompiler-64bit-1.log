@@ -1,6 +1,7 @@
 Base path: /Applications/Unity/Unity.app/Contents
 Pipe name: \\.\pipe\UnityShaderCompiler-64bit-1-1915892496
 Cmd: getPlatforms
+<<<<<<< Updated upstream
 Cmd: compileSnippet
   api=0 type=0 insize=751 outsize=2236 kw=SHADOWS_DEPTH _ALPHATEST_ON ok=1
 Cmd: compileSnippet
@@ -13,3 +14,5 @@ Cmd: compileSnippet
   api=0 type=0 insize=938 outsize=5775 kw=DIRECTIONAL SHADOWS_OFF _ALPHATEST_ON ok=1
 Cmd: compileSnippet
   api=0 type=1 insize=938 outsize=6 kw=DIRECTIONAL SHADOWS_OFF _ALPHATEST_ON ok=1
+=======
+>>>>>>> Stashed changes
