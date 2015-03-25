@@ -25,9 +25,10 @@ public class ballController : MonoBehaviour {
 		}
 
 
-		Collider[] collidersInFront = Physics.OverlapSphere(this.transform.position+inFront,0.0f);
+		Collider[] collidersInFront = Physics.OverlapSphere(this.transform.position+inFront,0.05f);
 		if(collidersInFront.Length!=0){
 			for(int i = 0; i<collidersInFront.Length; i++){
+				Debug.Log(collidersInFront[i].name);
 				if(!collidersInFront[i].name.Equals("PerspectiveWarper")){
 					hasCollided=true;
 				}
@@ -52,7 +53,7 @@ public class ballController : MonoBehaviour {
 
 			for(int i = 0; i<collidersThere.Length; i++){
 				if(collidersThere[i].name.Equals("PerspectiveWarper")){
-					Debug.Log("Perspective Warper exists!");
+					//Debug.Log("Perspective Warper exists!");
 					perspectiveJump(collidersThere[i]);
 				}
 			}
