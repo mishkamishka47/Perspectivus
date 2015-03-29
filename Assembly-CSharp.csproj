@@ -46,6 +46,7 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\scripts\AnimateTexture.cs" />
      <Compile Include="Assets\scripts\BallSpawner.cs" />
      <Compile Include="Assets\scripts\PerspectiveWarpVars.cs" />
      <Compile Include="Assets\scripts\PlayerMovement.cs" />
