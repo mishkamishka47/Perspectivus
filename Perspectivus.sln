@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 
 Project("{A44B91E6-E41A-E5C2-B347-8440E283A214}") = "Perspectivus", "Assembly-CSharp.csproj", "{BCB9D25B-1A8F-8B79-1CED-E3096246DD72}"
 EndProject
+Project("{A44B91E6-E41A-E5C2-B347-8440E283A214}") = "Perspectivus", "Assembly-CSharp-Editor.csproj", "{3808BE2D-A8A3-6ADB-FBAB-5FEB20781AD2}"
+EndProject
 Project("{A44B91E6-E41A-E5C2-B347-8440E283A214}") = "Perspectivus", "Assembly-UnityScript.unityproj", "{F532F865-1BB4-AC72-B2AC-F0F54BB418A6}"
 EndProject
 Global
@@ -15,6 +17,10 @@ Global
 		{BCB9D25B-1A8F-8B79-1CED-E3096246DD72}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BCB9D25B-1A8F-8B79-1CED-E3096246DD72}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BCB9D25B-1A8F-8B79-1CED-E3096246DD72}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3808BE2D-A8A3-6ADB-FBAB-5FEB20781AD2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3808BE2D-A8A3-6ADB-FBAB-5FEB20781AD2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3808BE2D-A8A3-6ADB-FBAB-5FEB20781AD2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3808BE2D-A8A3-6ADB-FBAB-5FEB20781AD2}.Release|Any CPU.Build.0 = Release|Any CPU
 		{F532F865-1BB4-AC72-B2AC-F0F54BB418A6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{F532F865-1BB4-AC72-B2AC-F0F54BB418A6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F532F865-1BB4-AC72-B2AC-F0F54BB418A6}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -23,7 +29,11 @@ Global
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
+<<<<<<< HEAD
 																																																																					GlobalSection(MonoDevelopProperties) = preSolution
+=======
+																																																																				GlobalSection(MonoDevelopProperties) = preSolution
+>>>>>>> Updating-Models
 =======
 																																															GlobalSection(MonoDevelopProperties) = preSolution
 >>>>>>> d393b466b633fa81e31e6b6e7f34453e8dd8be04
