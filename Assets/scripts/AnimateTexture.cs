@@ -4,7 +4,7 @@ using System.Collections;
 public class AnimateTexture : MonoBehaviour {
 
 	public float speed = 0.1f;
-	public string type;
+	public AnimationType type;
 
 	private Material shader;
 	private int tidalPosition;
@@ -20,11 +20,11 @@ public class AnimateTexture : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if(type.Equals("scroll")){
+		if(type == AnimationType.Scroll){
 			var currentOffset = shader.GetTextureOffset ("_MainTex");
 			currentOffset += new Vector2 (Time.deltaTime * speed, Time.deltaTime * speed);
 			shader.SetTextureOffset ("_MainTex", currentOffset);
-		}else if(type.Equals("tidal")){
+		}else if(type == AnimationType.Tidal){
 			var currentOffset = shader.GetTextureOffset ("_MainTex");
 			currentOffset += new Vector2 (Time.deltaTime * speed * tidalPosition * tidalSign/90, Time.deltaTime * speed * tidalPosition * tidalSign/90);
 			shader.SetTextureOffset ("_MainTex", currentOffset);
@@ -38,4 +38,8 @@ public class AnimateTexture : MonoBehaviour {
 			tidalPosition+=tideCycle;
 		}
 	}
+
+	public enum AnimationType {
+		Tidal, Scroll
+	};
 }
