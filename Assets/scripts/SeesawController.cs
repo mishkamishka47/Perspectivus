@@ -15,9 +15,9 @@ public class SeesawController : MonoBehaviour {
 		if(collidersThere.Length!=0){
 			
 			for(int i = 0; i<collidersThere.Length; i++){
-				Debug.Log(collidersThere[i].name);
+				//Debug.Log(collidersThere[i].name);
 				if(collidersThere[i].name.Equals("ball(Clone)")){
-					Debug.Log("Attempting to sink");
+					//Debug.Log("Attempting to sink");
 					sink();
 					sisterSaw.rise();
 				}
@@ -28,10 +28,10 @@ public class SeesawController : MonoBehaviour {
 	}
 	void sink(){
 		if(transform.position.y>originalHeight-2){
-			Debug.Log ("literally translating");
+			//Debug.Log ("literally translating");
 			this.transform.Translate(0,-.01f,0, Space.World);
 		}else{
-			Debug.Log ("Max Height Reached");
+			//Debug.Log ("Max Height Reached");
 		}
 	}
 	void rise(){
@@ -42,7 +42,7 @@ public class SeesawController : MonoBehaviour {
 				for(int i = 0; i<collidersThere.Length; i++){
 					//Debug.Log(collidersThere[i].name);
 					if(collidersThere[i].name.Equals("Player")){
-						Debug.Log("A player is on top of this see-saw!");
+						//Debug.Log("A player is on top of this see-saw!");
 						collidersThere[i].gameObject.transform.Translate(0,.01f,0, Space.World);
 					}
 				}
