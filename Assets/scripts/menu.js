@@ -15,6 +15,7 @@ private var steps : int = 0;
 public var labelSkin : GUISkin;
 public var labelAnotherSkin : GUISkin;
 public var settingSkin : GUISkin;
+private var csScript : PlayerMovement;
 
 function OnGUI () {
 	if(time < 0){
@@ -138,6 +139,10 @@ function Start(){
 	
 }
 
+function Awake(){
+	csScript = GameObject.Find("Player").GetComponent("PlayerMovement");
+}
+
 function subtime(){
 	if(distance > 1)
 	time -= 1;
@@ -204,9 +209,10 @@ function Update () {
 		}
 		windowSwitch = !windowSwitch;
 	}
-	if(Input.GetKeyDown("up")||Input.GetKeyDown("down")||Input.GetKeyDown("left")||Input.GetKeyDown("right")){
-		steps++;
-	}
-	//distance = Vector3.Distance(GameObject.Find("Player").transform.position, GameObject.Find("endpoint").transform.position);
+	steps = csScript.getSteps();
+	//if(Input.GetKeyDown("up")||Input.GetKeyDown("down")||Input.GetKeyDown("left")||Input.GetKeyDown("right")){
+		//steps++;
+	//}
+	distance = Vector3.Distance(GameObject.Find("Player").transform.position, GameObject.Find("Endpoint Emitter").transform.position);
 }
 
