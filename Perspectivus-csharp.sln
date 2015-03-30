@@ -1,6 +1,8 @@
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2008
 
+Project("{A44B91E6-E41A-E5C2-B347-8440E283A214}") = "Perspectivus", "Assembly-CSharp-firstpass-vs.csproj", "{F677690D-9FF2-F565-CA4A-064C73477682}"
+EndProject
 Project("{A44B91E6-E41A-E5C2-B347-8440E283A214}") = "Perspectivus", "Assembly-CSharp-vs.csproj", "{BCB9D25B-1A8F-8B79-1CED-E3096246DD72}"
 EndProject
 Project("{A44B91E6-E41A-E5C2-B347-8440E283A214}") = "Perspectivus", "Assembly-CSharp-Editor-vs.csproj", "{3808BE2D-A8A3-6ADB-FBAB-5FEB20781AD2}"
@@ -11,6 +13,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F677690D-9FF2-F565-CA4A-064C73477682}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F677690D-9FF2-F565-CA4A-064C73477682}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F677690D-9FF2-F565-CA4A-064C73477682}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F677690D-9FF2-F565-CA4A-064C73477682}.Release|Any CPU.Build.0 = Release|Any CPU
 		{BCB9D25B-1A8F-8B79-1CED-E3096246DD72}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{BCB9D25B-1A8F-8B79-1CED-E3096246DD72}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BCB9D25B-1A8F-8B79-1CED-E3096246DD72}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -23,7 +29,7 @@ Global
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
-																																																																														GlobalSection(MonoDevelopProperties) = preSolution
+																																																																																	GlobalSection(MonoDevelopProperties) = preSolution
 =======
 																																																																				GlobalSection(MonoDevelopProperties) = preSolution
 >>>>>>> Updating-Models
