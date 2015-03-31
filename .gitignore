@@ -23,8 +23,12 @@ Library/metadata/00/00000000000000004000000000000000
 
 *.csproj
 
+<<<<<<< HEAD
 *.csproj
 
 *.csproj
 
 *.unityproj
+=======
+*.meta
+>>>>>>> origin/master
