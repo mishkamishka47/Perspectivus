@@ -36,6 +36,11 @@ public function turnOn(){
 }
 
 public function changeClip(input){
+	audio1.Stop();
+	audio2.Stop();
+	audio3.Stop();
+	audio4.Stop();
+	audio5.Stop();
 	if(input==1){
 		audio1.Play();
 		audio2.Play();

@@ -205,7 +205,7 @@ function windowContain(windowID: int){
 	GUILayout.Space(15);
 	if(GUILayout.Button("Main Menu")){
 		DontDestroyOnLoad(GameObject.Find("pass"));
-		DontDestroyOnLoad(GameObject.Find("musicBox"));
+		Destroy(GameObject.Find("musicBox"));
 		Application.LoadLevel("menu");
 	}
 	GUILayout.Space(15);
