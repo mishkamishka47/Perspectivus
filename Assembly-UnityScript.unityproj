@@ -51,6 +51,7 @@
      <Compile Include="Assets\scripts\PlayerPrefsX.js" />
      <Compile Include="Assets\scripts\buttonEvent.js" />
      <Compile Include="Assets\scripts\menu.js" />
+     <Compile Include="Assets\scripts\music.js" />
      <Compile Include="Assets\scripts\passValue.js" />
      <Compile Include="Assets\scripts\startMenu.js" />
      <None Include="Assets\Standard Assets\Effects\GlassRefraction\Shaders\GlassStainedBumpDistort.shader" />

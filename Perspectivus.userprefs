@@ -3,8 +3,9 @@
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets\scripts\menu.js">
     <Files>
       <File FileName="Assets\Standard Assets\PlayerMovement.cs" Line="21" Column="30" />
-      <File FileName="Assets\scripts\menu.js" Line="119" Column="41" />
-      <File FileName="Assets\scripts\passValue.js" Line="8" Column="33" />
+      <File FileName="Assets\scripts\menu.js" Line="227" Column="50" />
+      <File FileName="Assets\scripts\passValue.js" Line="1" Column="1" />
+      <File FileName="Assets\scripts\startMenu.js" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
