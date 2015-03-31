@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: be8d5169708c642bca5e7f81928c505e
-timeCreated: 1427758093
+timeCreated: 1427772667
 licenseType: Free
 MonoImporter:
   serializedVersion: 2
@@ -10,6 +10,11 @@ MonoImporter:
   - labelAnotherSkin: {fileID: 11400000, guid: 125918bf5b8b84db79c9066e719091c5, type: 2}
   - settingSkin: {fileID: 11400000, guid: da8453365169f8f42a1d031ede2f71a6, type: 2}
   - storySkin: {fileID: 11400000, guid: da8453365169f8f42a1d031ede2f71a6, type: 2}
+  - audio1: {fileID: 8300000, guid: ed8d92bc9d251174e8be0ba314e3cf25, type: 3}
+  - audio2: {fileID: 8300000, guid: accc42b963fefd14083b57a76c7a4b24, type: 3}
+  - audio3: {fileID: 8300000, guid: 7bbed8b721b2d734b8eb76e5f0af59fa, type: 3}
+  - audio4: {fileID: 8300000, guid: 2df1ed62197dccd4988bc7412fa9690c, type: 3}
+  - audio5: {fileID: 8300000, guid: a9457d76862e0644396becfd0f357874, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

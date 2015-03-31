@@ -9,6 +9,7 @@ private var maxWorld : int = 5;
 private var firstMenu : boolean = true;
 private var current : int = 1;
 private var name : String;
+private var nowlevel : int = 1;
 function OnGUI(){
 	GUI.skin = labelSkin;
 	if(firstMenu){
@@ -21,40 +22,24 @@ function OnGUI(){
 		GUILayout.BeginVertical();
 		if(GUILayout.Button("Play!!!")){
 			DontDestroyOnLoad(GameObject.Find("musicBox"));
-			DontDestroyOnLoad(GameObject.Find("musicBox 1"));
-			DontDestroyOnLoad(GameObject.Find("musicBox 2"));
-			DontDestroyOnLoad(GameObject.Find("musicBox 3"));
-			DontDestroyOnLoad(GameObject.Find("musicBox 4"));
 			DontDestroyOnLoad(GameObject.Find("pass"));
 			Application.LoadLevel("Level1");
 		}
 		GUILayout.Space(20);
 		if(GUILayout.Button("Continue")){
 			DontDestroyOnLoad(GameObject.Find("musicBox"));
-			DontDestroyOnLoad(GameObject.Find("musicBox 1"));
-			DontDestroyOnLoad(GameObject.Find("musicBox 2"));
-			DontDestroyOnLoad(GameObject.Find("musicBox 3"));
-			DontDestroyOnLoad(GameObject.Find("musicBox 4"));
 			DontDestroyOnLoad(GameObject.Find("pass"));
 			GameObject.Find("pass").GetComponent(passValue).starlist = GameObject.Find("pass").GetComponent(PlayerPrefsX).GetIntArray("starlist");
 		}
 		GUILayout.Space(20);
 		if(GUILayout.Button("load")){
 			DontDestroyOnLoad(GameObject.Find("musicBox"));
-			DontDestroyOnLoad(GameObject.Find("musicBox 1"));
-			DontDestroyOnLoad(GameObject.Find("musicBox 2"));
-			DontDestroyOnLoad(GameObject.Find("musicBox 3"));
-			DontDestroyOnLoad(GameObject.Find("musicBox 4"));
 			DontDestroyOnLoad(GameObject.Find("pass"));
 			firstMenu = false;
 		}
 		GUILayout.Space(20);
 		if(GUILayout.Button("quit")){
 			DontDestroyOnLoad(GameObject.Find("musicBox"));
-			DontDestroyOnLoad(GameObject.Find("musicBox 1"));
-			DontDestroyOnLoad(GameObject.Find("musicBox 2"));
-			DontDestroyOnLoad(GameObject.Find("musicBox 3"));
-			DontDestroyOnLoad(GameObject.Find("musicBox 4"));
 			DontDestroyOnLoad(GameObject.Find("pass"));
 			Application.Quit();
 		}
@@ -75,13 +60,13 @@ function OnGUI(){
 			GUILayout.BeginHorizontal();
 			if(GUILayout.Button("level "+i)){
 				DontDestroyOnLoad(GameObject.Find("musicBox"));
-				DontDestroyOnLoad(GameObject.Find("musicBox 1"));
-				DontDestroyOnLoad(GameObject.Find("musicBox 2"));
-				DontDestroyOnLoad(GameObject.Find("musicBox 3"));
-				DontDestroyOnLoad(GameObject.Find("musicBox 4"));
 				DontDestroyOnLoad(GameObject.Find("pass"));
 				GameObject.Find("pass").GetComponent(passValue).setValue(i);
 				GameObject.Find("pass").GetComponent(passValue).setLevel(i);
+				if((i-1)/7 != nowlevel/7){
+				var mn = (i-1)/7+1;
+				GameObject.Find("musicBox").GetComponent(music).changeClip(mn);
+			}
 				Application.LoadLevel("Level"+i);
 			}
 			var label2 : GUIStyle = GUI.skin.GetStyle("label2");
@@ -95,7 +80,6 @@ function OnGUI(){
 					GUILayout.Label(starTexture, label3);
 				a++;
 			}
-			//GUILayout.Label(number +" stars", label2);
 			i++;
 			GUILayout.EndHorizontal();
 			GUILayout.Space(20);
@@ -119,7 +103,7 @@ function OnGUI(){
 	}
 }
 function Start () {
-
+	nowlevel = GameObject.Find("pass").GetComponent(passValue).getLevel();
 }
 
 function Update () {
