@@ -58,7 +58,7 @@ function OnGUI () {
 		else 
 			stars = 1;
 		GUI.skin = labelAnotherSkin;
-		GUILayout.BeginArea(Rect(Screen.width*0.15, Screen.height*0.2, Screen.width*0.7, Screen.height*0.4));
+		GUILayout.BeginArea(Rect(Screen.width*0.15, Screen.height*0.2, Screen.width*0.7, Screen.height*0.7));
 		GUILayout.BeginVertical();
 		GUILayout.Label("Succeed!!!");
 		
@@ -80,9 +80,9 @@ function OnGUI () {
 		}
 		GUILayout.FlexibleSpace();
 		GUILayout.EndHorizontal();
-		GUILayout.EndArea();
-		
-		GUILayout.BeginArea(Rect(Screen.width*0.15, Screen.height*0.6, Screen.width*0.7, Screen.height*0.2));
+		//GUILayout.EndArea();
+		GUILayout.Space(25);
+		//GUILayout.BeginArea(Rect(Screen.width*0.15, Screen.height*0.6, Screen.width*0.7, Screen.height*0.2));
 		GUILayout.BeginHorizontal();
 		GUI.skin = labelAnotherSkin;
 		if(GUILayout.Button("Next Level")){
