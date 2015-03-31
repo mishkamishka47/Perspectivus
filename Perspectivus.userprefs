@@ -1,9 +1,10 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Standard Assets\PlayerMovement.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\scripts\passValue.js">
     <Files>
-      <File FileName="Assets\Standard Assets\PlayerMovement.cs" Line="145" Column="19" />
-      <File FileName="Assets\scripts\menu.js" Line="130" Column="1" />
+      <File FileName="Assets\Standard Assets\PlayerMovement.cs" Line="147" Column="40" />
+      <File FileName="Assets\scripts\menu.js" Line="168" Column="20" />
+      <File FileName="Assets\scripts\passValue.js" Line="20" Column="2" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
