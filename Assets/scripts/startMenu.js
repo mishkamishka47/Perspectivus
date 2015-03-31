@@ -81,6 +81,7 @@ function OnGUI(){
 				DontDestroyOnLoad(GameObject.Find("musicBox 4"));
 				DontDestroyOnLoad(GameObject.Find("pass"));
 				GameObject.Find("pass").GetComponent(passValue).setValue(i);
+				GameObject.Find("pass").GetComponent(passValue).setLevel(i);
 				Application.LoadLevel("Level"+i);
 			}
 			var label2 : GUIStyle = GUI.skin.GetStyle("label2");

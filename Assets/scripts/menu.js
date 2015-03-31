@@ -103,6 +103,7 @@ function OnGUI () {
 			DontDestroyOnLoad(GameObject.Find("musicBox 2"));
 			DontDestroyOnLoad(GameObject.Find("musicBox 3"));
 			DontDestroyOnLoad(GameObject.Find("musicBox 4"));
+			GameObject.Find("pass").GetComponent(passValue).setLevel(level);
 			Application.LoadLevel("Level"+level);
 		}
 		if(GUILayout.Button("Retry")){
@@ -182,6 +183,7 @@ function preBoard(windowID: int){
 		time+=1;
 		InvokeRepeating("subtime", 0, 1);
 		pre = false;
+		GameObject.Find("pass").GetComponent(passValue).setPre();
 	}
 	GUILayout.EndArea();
 }
