@@ -37,55 +37,7 @@ public class PlayerMovement : MonoBehaviour {
 	}
 	// Update is called once per frame
 	void Update () {
-		int orientation = target.orientation;
-		//Comments indicate which absolute direction the player is moving. 
-		//0 means that it's as if up was pressed in orientation 0, 1 means it's as if up was pressed in orientation 1, and so on.
-		/*if(Input.GetKeyDown("up")){
-			targetRotation = Quaternion.Euler(0, 270, 90);
-			if(orientation==0&&pathPresent(1.0f,0.0f,0.0f,0)){
-				transform.Translate(1,0,0, Space.World); //0
-			}else if(orientation==1&&pathPresent(0.0f,0.0f,1.0f,1)){
-				transform.Translate(0,0,1, Space.World); //1
-			}else if(orientation==2&&pathPresent(-1.0f,0.0f,0.0f,2)){
-				transform.Translate(-1,0,0, Space.World); //2
-			}else if(orientation==3&&pathPresent(0.0f,0.0f,-1.0f,3)){
-				transform.Translate(0,0,-1, Space.World); //3
-			}
-		}else if(Input.GetKeyDown("down")){
-			targetRotation = Quaternion.Euler(0, 90, 90);
-			if(orientation==0&&pathPresent(-1.0f,0.0f,0.0f,2)){
-				transform.Translate(-1,0,0, Space.World); //2
-			}else if(orientation==1&&pathPresent(0.0f,0.0f,-1.0f,3)){
-				transform.Translate(0,0,-1, Space.World); //3
-			}else if(orientation==2&&pathPresent(1.0f,0.0f,0.0f,0)){
-				transform.Translate(1,0,0, Space.World); //0
-			}else if(orientation==3&&pathPresent(0.0f,0.0f,1.0f,1)){
-				transform.Translate(0,0,1, Space.World); //1
-			}
-		}else if(Input.GetKeyDown("left")){
-			targetRotation = Quaternion.Euler(0, 180, 90);
-			if(orientation == 0 && pathPresent(0.0f, 0.0f, 1.0f, 1)) {
-				transform.Translate(0,0,1, Space.World); //1
-			}else if(orientation==1&&pathPresent(-1.0f,0.0f,0.0f,2)){
-				transform.Translate(-1,0,0, Space.World); //2
-			}else if(orientation==2&&pathPresent(0.0f,0.0f,-1.0f,3)){
-				transform.Translate(0,0,-1, Space.World); //3
-			}else if(orientation==3&&pathPresent(1.0f,0.0f,0.0f,0)){
-				transform.Translate(1,0,0, Space.World); //0
-			}
-		}else if(Input.GetKeyDown("right")){
-			targetRotation = Quaternion.Euler(0, 0, 90);
-			if(orientation==0&&pathPresent(0.0f,0.0f,-1.0f,3)){
-				transform.Translate(0,0,-1, Space.World); //3
-			}else if(orientation==1&&pathPresent(1.0f,0.0f,0.0f,0)){
-				transform.Translate(1,0,0, Space.World); //0
-			}else if(orientation==2&&pathPresent(0.0f,0.0f,1.0f,1)){
-				transform.Translate(0,0,1, Space.World); //1
-			}else if(orientation==3&&pathPresent(-1.0f,0.0f,0.0f,2)){
-				transform.Translate(-1,0,0, Space.World); //2
-			}
-		}*/
-		
+		int orientation = target.orientation;		
 		if (Input.GetKeyDown ("up") && moreOrLessEqual(transform.rotation.eulerAngles, targetRotation.eulerAngles)) {;
 			if (pathPresent (transform.forward, upDirection)) {
 				moveSpeed = 5;
@@ -167,7 +119,7 @@ public class PlayerMovement : MonoBehaviour {
 					name = parent.gameObject.name;
 					parent = parent.transform.parent;
 				}
-				if(name.StartsWith("Walkway") || name.Equals("endpoint")){
+				if(name.StartsWith("Walkway") || name.Equals("endpoint") || name.ToLower().StartsWith("rotator")){
 					cubeBelow=true;
 				}
 				if(collidersBelow[i].name.Equals("RotateButton")){
@@ -200,7 +152,7 @@ public class PlayerMovement : MonoBehaviour {
 					name = parent.gameObject.name;
 					parent = parent.transform.parent;
 				}
-				if(name.StartsWith("Walkway") || name.Equals("endpoint")){
+				if(name.StartsWith("Walkway") || name.Equals("endpoint") || name.ToLower().StartsWith("rotator")){
 					cubeBelow=true;
 				}
 				if(collidersBelowWarp[i].name.Equals("RotateButton")){
