@@ -1,11 +1,13 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\scripts\menu.js">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/scripts/passValue.js">
     <Files>
-      <File FileName="Assets\Standard Assets\PlayerMovement.cs" Line="21" Column="30" />
-      <File FileName="Assets\scripts\menu.js" Line="227" Column="50" />
-      <File FileName="Assets\scripts\passValue.js" Line="1" Column="1" />
-      <File FileName="Assets\scripts\startMenu.js" Line="1" Column="1" />
+      <File FileName="Assets/scripts/menu.js" Line="138" Column="57" />
+      <File FileName="Assets/scripts/passValue.js" Line="20" Column="1" />
+      <File FileName="Assets/scripts/startMenu.js" Line="17" Column="35" />
+      <File FileName="Assets/scripts/AnimateTexture.cs" Line="29" Column="121" />
+      <File FileName="Assets/scripts/EmitterRotation.cs" Line="12" Column="18" />
+      <File FileName="Assets/scripts/RotatePlatform.cs" Line="25" Column="107" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
