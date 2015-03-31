@@ -16,6 +16,7 @@ private var pre : boolean = false;
 private var csScript : PlayerMovement;
 private var st : String = "";
 private var pr : String = "";
+private var scrollPosition : Vector2;
 
 public var starTexture : Texture;
 public var time : float = 50.0;
@@ -23,6 +24,8 @@ public var labelSkin : GUISkin;
 public var labelAnotherSkin : GUISkin;
 public var settingSkin : GUISkin;
 public var storySkin : GUISkin;
+public var pickupSkin : GUISkin;
+public var arrowTexture : Texture;
 
 function OnGUI () {
 	if(time < 0){
@@ -117,8 +120,27 @@ function OnGUI () {
 		windowExit = GUI.Window(0, windowExit, windowContain, "Settings");
 	}
 	if(story){
-		GUI.skin = storySkin;
-		windowStory = GUI.Window(0, windowStory, storyBoard, "New Data Linked");
+		GUI.skin = pickupSkin;
+		//GUILayout.BeginArea(Rect(Screen.width*0.3, 0, Screen.width*0.7, Screen.height*0.35));
+		GUILayout.BeginArea(Rect(Screen.width*0.35, 0, Screen.width*0.65, Screen.height*0.25));
+		scrollPosition = GUILayout.BeginScrollView(scrollPosition, GUILayout.Width(Screen.width*0.65), GUILayout.Height(Screen.height*0.2));
+		GUILayout.BeginHorizontal();
+		GUILayout.Label(arrowTexture);
+		//GUILayout.FlexibleSpace();
+		GUILayout.Label(st);
+		GUILayout.EndHorizontal();
+		GUILayout.BeginHorizontal();
+		GUILayout.Label(arrowTexture);
+		if(GUILayout.Button("Resume")){
+			time+=1;
+			InvokeRepeating("subtime", 0, 1);
+			csScript.setStory();
+			story = false;
+		}
+		GUILayout.EndHorizontal();
+		GUILayout.EndScrollView();
+		GUILayout.EndArea();
+		//windowStory = GUI.Window(0, windowStory, storyBoard, "New Data Linked");
 	}
 	if(pre){
 		GUI.skin = storySkin;
