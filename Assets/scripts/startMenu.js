@@ -13,11 +13,10 @@ private var nowlevel : int = 1;
 function OnGUI(){
 	GUI.skin = labelSkin;
 	if(firstMenu){
-		GUILayout.BeginArea(Rect(0, Screen.height*0.3, Screen.width, Screen.height*0.2));
-		GUILayout.BeginHorizontal();
+		GUILayout.BeginArea(Rect(0, Screen.height*0.2, Screen.width, Screen.height*0.2));
 		GUILayout.Label("Perspectivus");
 		GUILayout.EndArea();
-		GUILayout.BeginArea(Rect(Screen.width*0.4, Screen.height*0.5, Screen.width*0.3, Screen.height*0.5));
+		GUILayout.BeginArea(Rect(Screen.width*0.4, Screen.height*0.45, Screen.width*0.3, Screen.height*0.5));
 		GUILayout.BeginHorizontal();
 		GUILayout.BeginVertical();
 		if(GUILayout.Button("Play!!!")){
