@@ -145,7 +145,6 @@ public class PlayerMovement : MonoBehaviour {
 					story = true;
 					Debug.Log(collidersThere[i].name);
 					Destroy(GameObject.Find("USB"),1);
-					//GameObject.Find("Main Camera").GetComponent(menu).story = true;
 				}
 				else{
 					Debug.Log(collidersThere[i].name);

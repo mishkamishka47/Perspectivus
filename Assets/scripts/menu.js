@@ -12,8 +12,10 @@ private var stars : int = 0;
 private var ori : int;
 private var steps : int = 0;
 private var story : boolean = false;
+private var pre : boolean = false;
 private var csScript : PlayerMovement;
 private var st : String = "";
+private var pr : String = "";
 
 public var starTexture : Texture;
 public var time : float = 50.0;
@@ -130,10 +132,18 @@ function OnGUI () {
 		GUI.skin = storySkin;
 		windowStory = GUI.Window(0, windowStory, storyBoard, "New Data Linked");
 	}
+	if(pre){
+		GUI.skin = storySkin;
+		windowStory = GUI.Window(0, windowStory, preBoard, "New Data Linked");
+	}
 }
+
 function Start(){
 	windowSwitch = false;
 	st = GameObject.Find("pass").GetComponent(passValue).getData();
+	pr = GameObject.Find("pass").GetComponent(passValue).getPre();
+	if(pr!="")
+		pre = true;
 	ori = time;
 	level = GameObject.Find("pass").GetComponent(passValue).getLevel();
 	if(level<=7){
@@ -147,11 +157,10 @@ function Start(){
 	}
 	InvokeRepeating("subtime", 0, 1);
 	level = GameObject.Find("pass").GetComponent(passValue).getValue();
-	
 }
 
 function Awake(){
-	csScript = GameObject.Find("Player").GetComponent("PlayerMovement");
+	csScript = GameObject.Find("Player").GetComponent(PlayerMovement);
 }
 
 function subtime(){
@@ -161,6 +170,20 @@ function subtime(){
 
 function save(){
 	GameObject.Find("pass").GetComponent(PlayerPrefsX).SetIntArray("starlist", GameObject.Find("pass").GetComponent(passValue).starlist);
+}
+
+function preBoard(windowID: int){
+	GUILayout.BeginArea(Rect(Screen.width*0.15, Screen.height*0.15, Screen.width*0.7, Screen.height*0.55));
+	GUILayout.Space(20);
+	GUILayout.Label(pr);
+	GUILayout.EndArea();
+	GUILayout.BeginArea(Rect(Screen.width*0.1, Screen.height*0.85, Screen.width*0.8, Screen.height*0.15));
+	if(GUILayout.Button("Resume")){
+		time+=1;
+		InvokeRepeating("subtime", 0, 1);
+		pre = false;
+	}
+	GUILayout.EndArea();
 }
 
 function storyBoard(windowID: int){
@@ -238,6 +261,8 @@ function Update () {
 		windowSwitch = !windowSwitch;
 	}
 	if(story)
+		CancelInvoke();
+	if(pre)
 		CancelInvoke();
 	distance = Vector3.Distance(GameObject.Find("Player").transform.position, GameObject.Find("Endpoint Emitter").transform.position);
 }
