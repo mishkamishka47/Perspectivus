@@ -3,7 +3,7 @@ import UnityEngine.UI;
 
 static var windowSwitch : boolean = false;
 static private var level : int = 1;
-private var windowExit = Rect(Screen.width*0.25, Screen.height*0.2, Screen.width*0.6, Screen.height*0.6);
+private var windowExit = Rect(Screen.width*0.2, Screen.height*0.1, Screen.width*0.6, Screen.height*0.8);
 private var windowStory = Rect(0, 0, Screen.width, Screen.height);
 private var info : Text;
 private var distance : float = 100;
