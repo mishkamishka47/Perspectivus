@@ -174,6 +174,7 @@ public class PlayerMovement : MonoBehaviour {
 		if((orientationRequired==target.orientation||orientationRequired==4)&&(upDirection==warpVars.moveRequired||warpVars.moveRequired==4)){
 			targetPosition = warpCoords;
 			moveSpeed = (targetPosition - this.transform.position).magnitude * 5;
+			steps++;
 			return true;
 		}
 		return false;
