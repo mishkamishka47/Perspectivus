@@ -64,9 +64,9 @@ function OnGUI(){
 				GameObject.Find("pass").GetComponent(passValue).setValue(i);
 				GameObject.Find("pass").GetComponent(passValue).setLevel(i);
 				if((i-1)/7 != nowlevel/7){
-				var mn = (i-1)/7+1;
-				GameObject.Find("musicBox").GetComponent(music).changeClip(mn);
-			}
+					var mn = (i-1)/7+1;
+					GameObject.Find("musicBox").GetComponent(music).changeClip(mn);
+				}
 				Application.LoadLevel("Level"+i);
 			}
 			var label2 : GUIStyle = GUI.skin.GetStyle("label2");
