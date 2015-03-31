@@ -2,20 +2,26 @@
 import UnityEngine.UI;
 
 static var windowSwitch : boolean = false;
+static private var level : int = 1;
 private var windowExit = Rect(Screen.width*0.25, Screen.height*0.2, Screen.width*0.6, Screen.height*0.6);
+private var windowStory = Rect(Screen.width*0.1, Screen.height*0.1, Screen.width*0.8, Screen.height*0.8);
 private var info : Text;
 private var distance : float = 100;
 private var scores: int = 0;
 private var stars : int = 0;
 private var ori : int;
-static private var level : int = 1;
+private var steps : int = 0;
+private var story : boolean = false;
+private var csScript : PlayerMovement;
+private var st : String = "";
+
 public var starTexture : Texture;
 public var time : float = 50.0;
-private var steps : int = 0;
 public var labelSkin : GUISkin;
 public var labelAnotherSkin : GUISkin;
 public var settingSkin : GUISkin;
-private var csScript : PlayerMovement;
+public var storySkin : GUISkin;
+
 
 function OnGUI () {
 	if(time < 0){
@@ -120,9 +126,14 @@ function OnGUI () {
 		GUI.skin = settingSkin;
 		windowExit = GUI.Window(0, windowExit, windowContain, "Settings");
 	}
+	if(story){
+		GUI.skin = storySkin;
+		windowStory = GUI.Window(0, windowStory, storyBoard, "New Data Linked");
+	}
 }
 function Start(){
 	windowSwitch = false;
+	st = GameObject.Find("pass").GetComponent(passValue).getData();
 	ori = time;
 	level = GameObject.Find("pass").GetComponent(passValue).getLevel();
 	if(level<=7){
@@ -150,6 +161,20 @@ function subtime(){
 
 function save(){
 	GameObject.Find("pass").GetComponent(PlayerPrefsX).SetIntArray("starlist", GameObject.Find("pass").GetComponent(passValue).starlist);
+}
+
+function storyBoard(windowID: int){
+	GUILayout.BeginVertical();
+	GUILayout.Space(20);
+	GUILayout.Label(st);
+	GUILayout.Space(15);
+	if(GUILayout.Button("Resume")){
+		time+=1;
+		csScript.setStory();
+		InvokeRepeating("subtime", 0, 1);
+		story = false;
+	}
+	GUILayout.EndVertical();
 }
 
 function windowContain(windowID: int){
@@ -200,6 +225,8 @@ function windowContain(windowID: int){
 }
 
 function Update () {
+	steps = csScript.getSteps();
+	story = csScript.getStory();
 	if(Input.GetKeyDown(KeyCode.Escape)){
 		if(!windowSwitch)
 			CancelInvoke();
@@ -209,10 +236,8 @@ function Update () {
 		}
 		windowSwitch = !windowSwitch;
 	}
-	steps = csScript.getSteps();
-	//if(Input.GetKeyDown("up")||Input.GetKeyDown("down")||Input.GetKeyDown("left")||Input.GetKeyDown("right")){
-		//steps++;
-	//}
+	if(story)
+		CancelInvoke();
 	distance = Vector3.Distance(GameObject.Find("Player").transform.position, GameObject.Find("Endpoint Emitter").transform.position);
 }
 

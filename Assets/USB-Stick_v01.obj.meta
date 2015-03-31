@@ -1,0 +1,157 @@
+fileFormatVersion: 2
+guid: 081f42148f671f446b510b039331d96a
+timeCreated: 1427752075
+licenseType: Free
+ModelImporter:
+  serializedVersion: 18
+  fileIDToRecycleName:
+    100000: Box01
+    100002: ChamferBox01
+    100004: Connector
+    100006: Object01
+    100008: Object02
+    100010: Object13
+    100012: Object14
+    100014: Object15
+    100016: Object16
+    100018: Object17
+    100020: Object18
+    100022: Plane03
+    100024: Plane07
+    100026: Plane08
+    100028: Plane09
+    100030: //RootNode
+    400000: Box01
+    400002: ChamferBox01
+    400004: Connector
+    400006: Object01
+    400008: Object02
+    400010: Object13
+    400012: Object14
+    400014: Object15
+    400016: Object16
+    400018: Object17
+    400020: Object18
+    400022: Plane03
+    400024: Plane07
+    400026: Plane08
+    400028: Plane09
+    400030: //RootNode
+    2300000: Box01
+    2300002: ChamferBox01
+    2300004: Connector
+    2300006: Object01
+    2300008: Object02
+    2300010: Object13
+    2300012: Object14
+    2300014: Object15
+    2300016: Object16
+    2300018: Object17
+    2300020: Object18
+    2300022: Plane03
+    2300024: Plane07
+    2300026: Plane08
+    2300028: Plane09
+    3300000: Box01
+    3300002: ChamferBox01
+    3300004: Connector
+    3300006: Object01
+    3300008: Object02
+    3300010: Object13
+    3300012: Object14
+    3300014: Object15
+    3300016: Object16
+    3300018: Object17
+    3300020: Object18
+    3300022: Plane03
+    3300024: Plane07
+    3300026: Plane08
+    3300028: Plane09
+    4300000: Box01
+    4300002: ChamferBox01
+    4300004: Connector
+    4300006: Object01
+    4300008: Object02
+    4300010: Object13
+    4300012: Object14
+    4300014: Object15
+    4300016: Object16
+    4300018: Object17
+    4300020: Object18
+    4300022: Plane03
+    4300024: Plane07
+    4300026: Plane08
+    4300028: Plane09
+    6400000: Box01
+    6400002: ChamferBox01
+    6400004: Connector
+    6400006: Object01
+    6400008: Object02
+    6400010: Object13
+    6400012: Object14
+    6400014: Object15
+    6400016: Object16
+    6400018: Object17
+    6400020: Object18
+    6400022: Plane03
+    6400024: Plane07
+    6400026: Plane08
+    6400028: Plane09
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: .00100000005
+    meshCompression: 0
+    addColliders: 1
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

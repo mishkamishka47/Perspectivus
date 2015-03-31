@@ -6,8 +6,9 @@ public class PlayerMovement : MonoBehaviour {
 	public GameObject lastButtonPressed;
 	public Material offColor;
 	public Material onColor;
+
 	private int steps = 0;
-	
+	private bool story = false;
 	private Quaternion targetRotation;
 	private Vector3 targetPosition;
 	private float moveSpeed = 5;
@@ -19,9 +20,16 @@ public class PlayerMovement : MonoBehaviour {
 		lastButtonPressed=null;
 		targetRotation = transform.rotation;
 	}
+	public bool getStory(){
+		return story;
+	}
 
 	public int getSteps(){
 		return steps;
+	}
+
+	public void setStory(){
+		story = false;
 	}
 
 	public void setSteps(){
@@ -100,7 +108,6 @@ public class PlayerMovement : MonoBehaviour {
 		
 		if (upDirection >= 4)
 			upDirection %= 4;
-		print (upDirection);
 		
 		if ((int)(targetRotation.eulerAngles.y) % 90 != 0) {
 			var y = Mathf.Ceil (targetRotation.eulerAngles.y / 90) * 90;
@@ -134,7 +141,13 @@ public class PlayerMovement : MonoBehaviour {
 					if(perspectiveJump(collidersThere[i],upDirection)){
 						return false;
 					}
-				}else{
+				}else if(collidersThere[i].name == "USB"){
+					story = true;
+					Debug.Log(collidersThere[i].name);
+					Destroy(GameObject.Find("USB"),1);
+					//GameObject.Find("Main Camera").GetComponent(menu).story = true;
+				}
+				else{
 					Debug.Log(collidersThere[i].name);
 					pathBlocked=true;	
 				}
