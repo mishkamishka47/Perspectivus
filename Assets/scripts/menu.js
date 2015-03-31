@@ -186,19 +186,11 @@ function windowContain(windowID: int){
 	GUILayout.BeginVertical();
 	GUILayout.Space(30);
 	if(GUILayout.Button("Turn off Music")){
-		DontDestroyOnLoad(GameObject.Find("musicBox"));
-			DontDestroyOnLoad(GameObject.Find("musicBox 1"));
-			DontDestroyOnLoad(GameObject.Find("musicBox 2"));
-			DontDestroyOnLoad(GameObject.Find("musicBox 3"));
-			DontDestroyOnLoad(GameObject.Find("musicBox 4"));
+		GameObject.Find("musicBox").GetComponent(music).turnOff();
 	}
 	GUILayout.Space(15);
 	if(GUILayout.Button("Turn on Music")){
-		DontDestroyOnLoad(GameObject.Find("musicBox"));
-			DontDestroyOnLoad(GameObject.Find("musicBox 1"));
-			DontDestroyOnLoad(GameObject.Find("musicBox 2"));
-			DontDestroyOnLoad(GameObject.Find("musicBox 3"));
-			DontDestroyOnLoad(GameObject.Find("musicBox 4"));
+		GameObject.Find("musicBox").GetComponent(music).turnOn();
 	}
 	GUILayout.Space(15);
 	if(GUILayout.Button("Save")){
@@ -213,7 +205,7 @@ function windowContain(windowID: int){
 	GUILayout.Space(15);
 	if(GUILayout.Button("Main Menu")){
 		DontDestroyOnLoad(GameObject.Find("pass"));
-		DontDestroyOnLoad(GameObject.Find("musicBox"));
+		Destroy(GameObject.Find("musicBox"));
 		Application.LoadLevel("menu");
 	}
 	GUILayout.Space(15);
