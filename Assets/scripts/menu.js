@@ -112,7 +112,7 @@ function OnGUI () {
 		GUILayout.EndHorizontal();
 		GUILayout.EndArea();
 	}
-	else{
+	else if(!pre){
 		GUI.skin = labelSkin;
 		GUI.Label(Rect(10, 10, 200, 90), "Time: " + time +"\n" + "Steps: " + steps);
 	}
