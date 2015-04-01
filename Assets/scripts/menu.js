@@ -90,11 +90,14 @@ function OnGUI () {
 			var ori = GameObject.Find("pass").GetComponent(passValue).starlist[level-1];
 			if(stars > ori)
 				GameObject.Find("pass").GetComponent(passValue).starlist[level-1] = stars;
-			level++;
+			level = GameObject.Find("pass").GetComponent(passValue).getLevel();
+			Debug.Log(level);
 			if((level-1)/7 != level/7){
-				var mn = (level-1)/7+1;
+				var mn = level/7+1;
+				Debug.Log(mn);
 				GameObject.Find("musicBox").GetComponent(music).changeClip(mn);
 			}
+			level++;
 			GameObject.Find("pass").GetComponent(passValue).setValue(level);
 			DontDestroyOnLoad(GameObject.Find("pass"));
 			DontDestroyOnLoad(GameObject.Find("musicBox"));
