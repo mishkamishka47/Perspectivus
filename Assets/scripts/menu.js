@@ -18,43 +18,43 @@ private var csScript : PlayerMovement;
 private var st : String = "";
 private var pr : String = "";
 private var scrollPosition : Vector2;
+private var time : float = 0.0;
 
 public var starTexture : Texture;
-public var time : float = 50.0;
 public var labelSkin : GUISkin;
 public var labelAnotherSkin : GUISkin;
 public var settingSkin : GUISkin;
 public var storySkin : GUISkin;
 public var pickupSkin : GUISkin;
-public var arrowTexture : Texture;
+
 
 function OnGUI () {
-	if(time < 0){
-		GUI.skin = labelAnotherSkin;
-		GUILayout.BeginArea(Rect(Screen.width*0.15, Screen.height*0.2, Screen.width*0.7, Screen.height*0.4));
-		GUILayout.BeginVertical();
-		GUILayout.Label("~Failed~");
-		GUILayout.EndVertical();
-		GUILayout.BeginHorizontal();
-		if(GUILayout.Button("Retry")){
-			DontDestroyOnLoad(GameObject.Find("musicBox"));
-			DontDestroyOnLoad(GameObject.Find("pass"));
-			Application.LoadLevel("Level"+level);
-		}
-		if(GUILayout.Button("Main Menu")){
-			DontDestroyOnLoad(GameObject.Find("musicBox"));
-			DontDestroyOnLoad(GameObject.Find("pass"));
-			Application.LoadLevel("menu");
-		}
-		GUILayout.EndHorizontal();
-		GUILayout.EndArea();
-	}
-	else if(distance <= 1 && time >= 0){
+//	if(time < 0){
+//		GUI.skin = labelAnotherSkin;
+//		GUILayout.BeginArea(Rect(Screen.width*0.15, Screen.height*0.2, Screen.width*0.7, Screen.height*0.4));
+//		GUILayout.BeginVertical();
+//		GUILayout.Label("~Failed~");
+//		GUILayout.EndVertical();
+//		GUILayout.BeginHorizontal();
+//		if(GUILayout.Button("Retry")){
+//			DontDestroyOnLoad(GameObject.Find("musicBox"));
+//			DontDestroyOnLoad(GameObject.Find("pass"));
+//			Application.LoadLevel("Level"+level);
+//		}
+//		if(GUILayout.Button("Main Menu")){
+//			DontDestroyOnLoad(GameObject.Find("musicBox"));
+//			DontDestroyOnLoad(GameObject.Find("pass"));
+//			Application.LoadLevel("menu");
+//		}
+//		GUILayout.EndHorizontal();
+//		GUILayout.EndArea();
+//	}
+	if(distance <= 1){
 		CancelInvoke();
-		scores = time + (100 - steps);
-		if(time > 10)
+		scores = 3000- time*5 + (1000 - steps);
+		if(scores >= 3000)
 			stars = 3;
-		else if(time >= 5)
+		else if(time >= 1500)
 			stars = 2;
 		else 
 			stars = 1;
@@ -81,9 +81,7 @@ function OnGUI () {
 		}
 		GUILayout.FlexibleSpace();
 		GUILayout.EndHorizontal();
-		//GUILayout.EndArea();
 		GUILayout.Space(25);
-		//GUILayout.BeginArea(Rect(Screen.width*0.15, Screen.height*0.6, Screen.width*0.7, Screen.height*0.2));
 		GUILayout.BeginHorizontal();
 		GUI.skin = labelAnotherSkin;
 		if(GUILayout.Button("Next Level")){
@@ -117,7 +115,7 @@ function OnGUI () {
 	}
 	else if(!pre){
 		GUI.skin = labelSkin;
-		GUI.Label(Rect(10, 10, 200, 90), "Time: " + time +"\n" + "Steps: " + steps);
+		GUI.Label(Rect(10, 10, 200, 90), "Steps: " + steps);
 	}
 	if(windowSwitch){
 		GUI.skin = settingSkin;
@@ -151,7 +149,7 @@ function Awake(){
 
 function subtime(){
 	if(distance > 1)
-	time -= 1;
+	time += 1;
 }
 
 function save(){
@@ -165,7 +163,7 @@ function preBoard(windowID: int){
 	GUILayout.EndArea();
 	GUILayout.BeginArea(Rect(Screen.width*0.1, Screen.height*0.85, Screen.width*0.8, Screen.height*0.15));
 	if(GUILayout.Button("Resume")){
-		time+=1;
+		time-=1;
 		InvokeRepeating("subtime", 0, 1);
 		pre = false;
 		GameObject.Find("pass").GetComponent(passValue).setPre();
@@ -180,9 +178,8 @@ function storyBoard(windowID: int){
 	GUILayout.Label(st);
 	GUILayout.EndHorizontal();
 	GUILayout.EndScrollView();
-	//GUILayout.BeginArea(Rect(Screen.width*0.7, Screen.height*0.05, Screen.width*0.25, Screen.height*0.1));
 	if(GUI.Button(Rect(Screen.width*0.45, Screen.height*0.2, Screen.width*0.15,Screen.height*0.1),"Resume")){
-		time+=1;
+		time-=1;
 		InvokeRepeating("subtime", 0, 1);
 		csScript.setStory();
 		story = false;
@@ -206,7 +203,7 @@ function windowContain(windowID: int){
 	}
 	GUILayout.Space(15);
 	if(GUILayout.Button("Resume")){
-		time+=1;
+		time-=1;
 		InvokeRepeating("subtime", 0, 1);
 		windowSwitch = false;
 	}
@@ -232,7 +229,7 @@ function Update () {
 		if(!windowSwitch)
 			CancelInvoke();
 		else{
-			time+=1;
+			time-=1;
 			InvokeRepeating("subtime", 0, 1);
 		}
 		windowSwitch = !windowSwitch;
