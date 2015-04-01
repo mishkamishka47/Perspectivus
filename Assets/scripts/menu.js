@@ -19,6 +19,8 @@ private var st : String = "";
 private var pr : String = "";
 private var scrollPosition : Vector2;
 private var time : float = 0.0;
+private var t : int;
+private var g : int;
 
 public var starTexture : Texture;
 public var labelSkin : GUISkin;
@@ -115,7 +117,8 @@ function OnGUI () {
 	}
 	else if(!pre){
 		GUI.skin = labelSkin;
-		GUI.Label(Rect(10, 10, 200, 90), "Steps: " + steps);
+		g = GameObject.Find("pass").GetComponent(passValue).gain[level-1];
+		GUI.Label(Rect(10, 10, 350, 100), "Steps: " + steps +"\nCollectibles: " + g + "/" + t);
 	}
 	if(windowSwitch){
 		GUI.skin = settingSkin;
@@ -133,14 +136,17 @@ function OnGUI () {
 
 function Start(){
 	windowSwitch = false;
+	level = GameObject.Find("pass").GetComponent(passValue).getLevel();
 	st = GameObject.Find("pass").GetComponent(passValue).getData();
 	pr = GameObject.Find("pass").GetComponent(passValue).getPre();
+	t = GameObject.Find("pass").GetComponent(passValue).total[level-1];
+	g = GameObject.Find("pass").GetComponent(passValue).gain[level-1];
+	if(g==1)
+		Destroy(GameObject.Find("USB"));
 	if(pr!="")
 		pre = true;
 	ori = time;
-	level = GameObject.Find("pass").GetComponent(passValue).getLevel();
 	InvokeRepeating("subtime", 0, 1);
-	level = GameObject.Find("pass").GetComponent(passValue).getValue();
 }
 
 function Awake(){

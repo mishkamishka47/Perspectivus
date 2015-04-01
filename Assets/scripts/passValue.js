@@ -2,6 +2,8 @@
 import UnityEngine.UI;
 
 public static var starlist = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+public static var total = [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1];
+public static var gain = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
 public static var collect = [0,5,0,5,0,5,0,5,0,5];
 public var input : int;
 private var v : int = 1;
@@ -29,6 +31,7 @@ function setPre(){
 function addCol(){
 	var n = ((currLevel-1)/7+1)*2-2;
 	collect[n]+=1;
+	gain[currLevel-1]+=1;
 }
 
 function getPre(){
@@ -38,7 +41,9 @@ function getPre(){
 }
 
 function getData(){
-	if(currLevel==1)
+	if(gain[currLevel-1]==1)
+		story = "";
+	else if(currLevel==1)
 		story = "~New data received...Analyzing\n~Who am I?...\n~New data received...Analyzing\n~Who am I?...\n~New data received...Analyzing\n~Who am I?...\n~New data received...Analyzing\n~Who am I?...\n~New data received...Analyzing\n~Who am I?...\n";
 	else if(currLevel==3)
 		story = "hello, this is second data!";
