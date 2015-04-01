@@ -185,6 +185,8 @@ public class PlayerMovement : MonoBehaviour {
 					cubeBelow=true;
 					if((orientationRequired==target.orientation||orientationRequired==4)&&(upDirection==warpVars.moveRequired||warpVars.moveRequired==4)){
 						rotateObject(collidersBelowWarp[i]);
+					}else{
+						Debug.Log(upDirection);
 					}
 				}
 				if(collidersBelowWarp[i].name.Equals("BallButton")){
