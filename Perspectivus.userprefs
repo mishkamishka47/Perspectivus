@@ -1,9 +1,9 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/scripts/AnimateTexture.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/scripts/menu.js">
     <Files>
-      <File FileName="Assets/scripts/menu.js" Line="1" Column="1" />
-      <File FileName="Assets/scripts/passValue.js" Line="1" Column="1" />
+      <File FileName="Assets/scripts/menu.js" Line="129" Column="3" />
+      <File FileName="Assets/scripts/passValue.js" Line="36" Column="45" />
       <File FileName="Assets/scripts/startMenu.js" Line="1" Column="1" />
       <File FileName="Assets/scripts/AnimateTexture.cs" Line="10" Column="28" />
     </Files>

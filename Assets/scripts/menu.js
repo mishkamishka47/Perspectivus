@@ -5,6 +5,7 @@ static var windowSwitch : boolean = false;
 static private var level : int = 1;
 private var windowExit = Rect(Screen.width*0.2, Screen.height*0.1, Screen.width*0.6, Screen.height*0.8);
 private var windowStory = Rect(0, 0, Screen.width, Screen.height);
+private var windowPickup = Rect(Screen.width*0.3, 0, Screen.width*0.7, Screen.height*0.3);
 private var info : Text;
 private var distance : float = 100;
 private var scores: int = 0;
@@ -121,26 +122,7 @@ function OnGUI () {
 	}
 	if(story){
 		GUI.skin = pickupSkin;
-		//GUILayout.BeginArea(Rect(Screen.width*0.3, 0, Screen.width*0.7, Screen.height*0.35));
-		GUILayout.BeginArea(Rect(Screen.width*0.35, 0, Screen.width*0.65, Screen.height*0.25));
-		scrollPosition = GUILayout.BeginScrollView(scrollPosition, GUILayout.Width(Screen.width*0.65), GUILayout.Height(Screen.height*0.2));
-		//GUILayout.BeginHorizontal();
-		GUILayout.Label(arrowTexture);
-		GUILayout.FlexibleSpace();
-		GUILayout.Label(st);
-		//GUILayout.EndHorizontal();
-		GUILayout.BeginHorizontal();
-		GUILayout.Label(arrowTexture);
-		if(GUILayout.Button("Resume")){
-			time+=1;
-			InvokeRepeating("subtime", 0, 1);
-			csScript.setStory();
-			story = false;
-		}
-		GUILayout.EndHorizontal();
-		GUILayout.EndScrollView();
-		GUILayout.EndArea();
-		//windowStory = GUI.Window(0, windowStory, storyBoard, "New Data Linked");
+		windowPickup = GUI.Window(0, windowPickup, storyBoard, "New Items Received");
 	}
 	if(pre){
 		GUI.skin = storySkin;
@@ -189,20 +171,19 @@ function preBoard(windowID: int){
 }
 
 function storyBoard(windowID: int){
-	GUILayout.BeginArea(Rect(Screen.width*0.15, Screen.height*0.15, Screen.width*0.7, Screen.height*0.55));
+	scrollPosition = GUILayout.BeginScrollView(scrollPosition, GUILayout.Width(Screen.width*0.65), GUILayout.Height(Screen.height*0.2));
 	GUILayout.BeginHorizontal();
-	GUILayout.Space(20);
+	GUILayout.Space(30);
 	GUILayout.Label(st);
 	GUILayout.EndHorizontal();
-	GUILayout.EndArea();
-	GUILayout.BeginArea(Rect(Screen.width*0.1, Screen.height*0.85, Screen.width*0.8, Screen.height*0.15));
-	if(GUILayout.Button("Resume")){
+	GUILayout.EndScrollView();
+	//GUILayout.BeginArea(Rect(Screen.width*0.7, Screen.height*0.05, Screen.width*0.25, Screen.height*0.1));
+	if(GUI.Button(Rect(Screen.width*0.45, Screen.height*0.2, Screen.width*0.15,Screen.height*0.1),"Resume")){
 		time+=1;
-		csScript.setStory();
 		InvokeRepeating("subtime", 0, 1);
+		csScript.setStory();
 		story = false;
 	}
-	GUILayout.EndArea();
 }
 
 function windowContain(windowID: int){

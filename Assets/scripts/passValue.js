@@ -33,7 +33,7 @@ function getPre(){
 
 function getData(){
 	if(currLevel==1)
-		story = "~New data received...Analyzing\n~Who am I?...";
+		story = "~New data received...Analyzing\n~Who am I?...\n~New data received...Analyzing\n~Who am I?...\n~New data received...Analyzing\n~Who am I?...\n~New data received...Analyzing\n~Who am I?...\n~New data received...Analyzing\n~Who am I?...\n";
 	else if(currLevel==3)
 		story = "hello, this is second data!";
 	else
