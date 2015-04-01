@@ -124,11 +124,11 @@ function OnGUI () {
 		//GUILayout.BeginArea(Rect(Screen.width*0.3, 0, Screen.width*0.7, Screen.height*0.35));
 		GUILayout.BeginArea(Rect(Screen.width*0.35, 0, Screen.width*0.65, Screen.height*0.25));
 		scrollPosition = GUILayout.BeginScrollView(scrollPosition, GUILayout.Width(Screen.width*0.65), GUILayout.Height(Screen.height*0.2));
-		GUILayout.BeginHorizontal();
+		//GUILayout.BeginHorizontal();
 		GUILayout.Label(arrowTexture);
-		//GUILayout.FlexibleSpace();
+		GUILayout.FlexibleSpace();
 		GUILayout.Label(st);
-		GUILayout.EndHorizontal();
+		//GUILayout.EndHorizontal();
 		GUILayout.BeginHorizontal();
 		GUILayout.Label(arrowTexture);
 		if(GUILayout.Button("Resume")){
@@ -190,8 +190,10 @@ function preBoard(windowID: int){
 
 function storyBoard(windowID: int){
 	GUILayout.BeginArea(Rect(Screen.width*0.15, Screen.height*0.15, Screen.width*0.7, Screen.height*0.55));
+	GUILayout.BeginHorizontal();
 	GUILayout.Space(20);
 	GUILayout.Label(st);
+	GUILayout.EndHorizontal();
 	GUILayout.EndArea();
 	GUILayout.BeginArea(Rect(Screen.width*0.1, Screen.height*0.85, Screen.width*0.8, Screen.height*0.15));
 	if(GUILayout.Button("Resume")){

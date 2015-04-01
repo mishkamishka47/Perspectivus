@@ -27,13 +27,13 @@ function setPre(){
 
 function getPre(){
 	if(currLevel==1)
-		pre = "booting........\nanalyzing";
+		pre = "Booting........\nAnalyzing Environment.......\nNo Abnormalities Detected\nLaunching...\nPuzzle Solver V3.0.3 Launched.";
 	return pre;
 }
 
 function getData(){
 	if(currLevel==1)
-		story = "hello, this is first data!hello, this is first data!hello, this is first data!hello, this is first data!hello, this is first data!hello, this is first data!hello, this is first data!hello, this is first data!";
+		story = "~New data received...Analyzing\n~Who am I?...";
 	else if(currLevel==3)
 		story = "hello, this is second data!";
 	else
