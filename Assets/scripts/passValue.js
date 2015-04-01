@@ -2,6 +2,7 @@
 import UnityEngine.UI;
 
 public static var starlist = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+public static var collect = [0,5,0,5,0,5,0,5,0,5];
 public var input : int;
 private var v : int = 1;
 private var currLevel : int = 1;
@@ -23,6 +24,11 @@ function getLevel(){
 
 function setPre(){
 	pre = "";
+}
+
+function addCol(){
+	var n = ((currLevel-1)/7+1)*2-2;
+	collect[n]+=1;
 }
 
 function getPre(){

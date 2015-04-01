@@ -154,6 +154,7 @@ function subtime(){
 
 function save(){
 	GameObject.Find("pass").GetComponent(PlayerPrefsX).SetIntArray("starlist", GameObject.Find("pass").GetComponent(passValue).starlist);
+	GameObject.Find("pass").GetComponent(PlayerPrefsX).SetIntArray("collect", GameObject.Find("pass").GetComponent(passValue).collect);
 }
 
 function preBoard(windowID: int){
@@ -180,6 +181,7 @@ function storyBoard(windowID: int){
 	GUILayout.EndScrollView();
 	if(GUI.Button(Rect(Screen.width*0.45, Screen.height*0.2, Screen.width*0.15,Screen.height*0.1),"Resume")){
 		time-=1;
+		GameObject.Find("pass").GetComponent(passValue).addCol();
 		InvokeRepeating("subtime", 0, 1);
 		csScript.setStory();
 		story = false;
