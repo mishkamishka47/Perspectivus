@@ -2,6 +2,9 @@
 import UnityEngine.UI;
 
 public static var starlist = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+public static var total = [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1];
+public static var gain = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+public static var collect = [0,5,0,5,0,5,0,5,0,5];
 public var input : int;
 private var v : int = 1;
 private var currLevel : int = 1;
@@ -25,15 +28,25 @@ function setPre(){
 	pre = "";
 }
 
+function addCol(){
+	var n = ((currLevel-1)/7+1)*2-2;
+	collect[n]+=1;
+	gain[currLevel-1]+=1;
+}
+
 function getPre(){
 	if(currLevel==1)
-		pre = "booting........\nanalyzing";
+		pre = "Booting........\nAnalyzing Environment.......\nNo Abnormalities Detected\nLaunching...\nPuzzle Solver V3.0.3 Launched.";
 	return pre;
 }
 
 function getData(){
 	if(currLevel==1)
 		story = "hello, this is first data!hello, this is first data!hello, this is first data!hello, this is first data!hello, this is first data!hello, this is first data!hello, this is first data!hello, this is first data!hello, this is first data!hello, this is first data!hello, this is first data!hello, this is first data!hello, this is first data!hello, this is first data!hello, this is first data!hello, this is first data!";
+	if(gain[currLevel-1]==1)
+		story = "";
+	else if(currLevel==1)
+		story = "~New data received...Analyzing\n~Who am I?...\n~New data received...Analyzing\n~Who am I?...\n~New data received...Analyzing\n~Who am I?...\n~New data received...Analyzing\n~Who am I?...\n~New data received...Analyzing\n~Who am I?...\n";
 	else if(currLevel==3)
 		story = "hello, this is second data!";
 	else

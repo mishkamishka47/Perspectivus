@@ -13,11 +13,10 @@ private var nowlevel : int = 1;
 function OnGUI(){
 	GUI.skin = labelSkin;
 	if(firstMenu){
-		GUILayout.BeginArea(Rect(0, Screen.height*0.3, Screen.width, Screen.height*0.2));
-		GUILayout.BeginHorizontal();
+		GUILayout.BeginArea(Rect(0, Screen.height*0.2, Screen.width, Screen.height*0.2));
 		GUILayout.Label("Perspectivus");
 		GUILayout.EndArea();
-		GUILayout.BeginArea(Rect(Screen.width*0.4, Screen.height*0.5, Screen.width*0.3, Screen.height*0.5));
+		GUILayout.BeginArea(Rect(Screen.width*0.4, Screen.height*0.45, Screen.width*0.3, Screen.height*0.5));
 		GUILayout.BeginHorizontal();
 		GUILayout.BeginVertical();
 		if(GUILayout.Button("Play!!!")){
@@ -30,6 +29,7 @@ function OnGUI(){
 			DontDestroyOnLoad(GameObject.Find("musicBox"));
 			DontDestroyOnLoad(GameObject.Find("pass"));
 			GameObject.Find("pass").GetComponent(passValue).starlist = GameObject.Find("pass").GetComponent(PlayerPrefsX).GetIntArray("starlist");
+			GameObject.Find("pass").GetComponent(passValue).collect = GameObject.Find("pass").GetComponent(PlayerPrefsX).GetIntArray("collect");
 		}
 		GUILayout.Space(20);
 		if(GUILayout.Button("load")){
@@ -47,10 +47,16 @@ function OnGUI(){
 	}
 	if(!firstMenu){
 		currentWorld = (current-1)/7 + 1;
-		GUILayout.BeginArea(Rect(0, Screen.height*0.05, Screen.width, Screen.height*0.15));
-		GUILayout.BeginHorizontal();
-		GUILayout.Label("world "+currentWorld);
-		GUILayout.EndHorizontal();
+		GUILayout.BeginArea(Rect(0, 0, Screen.width, Screen.height*0.2));
+		GUILayout.BeginVertical();
+		GUI.skin = labelSkin;
+		var labelc : GUIStyle = GUI.skin.GetStyle("label1");
+		var c = GameObject.Find("pass").GetComponent(passValue).collect[currentWorld*2-2];
+		var d = GameObject.Find("pass").GetComponent(passValue).collect[currentWorld*2-1];
+		//Debug.Log(c+" "+d);
+		GUILayout.Label("world "+currentWorld+"  "+c+"/"+d);
+		//GUILayout.Label("col: "+c+"/"+d, labelc);
+		GUILayout.EndVertical();
 		GUILayout.EndArea();
 		GUILayout.BeginArea(Rect(Screen.width*0.2, Screen.height*0.2, Screen.width*0.6, Screen.height*0.5));
 		

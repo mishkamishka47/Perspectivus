@@ -6,6 +6,7 @@ var gui: GUITexture;
 function Start () 
 {
    if (!gui) gui = gameObject.GetComponent(GUITexture);//guiTexture;//gameObject.GetComponent(GUITexture);
+   if (!gui) gui = GetComponent.<GUITexture>();//gameObject.GetComponent(GUITexture);
 }
 
 function Update () 
