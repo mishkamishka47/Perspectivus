@@ -33,7 +33,7 @@ function getPre(){
 
 function getData(){
 	if(currLevel==1)
-		story = "hello, this is first data!hello, this is first data!hello, this is first data!hello, this is first data!hello, this is first data!hello, this is first data!hello, this is first data!hello, this is first data!";
+		story = "hello, this is first data!hello, this is first data!hello, this is first data!hello, this is first data!hello, this is first data!hello, this is first data!hello, this is first data!hello, this is first data!hello, this is first data!hello, this is first data!hello, this is first data!hello, this is first data!hello, this is first data!hello, this is first data!hello, this is first data!hello, this is first data!";
 	else if(currLevel==3)
 		story = "hello, this is second data!";
 	else
