@@ -50,8 +50,6 @@
      <Compile Include="Assets\Sci-Fi UI\Demo_Assets\GUI_Demo.js" />
      <Compile Include="Assets\Sci-Fi UI\Demo_Assets\TouchButton_Demo 1.js" />
      <Compile Include="Assets\Sci-Fi UI\Demo_Assets\TouchButton_Demo.js" />
-     <Compile Include="Assets\Sci-Fi UI\Demo_Assets\touchJoystick\Joystick 1.js" />
-     <Compile Include="Assets\Sci-Fi UI\Demo_Assets\touchJoystick\Joystick.js" />
      <Compile Include="Assets\scripts\Mike1Solution.js" />
      <Compile Include="Assets\scripts\NewBehaviourScript.js" />
      <Compile Include="Assets\scripts\PlayerPrefsX.js" />
