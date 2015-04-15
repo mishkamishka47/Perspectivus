@@ -41,8 +41,6 @@ function getPre(){
 }
 
 function getData(){
-	if(currLevel==1)
-		story = "hello, this is first data!hello, this is first data!hello, this is first data!hello, this is first data!hello, this is first data!hello, this is first data!hello, this is first data!hello, this is first data!hello, this is first data!hello, this is first data!hello, this is first data!hello, this is first data!hello, this is first data!hello, this is first data!hello, this is first data!hello, this is first data!";
 	if(gain[currLevel-1]==1)
 		story = "";
 	else if(currLevel==1)

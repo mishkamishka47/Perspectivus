@@ -5,7 +5,7 @@ static var windowSwitch : boolean = false;
 static private var level : int = 1;
 private var windowExit = Rect(Screen.width*0.2, Screen.height*0.1, Screen.width*0.6, Screen.height*0.8);
 private var windowStory = Rect(0, 0, Screen.width, Screen.height);
-private var windowPickup = Rect(Screen.width*0.2, Screen.height*0.25, Screen.width*0.6, Screen.height*0.4);
+private var windowPickup = Rect(Screen.width*0.3, 0, Screen.width*0.7, Screen.height*0.3);
 private var info : Text;
 private var distance : float = 100;
 private var scores: int = 0;
@@ -179,22 +179,19 @@ function preBoard(windowID: int){
 }
 
 function storyBoard(windowID: int){
-	//GUILayout.BeginArea(Rect(Screen.width*0.2, Screen.height*0.25, Screen.width*0.6, Screen.height*0.5));
-	GUILayout.BeginVertical();
-	scrollPosition = GUILayout.BeginScrollView(scrollPosition, false, true, GUILayout.Width(Screen.width*0.55), GUILayout.Height(Screen.height*0.28));
+	scrollPosition = GUILayout.BeginScrollView(scrollPosition, GUILayout.Width(Screen.width*0.65), GUILayout.Height(Screen.height*0.2));
+	GUILayout.BeginHorizontal();
 	GUILayout.Space(30);
 	GUILayout.Label(st);
+	GUILayout.EndHorizontal();
 	GUILayout.EndScrollView();
-	GUILayout.Space(50);
-	if(GUILayout.Button("Resume")){
+	if(GUI.Button(Rect(Screen.width*0.45, Screen.height*0.2, Screen.width*0.15,Screen.height*0.1),"Resume")){
 		time-=1;
 		GameObject.Find("pass").GetComponent(passValue).addCol();
 		InvokeRepeating("subtime", 0, 1);
 		csScript.setStory();
 		story = false;
 	}
-	GUILayout.EndVertical();
-	
 }
 
 function windowContain(windowID: int){
