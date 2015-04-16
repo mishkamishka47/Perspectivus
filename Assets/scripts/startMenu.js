@@ -22,7 +22,7 @@ function OnGUI(){
 		if(GUILayout.Button("Play!!!")){
 			DontDestroyOnLoad(GameObject.Find("musicBox"));
 			DontDestroyOnLoad(GameObject.Find("pass"));
-			Application.LoadLevel("Level1");
+			Application.LoadLevel("start1");
 		}
 		GUILayout.Space(20);
 		if(GUILayout.Button("Continue")){

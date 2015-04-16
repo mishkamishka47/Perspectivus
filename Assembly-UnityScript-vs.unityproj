@@ -54,6 +54,7 @@
      <Compile Include="Assets\scripts\music.js" />
      <Compile Include="Assets\scripts\passValue.js" />
      <Compile Include="Assets\scripts\startMenu.js" />
+     <Compile Include="Assets\scripts\startMovie.js" />
      <None Include="Assets\Standard Assets\Effects\GlassRefraction\Shaders\GlassStainedBumpDistort.shader" />
      <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\_BloomAndFlares\BlendOneOne.shader" />
      <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\NoiseEffectShaderRGB.shader" />
