@@ -31,6 +31,26 @@ public var pickupSkin : GUISkin;
 
 
 function OnGUI () {
+//	if(time < 0){
+//		GUI.skin = labelAnotherSkin;
+//		GUILayout.BeginArea(Rect(Screen.width*0.15, Screen.height*0.2, Screen.width*0.7, Screen.height*0.4));
+//		GUILayout.BeginVertical();
+//		GUILayout.Label("~Failed~");
+//		GUILayout.EndVertical();
+//		GUILayout.BeginHorizontal();
+//		if(GUILayout.Button("Retry")){
+//			DontDestroyOnLoad(GameObject.Find("musicBox"));
+//			DontDestroyOnLoad(GameObject.Find("pass"));
+//			Application.LoadLevel("Level"+level);
+//		}
+//		if(GUILayout.Button("Main Menu")){
+//			DontDestroyOnLoad(GameObject.Find("musicBox"));
+//			DontDestroyOnLoad(GameObject.Find("pass"));
+//			Application.LoadLevel("menu");
+//		}
+//		GUILayout.EndHorizontal();
+//		GUILayout.EndArea();
+//	}
 	if(distance <= 1){
 		CancelInvoke();
 		scores = 3000- time*5 + (1000 - steps);
@@ -98,10 +118,7 @@ function OnGUI () {
 	else if(!pre){
 		GUI.skin = labelSkin;
 		g = GameObject.Find("pass").GetComponent(passValue).gain[level-1];
-		if(t!=0)
-			GUI.Label(Rect(10, 10, 350, 100), "Steps: " + steps +"\nCollectibles: " + g + "/" + t);
-		else
-			GUI.Label(Rect(10, 10, 200, 50), "Steps: " + steps);
+		GUI.Label(Rect(10, 10, 350, 100), "Steps: " + steps +"\nCollectibles: " + g + "/" + t);
 	}
 	if(windowSwitch){
 		GUI.skin = settingSkin;
@@ -168,7 +185,7 @@ function storyBoard(windowID: int){
 	GUILayout.Label(st);
 	GUILayout.EndHorizontal();
 	GUILayout.EndScrollView();
-	if(GUI.Button(Rect(Screen.width*0.45, Screen.height*0.22, 150,80),"Resume")){
+	if(GUI.Button(Rect(Screen.width*0.45, Screen.height*0.2, Screen.width*0.15,Screen.height*0.1),"Resume")){
 		time-=1;
 		GameObject.Find("pass").GetComponent(passValue).addCol();
 		InvokeRepeating("subtime", 0, 1);
