@@ -5,7 +5,7 @@ static var windowSwitch : boolean = false;
 static private var level : int = 1;
 private var windowExit = Rect(Screen.width*0.2, Screen.height*0.1, Screen.width*0.6, Screen.height*0.8);
 private var windowStory = Rect(0, 0, Screen.width, Screen.height);
-private var windowPickup = Rect(0, Screen.height*.8, Screen.width, Screen.height*0.2);
+private var windowPickup = Rect(0, Screen.height*0.7, Screen.width, Screen.height*0.2);
 private var info : Text;
 private var distance : float = 100;
 private var scores: int = 0;
@@ -51,7 +51,8 @@ function OnGUI () {
 		GUI.skin = labelSkin;
 		var label1 : GUIStyle = GUI.skin.GetStyle("label1");
 		var label2 : GUIStyle = GUI.skin.GetStyle("label2");
-		GUILayout.Label("Scores: "+scores);
+		var label4 : GUIStyle = GUI.skin.GetStyle("label4");
+		GUILayout.Label("Scores: "+scores, label4);
 		GUILayout.Space(20);
 		GUILayout.EndVertical();
 		GUILayout.BeginHorizontal();
@@ -165,7 +166,7 @@ function preBoard(windowID: int){
 }
 
 function storyBoard(windowID: int){
-	//scrollPosition = GUILayout.BeginScrollView(scrollPosition, GUILayout.Width(Screen.width*0.65), GUILayout.Height(Screen.height*0.2));
+	//scrollPosition = GUILayout.BeginScrollView(scrollPosition, GUILayout.Width(Screen.width), GUILayout.Height(Screen.height*0.2));
 	windowOpen=true;
 	GUILayout.BeginHorizontal();
 	GUILayout.Space(Screen.width*.1);
