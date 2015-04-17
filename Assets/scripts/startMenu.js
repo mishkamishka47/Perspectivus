@@ -13,16 +13,16 @@ private var nowlevel : int = 1;
 function OnGUI(){
 	GUI.skin = labelSkin;
 	if(firstMenu){
-		GUILayout.BeginArea(Rect(0, Screen.height*0.2, Screen.width, Screen.height*0.2));
+		GUILayout.BeginArea(Rect(0, Screen.height*0.1, Screen.width, Screen.height*0.2));
 		GUILayout.Label("Perspectivus");
 		GUILayout.EndArea();
 		GUILayout.BeginArea(Rect(Screen.width*0.4, Screen.height*0.45, Screen.width*0.3, Screen.height*0.5));
 		GUILayout.BeginHorizontal();
 		GUILayout.BeginVertical();
-		if(GUILayout.Button("Play!!!")){
+		if(GUILayout.Button("Play")){
 			DontDestroyOnLoad(GameObject.Find("musicBox"));
 			DontDestroyOnLoad(GameObject.Find("pass"));
-			Application.LoadLevel("Level1");
+			Application.LoadLevel("start1");
 		}
 		GUILayout.Space(20);
 		if(GUILayout.Button("Continue")){
@@ -32,13 +32,13 @@ function OnGUI(){
 			GameObject.Find("pass").GetComponent(passValue).collect = GameObject.Find("pass").GetComponent(PlayerPrefsX).GetIntArray("collect");
 		}
 		GUILayout.Space(20);
-		if(GUILayout.Button("load")){
+		if(GUILayout.Button("Load")){
 			DontDestroyOnLoad(GameObject.Find("musicBox"));
 			DontDestroyOnLoad(GameObject.Find("pass"));
 			firstMenu = false;
 		}
 		GUILayout.Space(20);
-		if(GUILayout.Button("quit")){
+		if(GUILayout.Button("Quit")){
 			DontDestroyOnLoad(GameObject.Find("musicBox"));
 			DontDestroyOnLoad(GameObject.Find("pass"));
 			Application.Quit();
