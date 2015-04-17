@@ -5,7 +5,7 @@ static var windowSwitch : boolean = false;
 static private var level : int = 1;
 private var windowExit = Rect(Screen.width*0.2, Screen.height*0.1, Screen.width*0.6, Screen.height*0.8);
 private var windowStory = Rect(0, 0, Screen.width, Screen.height);
-private var windowPickup = Rect(Screen.width*0.3, 0, Screen.width*0.7, Screen.height*0.3);
+private var windowPickup = Rect(0, Screen.height*.8, Screen.width, Screen.height*0.2);
 private var info : Text;
 private var distance : float = 100;
 private var scores: int = 0;
@@ -16,11 +16,14 @@ private var story : boolean = false;
 private var pre : boolean = false;
 private var csScript : PlayerMovement;
 private var st : String = "";
+private var curSt : String = ""; 
 private var pr : String = "";
 private var scrollPosition : Vector2;
 private var time : float = 0.0;
 private var t : int;
 private var g : int;
+private var windowOpen : boolean = false;
+private var windowTextCounter : int = 0;
 
 public var starTexture : Texture;
 public var labelSkin : GUISkin;
@@ -125,8 +128,8 @@ function OnGUI () {
 		windowExit = GUI.Window(0, windowExit, windowContain, "Settings");
 	}
 	if(story){
-		GUI.skin = pickupSkin;
-		windowPickup = GUI.Window(0, windowPickup, storyBoard, "New Items Received");
+		//GUI.skin = pickupSkin;
+		windowPickup = GUI.Window(0, windowPickup, storyBoard, "");
 	}
 	if(pre){
 		GUI.skin = storySkin;
@@ -179,12 +182,13 @@ function preBoard(windowID: int){
 }
 
 function storyBoard(windowID: int){
-	scrollPosition = GUILayout.BeginScrollView(scrollPosition, GUILayout.Width(Screen.width*0.65), GUILayout.Height(Screen.height*0.2));
+	//scrollPosition = GUILayout.BeginScrollView(scrollPosition, GUILayout.Width(Screen.width*0.65), GUILayout.Height(Screen.height*0.2));
+	windowOpen=true;
 	GUILayout.BeginHorizontal();
-	GUILayout.Space(30);
-	GUILayout.Label(st);
+	GUILayout.Space(Screen.width*.1);
+	GUILayout.Label(curSt);
 	GUILayout.EndHorizontal();
-	GUILayout.EndScrollView();
+	//GUILayout.EndScrollView();
 	if(GUI.Button(Rect(Screen.width*0.45, Screen.height*0.2, Screen.width*0.15,Screen.height*0.1),"Resume")){
 		time-=1;
 		GameObject.Find("pass").GetComponent(passValue).addCol();
@@ -233,6 +237,20 @@ function windowContain(windowID: int){
 function Update () {
 	steps = csScript.getSteps();
 	story = csScript.getStory();
+	if(windowOpen){
+		if(windowTextCounter/5 < st.Length){
+			windowTextCounter++;
+			curSt=st.Substring(0,windowTextCounter/5);
+		}else{
+			time-=1;
+			GameObject.Find("pass").GetComponent(passValue).addCol();
+			InvokeRepeating("subtime", 0, 1);
+			csScript.setStory();
+			story = false;
+			windowTextCounter=0;
+			windowOpen=false;
+		}
+	}
 	if(Input.GetKeyDown(KeyCode.Escape)){
 		if(!windowSwitch)
 			CancelInvoke();
