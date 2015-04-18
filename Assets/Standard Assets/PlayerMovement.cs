@@ -13,7 +13,10 @@ public class PlayerMovement : MonoBehaviour {
 	private Vector3 targetPosition;
 	private float moveSpeed = 5;
 	private int upDirection = 0;
-
+	private Vector3 absoluteUp = new Vector3(1.0f,0.0f,0.0f);
+	private Vector3 absoluteLeft = new Vector3(0.0f,0.0f,1.0f);
+	private Vector3 absoluteDown = new Vector3(-1.0f,0.0f,0.0f);
+	private Vector3 absoluteRight = new Vector3(0.0f,0.0f,-1.0f);
 	// Use this for initialization
 	void Start () {
 		targetPosition = transform.position;
@@ -37,28 +40,73 @@ public class PlayerMovement : MonoBehaviour {
 	}
 	// Update is called once per frame
 	void Update () {
+		Debug.Log(transform.forward.x + " " + transform.forward.y + " " + transform.forward.z);
 		if(target==null){
 			return;
 		}
-		int orientation = target.orientation;		
-		if (Input.GetKeyDown ("up") && moreOrLessEqual(transform.rotation.eulerAngles, targetRotation.eulerAngles)) {;
-			if (pathPresent (transform.forward, upDirection)) {
+		int orientation = target.orientation;
+		if ( //Absolute up block
+			(
+			(Input.GetKeyDown ("up") && target.orientation==0)||
+			(Input.GetKeyDown ("right") && target.orientation==1)||
+			(Input.GetKeyDown ("down") && target.orientation==2)||
+			(Input.GetKeyDown ("left") && target.orientation==3)
+		 	)
+			&& moreOrLessEqual(transform.rotation.eulerAngles, targetRotation.eulerAngles)) {
+			var currentRotation = transform.rotation.eulerAngles; //i added this
+			targetRotation = Quaternion.Euler (currentRotation.x, 90, currentRotation.z); //i added this
+			if (pathPresent (absoluteUp, upDirection)) {
+
 				moveSpeed = 5;
-				targetPosition += transform.forward;
+				targetPosition += absoluteUp;
 				steps++;
 			}
-		} else if (Input.GetKeyDown ("down")) {
-			var currentRotation = transform.rotation.eulerAngles;
-			targetRotation = Quaternion.Euler (currentRotation.x, (currentRotation.y + 180) % 360, currentRotation.z);
-			upDirection += 2;
-		} else if (Input.GetKeyDown ("left")) {
-			var currentRotation = transform.rotation.eulerAngles;
-			targetRotation = Quaternion.Euler (currentRotation.x, (currentRotation.y - 90) % 360, currentRotation.z);
-			upDirection += 3;
-		} else if (Input.GetKeyDown ("right")) {
-			var currentRotation = transform.rotation.eulerAngles;
-			targetRotation = Quaternion.Euler (currentRotation.x, (currentRotation.y + 90) % 360, currentRotation.z);
-			upDirection += 1;
+		} if ( //Absolute left block
+			(
+			(Input.GetKeyDown ("up") && target.orientation==1)||
+			(Input.GetKeyDown ("right") && target.orientation==2)||
+			(Input.GetKeyDown ("down") && target.orientation==3)||
+			(Input.GetKeyDown ("left") && target.orientation==0)
+			)
+			&& moreOrLessEqual(transform.rotation.eulerAngles, targetRotation.eulerAngles)) {
+			var currentRotation = transform.rotation.eulerAngles; //i added this
+			targetRotation = Quaternion.Euler (currentRotation.x, 0, currentRotation.z); //i added this
+			if (pathPresent (absoluteLeft, upDirection)) {
+				
+				moveSpeed = 5;
+				targetPosition += absoluteLeft;
+				steps++;
+			}
+		} else if ( //Absolute down block
+		            (
+			(Input.GetKeyDown ("up") && target.orientation==2)||
+			(Input.GetKeyDown ("right") && target.orientation==3)||
+			(Input.GetKeyDown ("down") && target.orientation==0)||
+			(Input.GetKeyDown ("left") && target.orientation==1)
+			)
+		            && moreOrLessEqual(transform.rotation.eulerAngles, targetRotation.eulerAngles)) {
+			var currentRotation = transform.rotation.eulerAngles; //i added this
+			targetRotation = Quaternion.Euler (currentRotation.x, -90, currentRotation.z); //i added this
+			if (pathPresent (absoluteDown, upDirection)) {
+				moveSpeed = 5;
+				targetPosition += absoluteDown;
+				steps++;
+			}
+		} else if ( //Absolute right block
+		           (
+			(Input.GetKeyDown ("up") && target.orientation==3)||
+			(Input.GetKeyDown ("right") && target.orientation==0)||
+			(Input.GetKeyDown ("down") && target.orientation==1)||
+			(Input.GetKeyDown ("left") && target.orientation==2)
+			)
+		           && moreOrLessEqual(transform.rotation.eulerAngles, targetRotation.eulerAngles)) {
+			var currentRotation = transform.rotation.eulerAngles; //i added this
+			targetRotation = Quaternion.Euler (currentRotation.x, 180, currentRotation.z); //i added this
+			if (pathPresent (absoluteRight, upDirection)) {
+				moveSpeed = 5;
+				targetPosition += absoluteRight;
+				steps++;
+			}
 		}
 		
 		if (upDirection >= 4)
