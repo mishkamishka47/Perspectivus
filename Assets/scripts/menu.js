@@ -5,8 +5,8 @@ static var windowSwitch : boolean = false;
 static private var level : int = 1;
 private var windowExit = Rect(Screen.width*0.2, Screen.height*0.1, Screen.width*0.6, Screen.height*0.8);
 private var windowStory = Rect(0, 0, Screen.width, Screen.height);
-private var windowPickup = Rect(Screen.width*.2, Screen.height*.8, Screen.width*.8, Screen.height*0.2);
-private var windowIcon = Rect(0, Screen.height*.8, Screen.width*.2, Screen.height*0.2);
+private var windowPickup = Rect(Screen.width*.1, Screen.height*.8, Screen.width*.9, Screen.height*0.2);
+private var windowIcon = Rect(0, Screen.height*.8, Screen.width*.1, Screen.height*0.2);
 private var info : Text;
 private var distance : float = 100;
 private var scores: int = 0;
@@ -126,17 +126,17 @@ function OnGUI () {
 		GUILayout.EndArea();
 		GUI.skin = labelSkin;
 	}
-	else if(!pre){
-		GUI.skin = labelSkin;
+	else{
+		GUI.skin = labelAnotherSkin;
 		g = GameObject.Find("pass").GetComponent(passValue).gain[level-1];
-		GUI.Label(Rect(10, 10, 350, 100), "Steps: " + steps +"\nCollectibles: " + g + "/" + t);
+		GUI.Label(Rect(10, 10, 350, 100), "Collectibles: " + g + "/" + t + "\nSteps: " + steps);
 	}
 	if(windowSwitch){
 		GUI.skin = settingSkin;
 		windowExit = GUI.Window(0, windowExit, windowContain, "Settings");
 	}
 	if(story){
-		//GUI.skin = pickupSkin;
+		GUI.skin = labelSkin;
 		windowIcon = GUI.Window(0,windowIcon,storyIcon,"");
 		windowPickup = GUI.Window(1, windowPickup, storyBoard, "");
 		windowOpen=true;
