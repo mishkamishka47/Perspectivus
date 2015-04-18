@@ -17,6 +17,7 @@ public class PlayerMovement : MonoBehaviour {
 	private Vector3 absoluteLeft = new Vector3(0.0f,0.0f,1.0f);
 	private Vector3 absoluteDown = new Vector3(-1.0f,0.0f,0.0f);
 	private Vector3 absoluteRight = new Vector3(0.0f,0.0f,-1.0f);
+	private bool isMoving = false;
 	// Use this for initialization
 	void Start () {
 		targetPosition = transform.position;
@@ -40,72 +41,78 @@ public class PlayerMovement : MonoBehaviour {
 	}
 	// Update is called once per frame
 	void Update () {
-		Debug.Log(transform.forward.x + " " + transform.forward.y + " " + transform.forward.z);
+		//Debug.Log(transform.forward.x + " " + transform.forward.y + " " + transform.forward.z);
 		if(target==null){
 			return;
 		}
 		int orientation = target.orientation;
 		if ( //Absolute up block
 			(
-			(Input.GetKeyDown ("up") && target.orientation==0)||
-			(Input.GetKeyDown ("right") && target.orientation==1)||
-			(Input.GetKeyDown ("down") && target.orientation==2)||
-			(Input.GetKeyDown ("left") && target.orientation==3)
+			(Input.GetKey ("up") && target.orientation==0)||
+			(Input.GetKey ("right") && target.orientation==1)||
+			(Input.GetKey ("down") && target.orientation==2)||
+			(Input.GetKey ("left") && target.orientation==3)
 		 	)
-			&& moreOrLessEqual(transform.rotation.eulerAngles, targetRotation.eulerAngles)) {
+		    && moreOrLessEqual(transform.rotation.eulerAngles, targetRotation.eulerAngles)&&!isMoving) {
 			var currentRotation = transform.rotation.eulerAngles; //i added this
 			targetRotation = Quaternion.Euler (currentRotation.x, 90, currentRotation.z); //i added this
+			upDirection=0;
 			if (pathPresent (absoluteUp, upDirection)) {
-
 				moveSpeed = 5;
 				targetPosition += absoluteUp;
 				steps++;
+				isMoving=true;
 			}
 		} if ( //Absolute left block
 			(
-			(Input.GetKeyDown ("up") && target.orientation==1)||
-			(Input.GetKeyDown ("right") && target.orientation==2)||
-			(Input.GetKeyDown ("down") && target.orientation==3)||
-			(Input.GetKeyDown ("left") && target.orientation==0)
+			(Input.GetKey ("up") && target.orientation==1)||
+			(Input.GetKey ("right") && target.orientation==2)||
+			(Input.GetKey ("down") && target.orientation==3)||
+			(Input.GetKey ("left") && target.orientation==0)
 			)
-			&& moreOrLessEqual(transform.rotation.eulerAngles, targetRotation.eulerAngles)) {
+		      && moreOrLessEqual(transform.rotation.eulerAngles, targetRotation.eulerAngles)&&!isMoving) {
 			var currentRotation = transform.rotation.eulerAngles; //i added this
 			targetRotation = Quaternion.Euler (currentRotation.x, 0, currentRotation.z); //i added this
+			upDirection=1;
 			if (pathPresent (absoluteLeft, upDirection)) {
-				
 				moveSpeed = 5;
 				targetPosition += absoluteLeft;
 				steps++;
+				isMoving=true;
 			}
 		} else if ( //Absolute down block
 		            (
-			(Input.GetKeyDown ("up") && target.orientation==2)||
-			(Input.GetKeyDown ("right") && target.orientation==3)||
-			(Input.GetKeyDown ("down") && target.orientation==0)||
-			(Input.GetKeyDown ("left") && target.orientation==1)
+			(Input.GetKey ("up") && target.orientation==2)||
+			(Input.GetKey ("right") && target.orientation==3)||
+			(Input.GetKey ("down") && target.orientation==0)||
+			(Input.GetKey ("left") && target.orientation==1)
 			)
-		            && moreOrLessEqual(transform.rotation.eulerAngles, targetRotation.eulerAngles)) {
+		           && moreOrLessEqual(transform.rotation.eulerAngles, targetRotation.eulerAngles)&&!isMoving) {
 			var currentRotation = transform.rotation.eulerAngles; //i added this
 			targetRotation = Quaternion.Euler (currentRotation.x, -90, currentRotation.z); //i added this
+			upDirection=2;
 			if (pathPresent (absoluteDown, upDirection)) {
 				moveSpeed = 5;
 				targetPosition += absoluteDown;
 				steps++;
+				isMoving=true;
 			}
 		} else if ( //Absolute right block
 		           (
-			(Input.GetKeyDown ("up") && target.orientation==3)||
-			(Input.GetKeyDown ("right") && target.orientation==0)||
-			(Input.GetKeyDown ("down") && target.orientation==1)||
-			(Input.GetKeyDown ("left") && target.orientation==2)
+			(Input.GetKey ("up") && target.orientation==3)||
+			(Input.GetKey ("right") && target.orientation==0)||
+			(Input.GetKey ("down") && target.orientation==1)||
+			(Input.GetKey ("left") && target.orientation==2)
 			)
-		           && moreOrLessEqual(transform.rotation.eulerAngles, targetRotation.eulerAngles)) {
+		           && moreOrLessEqual(transform.rotation.eulerAngles, targetRotation.eulerAngles)&&!isMoving) {
 			var currentRotation = transform.rotation.eulerAngles; //i added this
 			targetRotation = Quaternion.Euler (currentRotation.x, 180, currentRotation.z); //i added this
+			upDirection=3;
 			if (pathPresent (absoluteRight, upDirection)) {
 				moveSpeed = 5;
 				targetPosition += absoluteRight;
 				steps++;
+				isMoving=true;
 			}
 		}
 		
@@ -119,6 +126,9 @@ public class PlayerMovement : MonoBehaviour {
 		
 		transform.position = Vector3.MoveTowards (transform.position, targetPosition, Time.deltaTime * moveSpeed);
 		var difference = targetPosition - transform.position;
+		if(difference.magnitude<= .1){
+			isMoving=false;
+		}
 		GetComponent<Animator> ().SetFloat ("distanceToTravel", difference.magnitude);
 		transform.rotation = Quaternion.RotateTowards (transform.rotation, targetRotation, Time.deltaTime * 500);
 	}
@@ -130,6 +140,7 @@ public class PlayerMovement : MonoBehaviour {
 	}
 	
 	bool pathPresent(Vector3 vec, int upDirection) {
+		Debug.Log (upDirection);
 		return pathPresent (vec.x, vec.y, vec.z, upDirection);
 	}
 	
