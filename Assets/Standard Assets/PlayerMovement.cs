@@ -18,6 +18,7 @@ public class PlayerMovement : MonoBehaviour {
 	private Vector3 absoluteDown = new Vector3(-1.0f,0.0f,0.0f);
 	private Vector3 absoluteRight = new Vector3(0.0f,0.0f,-1.0f);
 	private bool isMoving = false;
+	public bool menuScreen = false;
 	// Use this for initialization
 	void Start () {
 		targetPosition = transform.position;
@@ -26,6 +27,9 @@ public class PlayerMovement : MonoBehaviour {
 	}
 	public bool getStory(){
 		return story;
+	}
+	public void setMenu(bool m){
+		menuScreen=m;
 	}
 
 	public int getSteps(){
@@ -53,7 +57,7 @@ public class PlayerMovement : MonoBehaviour {
 			(Input.GetKey ("down") && target.orientation==2)||
 			(Input.GetKey ("left") && target.orientation==3)
 		 	)
-		    && moreOrLessEqual(transform.rotation.eulerAngles, targetRotation.eulerAngles)&&!isMoving) {
+		    && moreOrLessEqual(transform.rotation.eulerAngles, targetRotation.eulerAngles)&&!isMoving&&!menuScreen) {
 			var currentRotation = transform.rotation.eulerAngles; //i added this
 			targetRotation = Quaternion.Euler (currentRotation.x, 90, currentRotation.z); //i added this
 			upDirection=0;
@@ -70,7 +74,7 @@ public class PlayerMovement : MonoBehaviour {
 			(Input.GetKey ("down") && target.orientation==3)||
 			(Input.GetKey ("left") && target.orientation==0)
 			)
-		      && moreOrLessEqual(transform.rotation.eulerAngles, targetRotation.eulerAngles)&&!isMoving) {
+		      && moreOrLessEqual(transform.rotation.eulerAngles, targetRotation.eulerAngles)&&!isMoving&&!menuScreen) {
 			var currentRotation = transform.rotation.eulerAngles; //i added this
 			targetRotation = Quaternion.Euler (currentRotation.x, 0, currentRotation.z); //i added this
 			upDirection=1;
@@ -87,7 +91,7 @@ public class PlayerMovement : MonoBehaviour {
 			(Input.GetKey ("down") && target.orientation==0)||
 			(Input.GetKey ("left") && target.orientation==1)
 			)
-		           && moreOrLessEqual(transform.rotation.eulerAngles, targetRotation.eulerAngles)&&!isMoving) {
+		           && moreOrLessEqual(transform.rotation.eulerAngles, targetRotation.eulerAngles)&&!isMoving&&!menuScreen) {
 			var currentRotation = transform.rotation.eulerAngles; //i added this
 			targetRotation = Quaternion.Euler (currentRotation.x, -90, currentRotation.z); //i added this
 			upDirection=2;
@@ -104,7 +108,7 @@ public class PlayerMovement : MonoBehaviour {
 			(Input.GetKey ("down") && target.orientation==1)||
 			(Input.GetKey ("left") && target.orientation==2)
 			)
-		           && moreOrLessEqual(transform.rotation.eulerAngles, targetRotation.eulerAngles)&&!isMoving) {
+		           && moreOrLessEqual(transform.rotation.eulerAngles, targetRotation.eulerAngles)&&!isMoving&&!menuScreen) {
 			var currentRotation = transform.rotation.eulerAngles; //i added this
 			targetRotation = Quaternion.Euler (currentRotation.x, 180, currentRotation.z); //i added this
 			upDirection=3;

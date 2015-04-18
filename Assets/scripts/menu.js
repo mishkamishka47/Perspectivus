@@ -29,6 +29,7 @@ private var firstNewLine : int = 0;
 private var encounteredNewLine : boolean = false;
 private var intermediateNewLine : int = 0;
 private var preOpen : boolean = false;
+private var gamePaused : boolean = false;
 
 public var starTexture : Texture;
 public var robotIcon : Texture;
@@ -74,6 +75,7 @@ function OnGUI () {
 		GUILayout.BeginArea(Rect(Screen.width*0.15, Screen.height*0.2, Screen.width*0.7, Screen.height*0.7));
 		GUILayout.BeginVertical();
 		GUILayout.Label("Mission Complete");
+		csScript.setMenu(true);
 		
 		//GUI.skin = labelSkin;
 		var label1 : GUIStyle = GUI.skin.GetStyle("label1");
@@ -101,10 +103,10 @@ function OnGUI () {
 			if(stars > ori)
 				GameObject.Find("pass").GetComponent(passValue).starlist[level-1] = stars;
 			level = GameObject.Find("pass").GetComponent(passValue).getLevel();
-			Debug.Log(level);
+			//Debug.Log(level);
 			if((level-1)/7 != level/7){
 				var mn = level/7+1;
-				Debug.Log(mn);
+				//Debug.Log(mn);
 				GameObject.Find("musicBox").GetComponent(music).changeClip(mn);
 			}
 			level++;
@@ -127,27 +129,31 @@ function OnGUI () {
 		GUI.skin = labelSkin;
 	}
 	else{
-		GUI.skin = labelAnotherSkin;
-		g = GameObject.Find("pass").GetComponent(passValue).gain[level-1];
-		GUI.Label(Rect(10, 10, 350, 100), "Collectibles: " + g + "/" + t + "\nSteps: " + steps);
+		if(windowSwitch){
+			GUI.skin = settingSkin;
+			windowExit = GUI.Window(2, windowExit, windowContain, "Settings");
+			gamePaused=true;
+		}else{
+			csScript.setMenu(false);
+			gamePaused=false;
+		}
+		if(story){
+			GUI.skin = labelSkin;
+			windowIcon = GUI.Window(0,windowIcon,storyIcon,"");
+			windowPickup = GUI.Window(1, windowPickup, storyBoard, "");
+			windowOpen=true;
+		}
+		if(pre){
+			GUI.skin = labelSkin;
+			windowIcon = GUI.Window(0,windowIcon,storyIcon,"");
+			windowPickup = GUI.Window(1, windowPickup, storyBoard, "");
+			preOpen=true;
 	}
-	if(windowSwitch){
-		GUI.skin = settingSkin;
-		windowExit = GUI.Window(0, windowExit, windowContain, "Settings");
+			GUI.skin = labelAnotherSkin;
+			g = GameObject.Find("pass").GetComponent(passValue).gain[level-1];
+			GUI.Label(Rect(10, 10, 350, 100), "Collectibles: " + g + "/" + t + "\nSteps: " + steps);
 	}
-	if(story){
-		GUI.skin = labelSkin;
-		windowIcon = GUI.Window(0,windowIcon,storyIcon,"");
-		windowPickup = GUI.Window(1, windowPickup, storyBoard, "");
-		windowOpen=true;
-		
-	}
-	if(pre){
-		GUI.skin = labelSkin;
-		windowIcon = GUI.Window(0,windowIcon,storyIcon,"");
-		windowPickup = GUI.Window(1, windowPickup, storyBoard, "");
-		preOpen=true;
-	}
+	
 }
 
 function Start(){
@@ -224,25 +230,15 @@ function storyIcon(windowID: int){
 }
 
 function windowContain(windowID: int){
+	csScript.setMenu(true);
 	GUILayout.BeginHorizontal();
 	GUILayout.BeginVertical();
 	GUILayout.Space(30);
-	if(GUILayout.Button("Turn off Music")){
-		GameObject.Find("musicBox").GetComponent(music).turnOff();
-	}
-	GUILayout.Space(15);
-	if(GUILayout.Button("Turn on Music")){
-		GameObject.Find("musicBox").GetComponent(music).turnOn();
-	}
-	GUILayout.Space(15);
-	if(GUILayout.Button("Save")){
-		save();
-	}
-	GUILayout.Space(15);
 	if(GUILayout.Button("Resume")){
 		time-=1;
 		InvokeRepeating("subtime", 0, 1);
 		windowSwitch = false;
+		csScript.setMenu(false);
 	}
 	GUILayout.Space(15);
 	if(GUILayout.Button("Main Menu")){
@@ -252,6 +248,24 @@ function windowContain(windowID: int){
 		Application.LoadLevel("menu");
 	}
 	GUILayout.Space(15);
+	if(GUILayout.Button("Toggle Music")){
+		if(GameObject.Find("musicBox").GetComponent(music).getMusicOn()){
+			GameObject.Find("musicBox").GetComponent(music).turnOff();
+		}else{
+			GameObject.Find("musicBox").GetComponent(music).turnOn();
+		}
+	}
+	//GUILayout.Space(15);
+	//if(GUILayout.Button("Turn on Music")){
+	//	GameObject.Find("musicBox").GetComponent(music).turnOn();
+	//}
+	GUILayout.Space(15);
+	if(GUILayout.Button("Save")){
+		save();
+	}
+	GUILayout.Space(15);
+	
+	
 	if(GUILayout.Button("Quit")){
 		Application.Quit();
 	}
@@ -260,13 +274,14 @@ function windowContain(windowID: int){
 }
 
 function Update () {
+	Debug.Log(gamePaused);
 	steps = csScript.getSteps();
 	story = csScript.getStory();
-	if(windowOpen){
+	if(windowOpen&&!gamePaused){
 		if((windowTextCounter/5)+1 < st.Length){
 			if((windowTextCounter+1)/5!=(windowTextCounter/5)){
 				if(st[windowTextCounter/5]=='\n'){
-					Debug.Log("slashN Found!");
+					//Debug.Log("slashN Found!");
 					if(!encounteredNewLine){
 						encounteredNewLine=true;
 						intermediateNewLine=(windowTextCounter/5);
@@ -285,7 +300,7 @@ function Update () {
 			}else{
 				curSt=st.Substring(firstNewLine+1,(windowTextCounter/5)-firstNewLine);
 			}
-			Debug.Log(firstNewLine + " " + intermediateNewLine + " " + (windowTextCounter/5));
+			//Debug.Log(firstNewLine + " " + intermediateNewLine + " " + (windowTextCounter/5));
 		}else{
 			time-=1;
 			GameObject.Find("pass").GetComponent(passValue).addCol();
@@ -299,11 +314,11 @@ function Update () {
 		}
 	}
 	
-	if(preOpen){
+	if(preOpen&&!gamePaused){
 		if((windowTextCounter/5)+1 < pr.Length){
 			if((windowTextCounter+1)/5!=(windowTextCounter/5)){
 				if(pr[windowTextCounter/5]=='\n'){
-					Debug.Log("slashN Found!");
+					//Debug.Log("slashN Found!");
 					if(!encounteredNewLine){
 						encounteredNewLine=true;
 						intermediateNewLine=(windowTextCounter/5);
@@ -318,7 +333,7 @@ function Update () {
 			}
 			windowTextCounter++;
 			
-			Debug.Log(firstNewLine + " " + windowTextCounter + " " + ((windowTextCounter/5)-firstNewLine));
+			//Debug.Log(firstNewLine + " " + windowTextCounter + " " + ((windowTextCounter/5)-firstNewLine));
 			if(firstNewLine==0){
 				curSt=pr.Substring(firstNewLine,(windowTextCounter/5)-firstNewLine);
 			}else{
@@ -330,7 +345,7 @@ function Update () {
 			InvokeRepeating("subtime", 0, 1);
 			csScript.setStory();
 			pre = false;
-			Debug.Log("Resetting wTC");
+			//Debug.Log("Resetting wTC");
 			windowTextCounter=0;
 			firstNewLine=0;
 			preOpen=false;

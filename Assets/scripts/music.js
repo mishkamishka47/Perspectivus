@@ -6,6 +6,7 @@ private var audio3 : AudioSource;
 private var audio4 : AudioSource;
 private var audio5 : AudioSource;
 private var level : int = 1;
+private var musicPlaying : boolean = true;
 
 function Start(){
 	var aSources = GetComponents(AudioSource);
@@ -27,12 +28,18 @@ public function turnOff(){
 	audio3.Stop();
 	audio4.Stop();
 	audio5.Stop();
+	musicPlaying=false;
 }
 
 public function turnOn(){
 	level = GameObject.Find("pass").GetComponent(passValue).getLevel();
 	var mn = (level-1)/7+1;
 	changeClip(mn);
+	musicPlaying=true;
+}
+
+public function getMusicOn(){
+	return musicPlaying;
 }
 
 public function changeClip(input){
