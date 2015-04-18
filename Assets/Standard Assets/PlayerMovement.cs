@@ -37,6 +37,9 @@ public class PlayerMovement : MonoBehaviour {
 	}
 	// Update is called once per frame
 	void Update () {
+		if(target==null){
+			return;
+		}
 		int orientation = target.orientation;		
 		if (Input.GetKeyDown ("up") && moreOrLessEqual(transform.rotation.eulerAngles, targetRotation.eulerAngles)) {;
 			if (pathPresent (transform.forward, upDirection)) {
