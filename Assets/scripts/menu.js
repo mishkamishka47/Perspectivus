@@ -274,7 +274,7 @@ function windowContain(windowID: int){
 }
 
 function Update () {
-	Debug.Log(gamePaused);
+	//Debug.Log(gamePaused);
 	steps = csScript.getSteps();
 	story = csScript.getStory();
 	if(windowOpen&&!gamePaused){

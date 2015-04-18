@@ -62,6 +62,7 @@ public class PlayerMovement : MonoBehaviour {
 			targetRotation = Quaternion.Euler (currentRotation.x, 90, currentRotation.z); //i added this
 			upDirection=0;
 			if (pathPresent (absoluteUp, upDirection)) {
+				//Debug.Log ("path present??");
 				moveSpeed = 5;
 				targetPosition += absoluteUp;
 				steps++;
@@ -79,6 +80,7 @@ public class PlayerMovement : MonoBehaviour {
 			targetRotation = Quaternion.Euler (currentRotation.x, 0, currentRotation.z); //i added this
 			upDirection=1;
 			if (pathPresent (absoluteLeft, upDirection)) {
+				//Debug.Log ("path present??");
 				moveSpeed = 5;
 				targetPosition += absoluteLeft;
 				steps++;
@@ -96,6 +98,7 @@ public class PlayerMovement : MonoBehaviour {
 			targetRotation = Quaternion.Euler (currentRotation.x, -90, currentRotation.z); //i added this
 			upDirection=2;
 			if (pathPresent (absoluteDown, upDirection)) {
+				//Debug.Log ("path present??");
 				moveSpeed = 5;
 				targetPosition += absoluteDown;
 				steps++;
@@ -113,6 +116,7 @@ public class PlayerMovement : MonoBehaviour {
 			targetRotation = Quaternion.Euler (currentRotation.x, 180, currentRotation.z); //i added this
 			upDirection=3;
 			if (pathPresent (absoluteRight, upDirection)) {
+				Debug.Log ("path present??");
 				moveSpeed = 5;
 				targetPosition += absoluteRight;
 				steps++;
@@ -130,6 +134,7 @@ public class PlayerMovement : MonoBehaviour {
 		
 		transform.position = Vector3.MoveTowards (transform.position, targetPosition, Time.deltaTime * moveSpeed);
 		var difference = targetPosition - transform.position;
+		//Debug.Log (targetPosition.x + " " + targetPosition.y + " " + targetPosition.z);
 		if(difference.magnitude<= .1){
 			isMoving=false;
 		}
@@ -144,7 +149,7 @@ public class PlayerMovement : MonoBehaviour {
 	}
 	
 	bool pathPresent(Vector3 vec, int upDirection) {
-		Debug.Log (upDirection);
+		//Debug.Log (upDirection);
 		return pathPresent (vec.x, vec.y, vec.z, upDirection);
 	}
 	
@@ -155,17 +160,20 @@ public class PlayerMovement : MonoBehaviour {
 			//Debug.Log(collidersThere[0].name);
 			bool pathBlocked = false;
 			for(int i = 0; i<collidersThere.Length; i++){
+				Debug.Log (collidersThere[i]);
 				if(collidersThere[i].name.Equals("PerspectiveWarper")){
+					Debug.Log ("Recognized as a perspectivewarper");
 					if(perspectiveJump(collidersThere[i],upDirection)){
+						Debug.Log ("Returning false");
 						return false;
 					}
 				}else if(collidersThere[i].name == "USB"){
 					story = true;
-					Debug.Log(collidersThere[i].name);
+					//Debug.Log(collidersThere[i].name);
 					Destroy(GameObject.Find("USB"),1);
 				}
 				else{
-					Debug.Log(collidersThere[i].name);
+					//Debug.Log(collidersThere[i].name);
 					pathBlocked=true;	
 				}
 			}
@@ -239,6 +247,7 @@ public class PlayerMovement : MonoBehaviour {
 		warpCoords.y=warpCoords.y-0.25f;
 		if((orientationRequired==target.orientation||orientationRequired==4)&&(upDirection==warpVars.moveRequired||warpVars.moveRequired==4)){
 			targetPosition = warpCoords;
+			isMoving=true;
 			moveSpeed = (targetPosition - this.transform.position).magnitude * 5;
 			steps++;
 			return true;
