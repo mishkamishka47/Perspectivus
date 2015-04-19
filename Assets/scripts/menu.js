@@ -63,6 +63,7 @@ function OnGUI () {
 //		GUILayout.EndArea();
 //	}
 	if(distance <= 1){
+	Debug.Log("On top of the endpoint");
 		CancelInvoke();
 		scores = 3000- time*5 + (1000 - steps);
 		if(scores >= 3000)
