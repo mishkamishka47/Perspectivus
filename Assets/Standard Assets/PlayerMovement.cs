@@ -19,6 +19,8 @@ public class PlayerMovement : MonoBehaviour {
 	private Vector3 absoluteRight = new Vector3(0.0f,0.0f,-1.0f);
 	private bool isMoving = false;
 	public bool menuScreen = false;
+	private bool sliding = false;
+
 	// Use this for initialization
 	void Start () {
 		targetPosition = transform.position;
@@ -50,77 +52,80 @@ public class PlayerMovement : MonoBehaviour {
 			return;
 		}
 		int orientation = target.orientation;
-		if ( //Absolute up block
+		if (! sliding) {
+			if (//Absolute up block
 			(
-			(Input.GetKey ("up") && target.orientation==0)||
-			(Input.GetKey ("right") && target.orientation==1)||
-			(Input.GetKey ("down") && target.orientation==2)||
-			(Input.GetKey ("left") && target.orientation==3)
+			(Input.GetKey ("up") && target.orientation == 0) ||
+				(Input.GetKey ("right") && target.orientation == 1) ||
+				(Input.GetKey ("down") && target.orientation == 2) ||
+				(Input.GetKey ("left") && target.orientation == 3)
 		 	)
-		    && moreOrLessEqual(transform.rotation.eulerAngles, targetRotation.eulerAngles)&&!isMoving&&!menuScreen) {
-			var currentRotation = transform.rotation.eulerAngles; //i added this
-			targetRotation = Quaternion.Euler (currentRotation.x, 90, currentRotation.z); //i added this
-			upDirection=0;
-			if (pathPresent (absoluteUp, upDirection)) {
-				//Debug.Log ("path present??");
-				moveSpeed = 5;
-				targetPosition += absoluteUp;
-				steps++;
-				isMoving=true;
+				&& moreOrLessEqual (transform.rotation.eulerAngles, targetRotation.eulerAngles) && !isMoving && !menuScreen) {
+				var currentRotation = transform.rotation.eulerAngles; //i added this
+				targetRotation = Quaternion.Euler (currentRotation.x, 90, currentRotation.z); //i added this
+				upDirection = 0;
+				if (pathPresent (absoluteUp, upDirection)) {
+					//Debug.Log ("path present??");
+					moveSpeed = 5;
+					targetPosition += absoluteUp;
+					steps++;
+					isMoving = true;
+				}
 			}
-		} if ( //Absolute left block
+			if (//Absolute left block
 			(
-			(Input.GetKey ("up") && target.orientation==1)||
-			(Input.GetKey ("right") && target.orientation==2)||
-			(Input.GetKey ("down") && target.orientation==3)||
-			(Input.GetKey ("left") && target.orientation==0)
+			(Input.GetKey ("up") && target.orientation == 1) ||
+				(Input.GetKey ("right") && target.orientation == 2) ||
+				(Input.GetKey ("down") && target.orientation == 3) ||
+				(Input.GetKey ("left") && target.orientation == 0)
 			)
-		      && moreOrLessEqual(transform.rotation.eulerAngles, targetRotation.eulerAngles)&&!isMoving&&!menuScreen) {
-			var currentRotation = transform.rotation.eulerAngles; //i added this
-			targetRotation = Quaternion.Euler (currentRotation.x, 0, currentRotation.z); //i added this
-			upDirection=1;
-			if (pathPresent (absoluteLeft, upDirection)) {
-				//Debug.Log ("path present??");
-				moveSpeed = 5;
-				targetPosition += absoluteLeft;
-				steps++;
-				isMoving=true;
-			}
-		} else if ( //Absolute down block
+				&& moreOrLessEqual (transform.rotation.eulerAngles, targetRotation.eulerAngles) && !isMoving && !menuScreen) {
+				var currentRotation = transform.rotation.eulerAngles; //i added this
+				targetRotation = Quaternion.Euler (currentRotation.x, 0, currentRotation.z); //i added this
+				upDirection = 1;
+				if (pathPresent (absoluteLeft, upDirection)) {
+					//Debug.Log ("path present??");
+					moveSpeed = 5;
+					targetPosition += absoluteLeft;
+					steps++;
+					isMoving = true;
+				}
+			} else if (//Absolute down block
 		            (
-			(Input.GetKey ("up") && target.orientation==2)||
-			(Input.GetKey ("right") && target.orientation==3)||
-			(Input.GetKey ("down") && target.orientation==0)||
-			(Input.GetKey ("left") && target.orientation==1)
+			(Input.GetKey ("up") && target.orientation == 2) ||
+				(Input.GetKey ("right") && target.orientation == 3) ||
+				(Input.GetKey ("down") && target.orientation == 0) ||
+				(Input.GetKey ("left") && target.orientation == 1)
 			)
-		           && moreOrLessEqual(transform.rotation.eulerAngles, targetRotation.eulerAngles)&&!isMoving&&!menuScreen) {
-			var currentRotation = transform.rotation.eulerAngles; //i added this
-			targetRotation = Quaternion.Euler (currentRotation.x, -90, currentRotation.z); //i added this
-			upDirection=2;
-			if (pathPresent (absoluteDown, upDirection)) {
-				//Debug.Log ("path present??");
-				moveSpeed = 5;
-				targetPosition += absoluteDown;
-				steps++;
-				isMoving=true;
-			}
-		} else if ( //Absolute right block
+				&& moreOrLessEqual (transform.rotation.eulerAngles, targetRotation.eulerAngles) && !isMoving && !menuScreen) {
+				var currentRotation = transform.rotation.eulerAngles; //i added this
+				targetRotation = Quaternion.Euler (currentRotation.x, -90, currentRotation.z); //i added this
+				upDirection = 2;
+				if (pathPresent (absoluteDown, upDirection)) {
+					//Debug.Log ("path present??");
+					moveSpeed = 5;
+					targetPosition += absoluteDown;
+					steps++;
+					isMoving = true;
+				}
+			} else if (//Absolute right block
 		           (
-			(Input.GetKey ("up") && target.orientation==3)||
-			(Input.GetKey ("right") && target.orientation==0)||
-			(Input.GetKey ("down") && target.orientation==1)||
-			(Input.GetKey ("left") && target.orientation==2)
+			(Input.GetKey ("up") && target.orientation == 3) ||
+				(Input.GetKey ("right") && target.orientation == 0) ||
+				(Input.GetKey ("down") && target.orientation == 1) ||
+				(Input.GetKey ("left") && target.orientation == 2)
 			)
-		           && moreOrLessEqual(transform.rotation.eulerAngles, targetRotation.eulerAngles)&&!isMoving&&!menuScreen) {
-			var currentRotation = transform.rotation.eulerAngles; //i added this
-			targetRotation = Quaternion.Euler (currentRotation.x, 180, currentRotation.z); //i added this
-			upDirection=3;
-			if (pathPresent (absoluteRight, upDirection)) {
-				Debug.Log ("path present??");
-				moveSpeed = 5;
-				targetPosition += absoluteRight;
-				steps++;
-				isMoving=true;
+				&& moreOrLessEqual (transform.rotation.eulerAngles, targetRotation.eulerAngles) && !isMoving && !menuScreen) {
+				var currentRotation = transform.rotation.eulerAngles; //i added this
+				targetRotation = Quaternion.Euler (currentRotation.x, 180, currentRotation.z); //i added this
+				upDirection = 3;
+				if (pathPresent (absoluteRight, upDirection)) {
+					Debug.Log ("path present??");
+					moveSpeed = 5;
+					targetPosition += absoluteRight;
+					steps++;
+					isMoving = true;
+				}
 			}
 		}
 		
@@ -137,6 +142,8 @@ public class PlayerMovement : MonoBehaviour {
 		//Debug.Log (targetPosition.x + " " + targetPosition.y + " " + targetPosition.z);
 		if(difference.magnitude<= .1){
 			isMoving=false;
+			if (sliding)
+				sliding = false;
 		}
 		GetComponent<Animator> ().SetFloat ("distanceToTravel", difference.magnitude);
 		transform.rotation = Quaternion.RotateTowards (transform.rotation, targetRotation, Time.deltaTime * 500);
@@ -155,24 +162,29 @@ public class PlayerMovement : MonoBehaviour {
 	
 	bool pathPresent(float x, float y, float z, int upDirection) { //Returns true if translation should still take place (no successful perspective jump, path clear), false otherwise
 		var destination = new Vector3(x, y, z);
+
+		//Check that the destination is open
 		Collider[] collidersThere = Physics.OverlapSphere(targetPosition + destination, 0.0f);
 		if(collidersThere.Length!=0){
 			//Debug.Log(collidersThere[0].name);
 			bool pathBlocked = false;
 			for(int i = 0; i<collidersThere.Length; i++){
 				Debug.Log (collidersThere[i]);
-				if(collidersThere[i].name.Equals("PerspectiveWarper")){
+				if(collidersThere[i].name.Equals("PerspectiveWarper"))
+				{
 					Debug.Log ("Recognized as a perspectivewarper");
 					if(perspectiveJump(collidersThere[i],upDirection)){
 						Debug.Log ("Returning false");
 						return false;
 					}
-				}else if(collidersThere[i].name == "USB"){
+				}else if(collidersThere[i].name == "USB")
+				{
 					story = true;
 					//Debug.Log(collidersThere[i].name);
 					Destroy(GameObject.Find("USB"),1);
 				}
-				else{
+				else
+				{
 					//Debug.Log(collidersThere[i].name);
 					pathBlocked=true;	
 				}
@@ -203,6 +215,17 @@ public class PlayerMovement : MonoBehaviour {
 				if(collidersBelow[i].name.Equals("BallButton")){
 					cubeBelow=true;
 					spawnBall(collidersBelow[i]);
+				}
+				else if (collidersBelow[i].transform.parent.name.Equals("Ice"))
+				{
+					//SLIDE
+					var endOfSlide = findEndOfIcePath(targetPosition, destination, upDirection);
+					moveSpeed = 15;
+					targetPosition = endOfSlide;
+					sliding = true;
+					isMoving = true;
+					steps++;
+					return false;
 				}
 			}
 		}
@@ -254,6 +277,56 @@ public class PlayerMovement : MonoBehaviour {
 		}
 		return false;
 	}
+
+	Vector3? warperDestination(Collider warpCollider, int upDirection) {
+		var warpVars = warpCollider.GetComponent<PerspectiveWarpVars> ();
+		var orientationRequired = warpVars.OrientationRequired;
+		var moveRequired = warpVars.moveRequired;
+		var warpCoords = warpVars.warpCoords;
+		if ((moveRequired == 4 | upDirection == moveRequired) &&
+			(orientationRequired == 4 || target.orientation == orientationRequired)) {
+			return warpCoords;
+		}
+		return null;
+	}
+
+	Vector3 findEndOfIcePath(Vector3 startLocation, Vector3 direction, int upDirection)
+	{
+		Vector3 currentLocation = startLocation;
+		Collider colliderBelowCurrent = null;
+		//I AM SO ASHAMED BUT I'M ABOUT TO USE A DO WHILE LOOP
+		do {
+			var nextLocation = currentLocation + direction;
+			var collidersBelow = Physics.OverlapSphere(new Vector3(nextLocation.x, nextLocation.y - 1, nextLocation.z), 0.0f);
+			if (collidersBelow.Length == 0) {
+				//Check for a perspective warper
+				var collidersThere = Physics.OverlapSphere(nextLocation, 0.0f);
+				if (collidersThere.Length == 0)
+					colliderBelowCurrent = null;
+				else {
+					foreach (var collider in collidersThere) {
+						if (collider.name.Equals ("PerspectiveWarper")) {
+							var warpDest = warperDestination (collider, upDirection);
+							if (warpDest.HasValue) {
+								currentLocation = warpDest.Value;
+								var collidersAgain = Physics.OverlapSphere(currentLocation - new Vector3(0, -1, 0), 0.0f);
+								colliderBelowCurrent = collidersAgain[0];
+							} else { //invalid warp
+								colliderBelowCurrent = null; //this will exit the main loop
+							}
+							break;
+						}
+					}
+				}
+			} else {
+				//There's something here so we can either stop or keep sliding
+				colliderBelowCurrent = collidersBelow[0]; //There's probably only going to be one collider...???
+				currentLocation += direction;
+			}
+		} while (colliderBelowCurrent != null && colliderBelowCurrent.transform.parent.name.Equals ("Ice"));
+		return currentLocation;
+	}
+
 	void rotateObject(Collider rotateCollider){
 		GameObject button = rotateCollider.gameObject;
 		if(lastButtonPressed==null){
