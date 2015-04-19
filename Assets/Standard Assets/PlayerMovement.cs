@@ -324,6 +324,11 @@ public class PlayerMovement : MonoBehaviour {
 				currentLocation += direction;
 			}
 		} while (colliderBelowCurrent != null && colliderBelowCurrent.transform.parent.name.Equals ("Ice"));
+		//Passing over rotators and ball spawners will stop the player DECLAN CHECK THIS
+		if (colliderBelowCurrent.name.Equals ("RotateButton"))
+			rotateObject (colliderBelowCurrent);
+		else if (colliderBelowCurrent.name.Equals ("BallButton"))
+			spawnBall (colliderBelowCurrent);
 		return currentLocation;
 	}
 
