@@ -36,6 +36,7 @@ private var postOpen : boolean = false;
 private var postOpened : boolean = false;
 private var gamePaused : boolean = false;
 private var speed : int = 2;
+private var debounce : boolean = true;
 
 public var starTexture : Texture;
 public var robotIcon : Texture;
@@ -301,6 +302,7 @@ function Update () {
 						if(!encounteredNewLine){
 							encounteredNewLine=true;
 							intermediateNewLine=(windowTextCounter/speed);
+							newLineTimer = 0;
 							//firstNewLine=windowTextCounter/speed;
 						}else{
 							firstNewLine=intermediateNewLine;
@@ -322,17 +324,21 @@ function Update () {
 			}else{
 				curSt=st.Substring(firstNewLine+1,(windowTextCounter/speed)-firstNewLine);
 			}
-			Debug.Log(firstNewLine + " " + intermediateNewLine + " " + (windowTextCounter/speed));
 		}else{
-			time-=1;
-			GameObject.Find("pass").GetComponent(passValue).addCol();
-			InvokeRepeating("subtime", 0, 1);
-			csScript.setStory();
-			story = false;
-			windowTextCounter=0;
-			firstNewLine=0;
-			windowOpen=false;
-			encounteredNewLine=false;
+			if (newLineTimer != 50) {
+				newLineTimer++;
+			} else {
+				time-=1;
+				GameObject.Find("pass").GetComponent(passValue).addCol();
+				InvokeRepeating("subtime", 0, 1);
+				csScript.setStory();
+				story = false;
+				windowTextCounter=0;
+				firstNewLine=0;
+				windowOpen=false;
+				newLineTimer = 0;
+				encounteredNewLine=false;
+			}
 		}
 	}
 	
@@ -340,17 +346,14 @@ function Update () {
 		if((windowTextCounter/speed)+1 < pr.Length){
 			if((windowTextCounter+1)/speed!=(windowTextCounter/speed)){
 				if(pr[windowTextCounter/speed]=='\n'){
-					//Debug.Log("slashN Found!");
 					if (newLineTimer == 50) {
 						if(!encounteredNewLine){
 							encounteredNewLine=true;
 							intermediateNewLine=(windowTextCounter/speed);
-							//firstNewLine=windowTextCounter/speed;
 						}else{
 							firstNewLine=intermediateNewLine;
 							intermediateNewLine=(windowTextCounter/speed);
 							newLineTimer = 0;
-							//encounteredNewLine=false;
 						}
 					} else {
 						newLineTimer++;
@@ -362,7 +365,6 @@ function Update () {
 				windowTextCounter++;
 			}
 			
-			//Debug.Log(firstNewLine + " " + windowTextCounter + " " + ((windowTextCounter/speed)-firstNewLine));
 			if(firstNewLine==0){
 				curSt=pr.Substring(firstNewLine,(windowTextCounter/speed)-firstNewLine);
 			}else{
@@ -375,10 +377,11 @@ function Update () {
 			InvokeRepeating("subtime", 0, 1);
 			csScript.setStory();
 			pre = false;
-			//Debug.Log("Resetting wTC");
+
 			windowTextCounter=0;
 			firstNewLine=0;
 			preOpen=false;
+			newLineTimer = 0;
 			encounteredNewLine=false;
 		} else {
 			newLineTimer++;
@@ -434,6 +437,7 @@ function Update () {
 				windowTextCounter=0;
 				firstNewLine=0;
 				postOpen=false;
+				newLineTimer = 0;
 				encounteredNewLine=false;
 			}
 		}
