@@ -41,6 +41,7 @@ private var debounce : boolean = true;
 public var starTexture : Texture;
 public var robotIcon : Texture;
 public var movementTut : Texture;
+public var cameraTut : Texture;
 public var labelSkin : GUISkin;
 public var labelAnotherSkin : GUISkin;
 public var settingSkin : GUISkin;
@@ -148,6 +149,12 @@ function OnGUI () {
 			GUI.Label(Rect(Screen.width-movementTut.width-10,10,movementTut.width,10+movementTut.height),movementTut);
 			GUI.skin.label.alignment = TextAnchor.UpperCenter;
 			GUI.Label(Rect(Screen.width-movementTut.width-10,movementTut.height+20,movementTut.width,movementTut.height+110),"Movement");
+			GUI.skin.label.alignment = TextAnchor.UpperLeft;
+		}
+		if(level==2){
+			GUI.Label(Rect(Screen.width-cameraTut.width-10,10,cameraTut.width,10+cameraTut.height),cameraTut);
+			GUI.skin.label.alignment = TextAnchor.UpperCenter;
+			GUI.Label(Rect(Screen.width-cameraTut.width-10,cameraTut.height+20,cameraTut.width,cameraTut.height+110),"Perspective");
 			GUI.skin.label.alignment = TextAnchor.UpperLeft;
 		}
 	}
