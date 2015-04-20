@@ -39,6 +39,7 @@ private var speed : int = 2;
 
 public var starTexture : Texture;
 public var robotIcon : Texture;
+public var movementTut : Texture;
 public var labelSkin : GUISkin;
 public var labelAnotherSkin : GUISkin;
 public var settingSkin : GUISkin;
@@ -139,17 +140,23 @@ function OnGUI () {
 			windowPickup = GUI.Window(1, windowPickup, storyBoard, "");
 			preOpen=true;
 		}
+		GUI.skin = labelAnotherSkin;
+		g = GameObject.Find("pass").GetComponent(passValue).gain[level-1];
+		GUI.Label(Rect(10, 10, 350, 100), "Collectibles: " + g + "/" + t + "\nSteps: " + steps);
+		if(level==1){
+			GUI.Label(Rect(Screen.width-movementTut.width-10,10,movementTut.width,10+movementTut.height),movementTut);
+			GUI.skin.label.alignment = TextAnchor.UpperCenter;
+			GUI.Label(Rect(Screen.width-movementTut.width-10,movementTut.height+20,movementTut.width,movementTut.height+110),"Movement");
+			GUI.skin.label.alignment = TextAnchor.UpperLeft;
+		}
+	}
 	GUI.skin = labelAnotherSkin;
 	g = GameObject.Find("pass").GetComponent(passValue).gain[level-1];
-	GUI.Label(Rect(10, 10, 350, 100), "Collectibles: " + g + "/" + t + "\nSteps: " + steps);
+	if(t==0)
+		GUI.Label(Rect(10, 10, 350, 100), "\nSteps: " + steps);
+	else {
+		GUI.Label(Rect(10, 10, 350, 100), "Collectibles: " + g + "/" + t + "\nSteps: " + steps);
 	}
-			GUI.skin = labelAnotherSkin;
-			g = GameObject.Find("pass").GetComponent(passValue).gain[level-1];
-			if(t==0)
-				GUI.Label(Rect(10, 10, 350, 100), "\nSteps: " + steps);
-			else {
-				GUI.Label(Rect(10, 10, 350, 100), "Collectibles: " + g + "/" + t + "\nSteps: " + steps);
-			}
 	
 }
 
