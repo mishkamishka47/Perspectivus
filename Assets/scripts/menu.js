@@ -15,21 +15,27 @@ private var ori : int;
 private var steps : int = 0;
 private var story : boolean = false;
 private var pre : boolean = false;
+private var post : boolean = false;
 private var csScript : PlayerMovement;
 private var st : String = "";
 private var curSt : String = ""; 
 private var pr : String = "";
+private var pst: String = "";
 private var scrollPosition : Vector2;
 private var time : float = 0.0;
 private var t : int;
 private var g : int;
 private var windowOpen : boolean = false;
 private var windowTextCounter : int = 0;
+private var newLineTimer : int = 0;
 private var firstNewLine : int = 0;
 private var encounteredNewLine : boolean = false;
 private var intermediateNewLine : int = 0;
 private var preOpen : boolean = false;
+private var postOpen : boolean = false;
+private var postOpened : boolean = false;
 private var gamePaused : boolean = false;
+private var speed : int = 2;
 
 public var starTexture : Texture;
 public var robotIcon : Texture;
@@ -43,7 +49,8 @@ public var pickupSkin : GUISkin;
 
 function OnGUI () {
 	if(distance <= 1){
-	Debug.Log("On top of the endpoint");
+		postOpen = true;
+		post = true;
 		CancelInvoke();
 		scores = 3000- time*5 + (1000 - steps);
 		if(scores >= 3000)
@@ -106,6 +113,10 @@ function OnGUI () {
 		GUILayout.EndHorizontal();
 		GUILayout.EndArea();
 		GUI.skin = labelSkin;
+		if(post) {
+			windowIcon = GUI.Window(0,windowIcon,storyIcon,"");
+			windowPickup = GUI.Window(1, windowPickup, storyBoard, "");
+		}
 	}
 	else{
 		if(windowSwitch){
@@ -127,14 +138,18 @@ function OnGUI () {
 			windowIcon = GUI.Window(0,windowIcon,storyIcon,"");
 			windowPickup = GUI.Window(1, windowPickup, storyBoard, "");
 			preOpen=true;
+		}
+	GUI.skin = labelAnotherSkin;
+	g = GameObject.Find("pass").GetComponent(passValue).gain[level-1];
+	GUI.Label(Rect(10, 10, 350, 100), "Collectibles: " + g + "/" + t + "\nSteps: " + steps);
 	}
 			GUI.skin = labelAnotherSkin;
 			g = GameObject.Find("pass").GetComponent(passValue).gain[level-1];
 			if(t==0)
 				GUI.Label(Rect(10, 10, 350, 100), "\nSteps: " + steps);
-			else
+			else {
 				GUI.Label(Rect(10, 10, 350, 100), "Collectibles: " + g + "/" + t + "\nSteps: " + steps);
-	}
+			}
 	
 }
 
@@ -143,6 +158,7 @@ function Start(){
 	level = GameObject.Find("pass").GetComponent(passValue).getLevel();
 	st = GameObject.Find("pass").GetComponent(passValue).getData();
 	pr = GameObject.Find("pass").GetComponent(passValue).getPre();
+	pst = GameObject.Find("pass").GetComponent(passValue).getPost();
 	t = GameObject.Find("pass").GetComponent(passValue).total[level-1];
 	g = GameObject.Find("pass").GetComponent(passValue).gain[level-1];
 	if(g!=0)
@@ -264,29 +280,42 @@ function Update () {
 	steps = csScript.getSteps();
 	story = csScript.getStory();
 	if(windowOpen&&!gamePaused){
-		if((windowTextCounter/5)+1 < st.Length){
-			if((windowTextCounter+1)/5!=(windowTextCounter/5)){
-				if(st[windowTextCounter/5]=='\n'){
+		if (preOpen) {
+			preOpen = false;
+			windowTextCounter=0;
+			firstNewLine=0;
+			encounteredNewLine=false;
+		}
+		if((windowTextCounter/speed)+1 < st.Length){
+			if((windowTextCounter+1)/speed!=(windowTextCounter/speed)){
+				if(st[windowTextCounter/speed]=='\n'){
 					//Debug.Log("slashN Found!");
-					if(!encounteredNewLine){
-						encounteredNewLine=true;
-						intermediateNewLine=(windowTextCounter/5);
-						//firstNewLine=windowTextCounter/5;
-					}else{
-						firstNewLine=intermediateNewLine;
-						intermediateNewLine=(windowTextCounter/5);
-						//encounteredNewLine=false;
+					if (newLineTimer == 50) {
+						if(!encounteredNewLine){
+							encounteredNewLine=true;
+							intermediateNewLine=(windowTextCounter/speed);
+							//firstNewLine=windowTextCounter/speed;
+						}else{
+							firstNewLine=intermediateNewLine;
+							intermediateNewLine=(windowTextCounter/speed);
+							newLineTimer = 0;
+							//encounteredNewLine=false;
+						}
+					} else {
+						newLineTimer++;
 					}
 					
 				}
 			}
-			windowTextCounter++;
-			if(firstNewLine==0){
-				curSt=st.Substring(firstNewLine,(windowTextCounter/5)-firstNewLine);
-			}else{
-				curSt=st.Substring(firstNewLine+1,(windowTextCounter/5)-firstNewLine);
+			if (newLineTimer == 0) {
+				windowTextCounter++;
 			}
-			//Debug.Log(firstNewLine + " " + intermediateNewLine + " " + (windowTextCounter/5));
+			if(firstNewLine==0){
+				curSt=st.Substring(firstNewLine,(windowTextCounter/speed)-firstNewLine);
+			}else{
+				curSt=st.Substring(firstNewLine+1,(windowTextCounter/speed)-firstNewLine);
+			}
+			Debug.Log(firstNewLine + " " + intermediateNewLine + " " + (windowTextCounter/speed));
 		}else{
 			time-=1;
 			GameObject.Find("pass").GetComponent(passValue).addCol();
@@ -301,32 +330,41 @@ function Update () {
 	}
 	
 	if(preOpen&&!gamePaused){
-		if((windowTextCounter/5)+1 < pr.Length){
-			if((windowTextCounter+1)/5!=(windowTextCounter/5)){
-				if(pr[windowTextCounter/5]=='\n'){
-					if(!encounteredNewLine){
-						encounteredNewLine=true;
-						intermediateNewLine=(windowTextCounter/5);
-						//firstNewLine=windowTextCounter/5;
-					}else{
-						firstNewLine=intermediateNewLine;
-						intermediateNewLine=(windowTextCounter/5);
-						//encounteredNewLine=false;
+		if((windowTextCounter/speed)+1 < pr.Length){
+			if((windowTextCounter+1)/speed!=(windowTextCounter/speed)){
+				if(pr[windowTextCounter/speed]=='\n'){
+					//Debug.Log("slashN Found!");
+					if (newLineTimer == 50) {
+						if(!encounteredNewLine){
+							encounteredNewLine=true;
+							intermediateNewLine=(windowTextCounter/speed);
+							//firstNewLine=windowTextCounter/speed;
+						}else{
+							firstNewLine=intermediateNewLine;
+							intermediateNewLine=(windowTextCounter/speed);
+							newLineTimer = 0;
+							//encounteredNewLine=false;
+						}
+					} else {
+						newLineTimer++;
 					}
-					
+
 				}
 			}
-			windowTextCounter++;
-			
-			//Debug.Log(firstNewLine + " " + windowTextCounter + " " + ((windowTextCounter/5)-firstNewLine));
-			if(firstNewLine==0){
-				curSt=pr.Substring(firstNewLine,(windowTextCounter/5)-firstNewLine);
-			}else{
-				curSt=pr.Substring(firstNewLine+1,(windowTextCounter/5)-firstNewLine);
+			if (newLineTimer == 0) {
+				windowTextCounter++;
 			}
-		}else{
+			
+			//Debug.Log(firstNewLine + " " + windowTextCounter + " " + ((windowTextCounter/speed)-firstNewLine));
+			if(firstNewLine==0){
+				curSt=pr.Substring(firstNewLine,(windowTextCounter/speed)-firstNewLine);
+			}else{
+				curSt=pr.Substring(firstNewLine+1,(windowTextCounter/speed)-firstNewLine);
+			}
+		}else if (newLineTimer == 50) {
+
 			time-=1;
-			//GameObject.Find("pass").GetComponent(passValue).addCol();
+			GameObject.Find("pass").GetComponent(passValue).addCol();
 			InvokeRepeating("subtime", 0, 1);
 			csScript.setStory();
 			pre = false;
@@ -335,6 +373,62 @@ function Update () {
 			firstNewLine=0;
 			preOpen=false;
 			encounteredNewLine=false;
+		} else {
+			newLineTimer++;
+		}
+	}
+	
+	if (postOpen) {
+		if(preOpen || windowOpen) {
+			preOpen = false;
+			windowOpen = false;
+			windowTextCounter=0;
+			firstNewLine=0;
+			encounteredNewLine=false;
+		}
+		if (!postOpened) {
+			if((windowTextCounter/speed)+1 < pst.Length){
+				if((windowTextCounter+1)/speed!=(windowTextCounter/speed)){
+					if(pst[windowTextCounter/speed]=='\n'){
+						//Debug.Log("slashN Found!");
+						if (newLineTimer == 50) {
+							if(!encounteredNewLine){
+								encounteredNewLine=true;
+								intermediateNewLine=(windowTextCounter/speed);
+								//firstNewLine=windowTextCounter/speed;
+							}else{
+								firstNewLine=intermediateNewLine;
+								intermediateNewLine=(windowTextCounter/speed);
+								newLineTimer = 0;
+								//encounteredNewLine=false;
+							}
+						} else {
+							newLineTimer++;
+						}
+						
+					}
+				}
+				if (newLineTimer == 0) {
+					windowTextCounter++;
+				}
+				if(firstNewLine==0){
+					curSt=pst.Substring(firstNewLine,(windowTextCounter/speed)-firstNewLine);
+				}else{
+					curSt=pst.Substring(firstNewLine+1,(windowTextCounter/speed)-firstNewLine);
+				}
+				//Debug.Log(firstNewLine + " " + intermediateNewLine + " " + (windowTextCounter/speed));
+			}else{
+				time-=1;
+				GameObject.Find("pass").GetComponent(passValue).addCol();
+				InvokeRepeating("subtime", 0, 1);
+				csScript.setStory();
+				post = false;
+				postOpened = true;
+				windowTextCounter=0;
+				firstNewLine=0;
+				postOpen=false;
+				encounteredNewLine=false;
+			}
 		}
 	}
 	
