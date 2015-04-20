@@ -42,26 +42,6 @@ public var pickupSkin : GUISkin;
 
 
 function OnGUI () {
-//	if(time < 0){
-//		GUI.skin = labelAnotherSkin;
-//		GUILayout.BeginArea(Rect(Screen.width*0.15, Screen.height*0.2, Screen.width*0.7, Screen.height*0.4));
-//		GUILayout.BeginVertical();
-//		GUILayout.Label("~Failed~");
-//		GUILayout.EndVertical();
-//		GUILayout.BeginHorizontal();
-//		if(GUILayout.Button("Retry")){
-//			DontDestroyOnLoad(GameObject.Find("musicBox"));
-//			DontDestroyOnLoad(GameObject.Find("pass"));
-//			Application.LoadLevel("Level"+level);
-//		}
-//		if(GUILayout.Button("Main Menu")){
-//			DontDestroyOnLoad(GameObject.Find("musicBox"));
-//			DontDestroyOnLoad(GameObject.Find("pass"));
-//			Application.LoadLevel("menu");
-//		}
-//		GUILayout.EndHorizontal();
-//		GUILayout.EndArea();
-//	}
 	if(distance <= 1){
 	Debug.Log("On top of the endpoint");
 		CancelInvoke();
@@ -104,10 +84,8 @@ function OnGUI () {
 			if(stars > ori)
 				GameObject.Find("pass").GetComponent(passValue).starlist[level-1] = stars;
 			level = GameObject.Find("pass").GetComponent(passValue).getLevel();
-			//Debug.Log(level);
 			if((level-1)/7 != level/7){
 				var mn = level/7+1;
-				//Debug.Log(mn);
 				GameObject.Find("musicBox").GetComponent(music).changeClip(mn);
 			}
 			level++;
@@ -152,7 +130,10 @@ function OnGUI () {
 	}
 			GUI.skin = labelAnotherSkin;
 			g = GameObject.Find("pass").GetComponent(passValue).gain[level-1];
-			GUI.Label(Rect(10, 10, 350, 100), "Collectibles: " + g + "/" + t + "\nSteps: " + steps);
+			if(t==0)
+				GUI.Label(Rect(10, 10, 350, 100), "\nSteps: " + steps);
+			else
+				GUI.Label(Rect(10, 10, 350, 100), "Collectibles: " + g + "/" + t + "\nSteps: " + steps);
 	}
 	
 }
@@ -164,7 +145,7 @@ function Start(){
 	pr = GameObject.Find("pass").GetComponent(passValue).getPre();
 	t = GameObject.Find("pass").GetComponent(passValue).total[level-1];
 	g = GameObject.Find("pass").GetComponent(passValue).gain[level-1];
-	if(g==1)
+	if(g!=0)
 		Destroy(GameObject.Find("USB"));
 	if(pr!="")
 		pre = true;
@@ -342,7 +323,7 @@ function Update () {
 			}
 		}else{
 			time-=1;
-			GameObject.Find("pass").GetComponent(passValue).addCol();
+			//GameObject.Find("pass").GetComponent(passValue).addCol();
 			InvokeRepeating("subtime", 0, 1);
 			csScript.setStory();
 			pre = false;
