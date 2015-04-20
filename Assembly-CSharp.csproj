@@ -55,6 +55,7 @@
      <Compile Include="Assets\scripts\PlayerMovement.cs" />
      <Compile Include="Assets\scripts\Rotate90.cs" />
      <Compile Include="Assets\scripts\RotateButtonVars.cs" />
+     <Compile Include="Assets\scripts\SeesawController.cs" />
      <Compile Include="Assets\scripts\SpinEmitter.cs" />
      <Compile Include="Assets\scripts\ballButtonVars.cs" />
      <Compile Include="Assets\scripts\ballController.cs" />

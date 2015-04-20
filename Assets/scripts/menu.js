@@ -223,6 +223,14 @@ function windowContain(windowID: int){
 		csScript.setMenu(false);
 	}
 	GUILayout.Space(15);
+	if(GUILayout.Button("Restart")){
+		windowSwitch = false;
+		csScript.setMenu(false);
+		DontDestroyOnLoad(GameObject.Find("pass"));
+		DontDestroyOnLoad(GameObject.Find("musicBox"));
+		Application.LoadLevel("Level"+level);
+	}
+	GUILayout.Space(15);
 	if(GUILayout.Button("Main Menu")){
 		save();
 		Destroy(GameObject.Find("pass"));
@@ -237,10 +245,6 @@ function windowContain(windowID: int){
 			GameObject.Find("musicBox").GetComponent(music).turnOn();
 		}
 	}
-	//GUILayout.Space(15);
-	//if(GUILayout.Button("Turn on Music")){
-	//	GameObject.Find("musicBox").GetComponent(music).turnOn();
-	//}
 	GUILayout.Space(15);
 	if(GUILayout.Button("Save")){
 		save();
@@ -300,7 +304,6 @@ function Update () {
 		if((windowTextCounter/5)+1 < pr.Length){
 			if((windowTextCounter+1)/5!=(windowTextCounter/5)){
 				if(pr[windowTextCounter/5]=='\n'){
-					//Debug.Log("slashN Found!");
 					if(!encounteredNewLine){
 						encounteredNewLine=true;
 						intermediateNewLine=(windowTextCounter/5);
