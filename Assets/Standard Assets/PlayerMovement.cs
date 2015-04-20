@@ -230,11 +230,11 @@ public class PlayerMovement : MonoBehaviour {
 				if(name.StartsWith("Walkway") || name.Equals("endpoint") || name.ToLower().StartsWith("rotator")){
 					cubeBelow=true;
 				}
-				if(collidersBelow[i].name.Equals("RotateButton")){
+				if(collidersBelow[i].name.StartsWith("RotateButton")){
 					cubeBelow=true;
 					rotateObject(collidersBelow[i]);
 				}
-				if(collidersBelow[i].name.Equals("BallButton")){
+				if(collidersBelow[i].name.StartsWith("BallButton")){
 					cubeBelow=true;
 					spawnBall(collidersBelow[i]);
 				}
@@ -274,13 +274,13 @@ public class PlayerMovement : MonoBehaviour {
 				if(name.StartsWith("Walkway") || name.Equals("endpoint") || name.ToLower().StartsWith("rotator")){
 					cubeBelow=true;
 				}
-				if(collidersBelowWarp[i].name.Equals("RotateButton")){
+				if(collidersBelowWarp[i].name.StartsWith("RotateButton")){
 					cubeBelow=true;
 					if((orientationRequired==target.orientation||orientationRequired==4)&&(upDirection==warpVars.moveRequired||warpVars.moveRequired==4)){
 						rotateObject(collidersBelowWarp[i]);
 					}
 				}
-				if(collidersBelowWarp[i].name.Equals("BallButton")){
+				if(collidersBelowWarp[i].name.StartsWith("BallButton")){
 					cubeBelow=true;
 					spawnBall(collidersBelowWarp[i]);
 				}
@@ -346,11 +346,13 @@ public class PlayerMovement : MonoBehaviour {
 				currentLocation += direction;
 			}
 		} while (colliderBelowCurrent != null && colliderBelowCurrent.transform.parent.name.Equals ("Ice"));
-		//Passing over rotators and ball spawners will stop the player DECLAN CHECK THIS
-		if (colliderBelowCurrent.name.Equals ("RotateButton"))
-			rotateObject (colliderBelowCurrent);
-		else if (colliderBelowCurrent.name.Equals ("BallButton"))
-			spawnBall (colliderBelowCurrent);
+		//Passing over rotators and ball spawners will stop the player
+		if (colliderBelowCurrent != null) {
+			if (colliderBelowCurrent.name.StartsWith ("RotateButton"))
+				rotateObject (colliderBelowCurrent);
+			else if (colliderBelowCurrent.name.StartsWith ("BallButton"))
+				spawnBall (colliderBelowCurrent);
+		}
 		return currentLocation;
 	}
 
