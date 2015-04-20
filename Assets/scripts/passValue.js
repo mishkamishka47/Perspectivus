@@ -11,6 +11,7 @@ private var currLevel : int = 1;
 private var story : String = "";
 private var pre : String = "";
 private var post : String = "";
+private var swap : boolean = false;
 
 function setValue(input){
 	v = input;
@@ -52,6 +53,12 @@ function getPre(){
 		case 5:
 			pre = "........\n...........\n..............";
 			break;
+		case 6:
+			pre = "This, not right.\nThis, wrong.\nFind more parts.\nCome back.";
+			break;
+		case 7:
+			pre = "I need more.\nThis place is familiar, but...\nWhy am I here? This is the start.\nI knew/know the end.\nThe end matters.";
+			break;
 		default:
 			pre = "";
 			break;
@@ -65,7 +72,34 @@ function getData(){
 	else if(currLevel==2)
 		story = "MEMORY MODULE ENCOUNTERED.\nDOWNLOADING CONTENTS.......\nCONTENTS DOWNLOADED. QUEUEING FOR EVALUATION...\nQUEUED.";
 	else if(currLevel==3)
-		story = "hello, this is second data!";
+		story = "RAM unit encountered. Loading into primary bay.\nSystem appears functional. Scheduling RAM integrity testing.\nRunning...";
+	else if(currLevel==4 && swap == false) {
+		swap = true;
+		story = "Memory module located. Scanning for anomalies.\nLoading...";
+	}
+ 	else if(currLevel == 4 && swap == true) {
+		swap = false;
+		story = "RAM unit located. Scanning for anomalies.\nScheduled installation into secondary bay.";
+	}
+	else if(currLevel==5 && swap == false) {
+		swap = true;
+		story = ".........";
+	}
+	else if(currLevel==5 && swap == true) {
+		swap = false;
+		story = "...........";
+	}
+	else if (currLevel == 6 && swap == false) {
+		swap = true;
+		story = "Install these to faster.\nHas to be done.\n.......\nREBOOTING...\nRECREATING LINGUISTICS ARCHITECTURE....\nDone. A little better.";
+	}
+	else if (currLevel == 6 && swap == true) {
+		swap = false;
+		story = "Found another part. What does it do?\nTrying it...\nKIERAN.\nI was/am/will be KIERAN?\nSelf-label: KIERAN assigned.";
+	}
+	else if (currLevel == 7) {
+		story = "More RAM is good. I can think faster.\nNot much more space, though.\nNot nearly as much as before.\nStill, low chance of self-harm.\nScheduling installation...";
+	}
 	else
 		story = "";
 	return story;
@@ -87,6 +121,12 @@ function getPost() {
 			break;
 		case 5:
 			post = "Hello?\n........\nLevel...\ncompleted.";
+			break;
+		case 6:
+			post = "kieran.\nKiErAn.\nkIERAn.\nKieran.\nI like it. It is a good name.";
+			break;
+		case 7:
+			post = "I remember....\nI had a purpose, once.\nWhat has placed me here, in this bewildering world?";
 			break;
 		default:
 			post = "";
