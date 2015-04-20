@@ -103,7 +103,7 @@ public class ballController : MonoBehaviour {
 			}
 		}
 		Collider[] collidersBelow = Physics.OverlapSphere(transform.position+new Vector3(0.0f,-.6f,0.0f), 0.0f);
-		if(collidersBelow.Length!=0){
+		if(collidersBelow.Length==1){
 			for(int i = 0; i<collidersBelow.Length; i++){
 				if(collidersBelow[i].name.Equals("Floor")){
 					GetComponent<Rigidbody>().detectCollisions=false;

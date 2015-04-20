@@ -145,6 +145,20 @@ public class PlayerMovement : MonoBehaviour {
 					isMoving = true;
 				}
 			}
+		}else{
+			if(upDirection==0){
+				pathPresent (absoluteUp,upDirection);
+			}
+			if(upDirection==1){
+				pathPresent (absoluteLeft,upDirection);
+			}
+			if(upDirection==2){
+				pathPresent (absoluteDown,upDirection);
+			}
+			if(upDirection==3){
+				pathPresent (absoluteRight,upDirection);
+			}
+
 		}
 		
 		if (upDirection >= 4)
@@ -283,6 +297,16 @@ public class PlayerMovement : MonoBehaviour {
 				if(collidersBelowWarp[i].name.StartsWith("BallButton")){
 					cubeBelow=true;
 					spawnBall(collidersBelowWarp[i]);
+				}
+				else if (collidersBelowWarp[i].transform.parent!=null&&collidersBelowWarp[i].transform.parent.name.Equals("Ice"))
+				{
+					//SLIDE
+					var endOfSlide = findEndOfIcePath(targetPosition, warpCoords, upDirection);
+					moveSpeed = 15;
+					targetPosition = endOfSlide;
+					sliding = true;
+					isMoving = true;
+					steps++;
 				}
 			}
 		}
