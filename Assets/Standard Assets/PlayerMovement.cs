@@ -232,6 +232,7 @@ public class PlayerMovement : MonoBehaviour {
 		Vector3 logger = targetPosition + belowCenter;
 		//Debug.Log ("Checked for colliders at (" + logger.x + "," + logger.y + "," + logger.z + ") and found " + collidersBelow.Length); 
 		if(collidersBelow.Length!=0){
+
 			for(int i = 0; i<collidersBelow.Length; i++){
 				//Debug.Log (collidersBelow[i].name);
 				var parent = collidersBelow[i].transform.parent;
@@ -254,6 +255,7 @@ public class PlayerMovement : MonoBehaviour {
 				}
 				else if (collidersBelow[i].transform.parent!=null&&collidersBelow[i].transform.parent.name.Equals("Ice"))
 				{
+					Debug.Log ("we see the ice");
 					//SLIDE
 					var endOfSlide = findEndOfIcePath(targetPosition, destination, upDirection);
 					moveSpeed = 15;
@@ -345,25 +347,26 @@ public class PlayerMovement : MonoBehaviour {
 			var nextLocation = currentLocation + direction;
 			var collidersBelow = Physics.OverlapSphere(new Vector3(nextLocation.x, nextLocation.y - 1, nextLocation.z), 0.0f);
 			if (collidersBelow.Length == 0) {
+				colliderBelowCurrent = null;
 				//Check for a perspective warper
-				var collidersThere = Physics.OverlapSphere(nextLocation, 0.0f);
-				if (collidersThere.Length == 0)
-					colliderBelowCurrent = null;
-				else {
-					foreach (var collider in collidersThere) {
-						if (collider.name.Equals ("PerspectiveWarper")) {
-							var warpDest = warperDestination (collider, upDirection);
-							if (warpDest.HasValue) {
-								currentLocation = warpDest.Value;
-								var collidersAgain = Physics.OverlapSphere(currentLocation - new Vector3(0, -1, 0), 0.0f);
-								colliderBelowCurrent = collidersAgain[0];
-							} else { //invalid warp
-								colliderBelowCurrent = null; //this will exit the main loop
-							}
-							break;
-						}
-					}
-				}
+				//var collidersThere = Physics.OverlapSphere(nextLocation, 0.0f);
+				//if (collidersThere.Length == 0)
+				//	colliderBelowCurrent = null;
+				//else {
+				//	foreach (var collider in collidersThere) {
+				//		if (collider.name.Equals ("PerspectiveWarper")) {
+							//var warpDest = warperDestination (collider, upDirection);
+							//if (warpDest.HasValue) {
+							//	currentLocation = warpDest.Value;
+							//	var collidersAgain = Physics.OverlapSphere(currentLocation - new Vector3(0, -1, 0), 0.0f);
+							//	colliderBelowCurrent = collidersAgain[0];
+							//} else { //invalid warp
+							//	colliderBelowCurrent = null; //this will exit the main loop
+							//}
+							//break;
+				//		}
+				//	}
+				//}
 			} else {
 				//There's something here so we can either stop or keep sliding
 				colliderBelowCurrent = collidersBelow[0]; //There's probably only going to be one collider...???
