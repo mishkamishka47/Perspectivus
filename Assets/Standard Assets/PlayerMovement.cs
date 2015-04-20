@@ -214,6 +214,9 @@ public class PlayerMovement : MonoBehaviour {
 					story = true;
 					//Debug.Log(collidersThere[i].name);
 					Destroy(GameObject.Find("USB"),1);
+				}else if(collidersThere[i].name == "USB 1") {
+					story = true;
+					Destroy(GameObject.Find ("USB 1"),1);
 				}
 				else
 				{
