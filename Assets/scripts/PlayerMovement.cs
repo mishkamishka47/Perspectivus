@@ -8,9 +8,16 @@ public class PlayerMovement : MonoBehaviour {
 	public Material onColor;
 	
 	private Quaternion targetRotation;
-	private Vector3 targetPosition;
+	public Vector3 targetPosition;
 	private float moveSpeed = 5;
 	private int upDirection = 0;
+
+	public void setTargetPosition(Vector3 tP){
+		targetPosition=tP;
+	}
+	public Vector3 getTargetPosition(){
+		return targetPosition;
+	}
 	// Use this for initialization
 	void Start () {
 		targetPosition = transform.position;

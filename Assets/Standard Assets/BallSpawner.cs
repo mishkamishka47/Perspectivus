@@ -14,9 +14,9 @@ public class BallSpawner : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (Input.GetButtonDown("Fire1")) {
-			spawnBall();
-		}
+		//if (Input.GetButtonDown("Fire1")) {
+		//	spawnBall();
+		//}
 	}
 
 	

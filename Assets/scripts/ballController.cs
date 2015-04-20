@@ -62,7 +62,7 @@ public class ballController : MonoBehaviour {
 		Collider[] collidersAtRight = Physics.OverlapSphere(this.transform.position+inFront+toTheRight,0.05f);
 		if(collidersAtRight.Length!=0){
 			for(int i = 0; i<collidersAtRight.Length; i++){
-				Debug.Log(collidersAtRight[i].name);
+				//Debug.Log(collidersAtRight[i].name);
 				if(collidersAtRight[i].name.Equals("Bumper")){
 					if(direction==3){
 						direction=0;

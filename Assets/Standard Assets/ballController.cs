@@ -42,6 +42,9 @@ public class ballController : MonoBehaviour {
 				if(!(collidersInFront[i].name.Equals("PerspectiveWarper")||collidersInFront[i].name.Equals("Bumper"))){
 					hasCollided=true;
 				}
+				if(collidersInFront[i].name.Equals("Player")){
+					Destroy(gameObject);
+				}
 			}
 		}
 
@@ -62,7 +65,7 @@ public class ballController : MonoBehaviour {
 		Collider[] collidersAtRight = Physics.OverlapSphere(this.transform.position+inFront+toTheRight,0.05f);
 		if(collidersAtRight.Length!=0){
 			for(int i = 0; i<collidersAtRight.Length; i++){
-				Debug.Log(collidersAtRight[i].name);
+				//Debug.Log(collidersAtRight[i].name);
 				if(collidersAtRight[i].name.Equals("Bumper")){
 					if(direction==3){
 						direction=0;
@@ -92,13 +95,25 @@ public class ballController : MonoBehaviour {
 		}
 		Collider[] collidersThere = Physics.OverlapSphere(transform.position, 0.0f);
 		if(collidersThere.Length!=0){
-
 			for(int i = 0; i<collidersThere.Length; i++){
 				if(collidersThere[i].name.Equals("PerspectiveWarper")){
 					//Debug.Log("Perspective Warper exists!");
 					perspectiveJump(collidersThere[i]);
 				}
 			}
+		}
+		Collider[] collidersBelow = Physics.OverlapSphere(transform.position+new Vector3(0.0f,-.6f,0.0f), 0.0f);
+		if(collidersBelow.Length!=0){
+			for(int i = 0; i<collidersBelow.Length; i++){
+				if(collidersBelow[i].name.Equals("Floor")){
+					GetComponent<Rigidbody>().detectCollisions=false;
+					GetComponent<Rigidbody>().velocity=new Vector3(0f,-.1f,0f);
+					GetComponent<Rigidbody>().rotation=Quaternion.identity;
+				}
+			}
+		}
+		if(transform.position.y<=-1){
+			Destroy (gameObject);
 		}
 	}
 
@@ -127,7 +142,7 @@ public class ballController : MonoBehaviour {
 		//	Debug.Log("No cube below!");
 		//	return false;
 		//}
-		warpCoords.y=warpCoords.y-0.25f;
+		//warpCoords.y=warpCoords.y-0.25f;
 		if((orientationRequired==target.orientation||orientationRequired==4)&&(warpVars.moveRequired==direction||warpVars.moveRequired==4)){
 			transform.position=warpCoords;
 			return true;

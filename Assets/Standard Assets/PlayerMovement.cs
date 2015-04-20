@@ -10,7 +10,7 @@ public class PlayerMovement : MonoBehaviour {
 	private int steps = 0;
 	private bool story = false;
 	private Quaternion targetRotation;
-	private Vector3 targetPosition;
+	public Vector3 targetPosition;
 	private float moveSpeed = 5;
 	private int upDirection = 0;
 	private Vector3 absoluteUp = new Vector3(1.0f,0.0f,0.0f);
@@ -45,9 +45,26 @@ public class PlayerMovement : MonoBehaviour {
 	public void setSteps(){
 		steps = 0;
 	}
+	public void setTargetPosition(Vector3 tP){
+		targetPosition=tP;
+	}
+	public Vector3 getTargetPosition(){
+		return targetPosition;
+	}
 	// Update is called once per frame
 	void Update () {
 		//Debug.Log(transform.forward.x + " " + transform.forward.y + " " + transform.forward.z);
+//		Collider[] seeSawCheck = Physics.OverlapSphere(transform.position + new Vector3(0.0f,-1.0f, 0.0f), 0.0f);
+//		for(int i = 0; i<seeSawCheck.Length; i++){
+//			Debug.Log (seeSawCheck[i]);
+//			if(seeSawCheck[i].gameObject.transform.parent!=null&&seeSawCheck[i].gameObject.transform.parent.name.StartsWith("Seesaw")){
+//				Debug.Log ("Standing on a seesaw!");
+//				if(seeSawCheck[i].gameObject.transform.parent.GetComponent<SeesawController>().isRising){
+//					Debug.Log ("Rising!");
+//				}
+//			}
+//		}
+
 		if(target==null){
 			return;
 		}
@@ -61,11 +78,12 @@ public class PlayerMovement : MonoBehaviour {
 				(Input.GetKey ("left") && target.orientation == 3)
 		 	)
 				&& moreOrLessEqual (transform.rotation.eulerAngles, targetRotation.eulerAngles) && !isMoving && !menuScreen) {
+				//Debug.Log ("key pressed, trying to move up");
 				var currentRotation = transform.rotation.eulerAngles; //i added this
 				targetRotation = Quaternion.Euler (currentRotation.x, 90, currentRotation.z); //i added this
 				upDirection = 0;
 				if (pathPresent (absoluteUp, upDirection)) {
-					//Debug.Log ("path present??");
+					//Debug.Log ("up path present");
 					moveSpeed = 5;
 					targetPosition += absoluteUp;
 					steps++;
@@ -120,7 +138,7 @@ public class PlayerMovement : MonoBehaviour {
 				targetRotation = Quaternion.Euler (currentRotation.x, 180, currentRotation.z); //i added this
 				upDirection = 3;
 				if (pathPresent (absoluteRight, upDirection)) {
-					Debug.Log ("path present??");
+					//Debug.Log ("path present??");
 					moveSpeed = 5;
 					targetPosition += absoluteRight;
 					steps++;
@@ -169,12 +187,12 @@ public class PlayerMovement : MonoBehaviour {
 			//Debug.Log(collidersThere[0].name);
 			bool pathBlocked = false;
 			for(int i = 0; i<collidersThere.Length; i++){
-				Debug.Log (collidersThere[i]);
+				//Debug.Log (collidersThere[i]);
 				if(collidersThere[i].name.Equals("PerspectiveWarper"))
 				{
-					Debug.Log ("Recognized as a perspectivewarper");
+					//Debug.Log ("Recognized as a perspectivewarper");
 					if(perspectiveJump(collidersThere[i],upDirection)){
-						Debug.Log ("Returning false");
+						//Debug.Log ("Returning false");
 						return false;
 					}
 				}else if(collidersThere[i].name == "USB")
@@ -193,18 +211,22 @@ public class PlayerMovement : MonoBehaviour {
 				return false;
 			}
 		}
-		
+		//Debug.Log ("No blockages!");
 		Vector3 belowCenter = new Vector3(x,y-1,z); //Check that there's something to stand on
 		bool cubeBelow = false;
 		Collider[] collidersBelow = Physics.OverlapSphere(targetPosition + belowCenter, 0.0f);
+		Vector3 logger = targetPosition + belowCenter;
+		//Debug.Log ("Checked for colliders at (" + logger.x + "," + logger.y + "," + logger.z + ") and found " + collidersBelow.Length); 
 		if(collidersBelow.Length!=0){
 			for(int i = 0; i<collidersBelow.Length; i++){
+				//Debug.Log (collidersBelow[i].name);
 				var parent = collidersBelow[i].transform.parent;
 				var name = "";
 				while (parent != null) {
 					name = parent.gameObject.name;
 					parent = parent.transform.parent;
 				}
+				//Debug.Log(parent + " " +name);
 				if(name.StartsWith("Walkway") || name.Equals("endpoint") || name.ToLower().StartsWith("rotator")){
 					cubeBelow=true;
 				}
@@ -216,7 +238,7 @@ public class PlayerMovement : MonoBehaviour {
 					cubeBelow=true;
 					spawnBall(collidersBelow[i]);
 				}
-				else if (collidersBelow[i].transform.parent.name.Equals("Ice"))
+				else if (collidersBelow[i].transform.parent!=null&&collidersBelow[i].transform.parent.name.Equals("Ice"))
 				{
 					//SLIDE
 					var endOfSlide = findEndOfIcePath(targetPosition, destination, upDirection);
