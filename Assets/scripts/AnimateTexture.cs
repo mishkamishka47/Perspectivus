@@ -10,12 +10,14 @@ public class AnimateTexture : MonoBehaviour {
 	private int tidalPosition;
 	private int tidalSign;
 	private int tideCycle;
+	private float expansion;
 	// Use this for initialization
 	void Start () {
 		shader = GetComponent<Renderer> ().material;
 		tidalPosition = 0;
 		tidalSign = 1;
 		tideCycle = 1;
+		expansion=1.0f;
 	}
 	
 	// Update is called once per frame
@@ -36,10 +38,25 @@ public class AnimateTexture : MonoBehaviour {
 				tideCycle=-1;
 			}
 			tidalPosition+=tideCycle;
+		}else if(type == AnimationType.Expand){
+			if(expansion<.98){
+				tidalSign=1;
+			}
+			if(expansion>1){
+				tidalSign=-1;
+			}
+			if(expansion>.985 && expansion <.995){
+				expansion = expansion+ (tidalSign*.0003f);
+			}else{
+				expansion = expansion+ ((tidalSign/2)*.0003f);
+			}
+
+			shader.SetTextureScale("_MainTex",new Vector2(expansion,expansion));
+			shader.SetTextureOffset ("_MainTex", new Vector2(-expansion,-expansion));
 		}
 	}
 
 	public enum AnimationType {
-		Tidal, Scroll
+		Tidal, Scroll, Expand
 	};
 }

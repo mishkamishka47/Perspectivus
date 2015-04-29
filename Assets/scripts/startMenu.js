@@ -17,7 +17,7 @@ function OnGUI(){
 		GUILayout.BeginArea(Rect(0, Screen.height*0.1, Screen.width, Screen.height*0.2));
 		GUILayout.Label("Perspectivus");
 		GUILayout.EndArea();
-		GUILayout.BeginArea(Rect(Screen.width*0.4, Screen.height*0.45, Screen.width*0.3, Screen.height*0.5));
+		GUILayout.BeginArea(Rect(Screen.width*0.45, Screen.height*0.45, Screen.width*0.55, Screen.height*0.5));
 		GUILayout.BeginHorizontal();
 		GUILayout.BeginVertical();
 		if(GUILayout.Button("Play")){
@@ -145,7 +145,7 @@ function OnGUI(){
 			GameObject.Find("pass").GetComponent(passValue).setValue((((worldLevelSelect-1)*7)+1));
 			GameObject.Find("pass").GetComponent(passValue).setLevel((((worldLevelSelect-1)*7)+1));
 			if(worldLevelSelect != nowlevel/7){
-				GameObject.Find("musicBox").GetComponent(music).changeClip(worldLevelSelect+1);
+				GameObject.Find("musicBox").GetComponent(music).changeClip(worldLevelSelect);
 			}
 			Application.LoadLevel("Level"+(((worldLevelSelect-1)*7)+1));
 		}
@@ -155,7 +155,7 @@ function OnGUI(){
 			GameObject.Find("pass").GetComponent(passValue).setValue((((worldLevelSelect-1)*7)+2));
 			GameObject.Find("pass").GetComponent(passValue).setLevel((((worldLevelSelect-1)*7)+2));
 			if(worldLevelSelect != nowlevel/7){
-				GameObject.Find("musicBox").GetComponent(music).changeClip(worldLevelSelect+1);
+				GameObject.Find("musicBox").GetComponent(music).changeClip(worldLevelSelect);
 			}
 			Application.LoadLevel("Level"+(((worldLevelSelect-1)*7)+2));
 		}
@@ -166,7 +166,7 @@ function OnGUI(){
 			GameObject.Find("pass").GetComponent(passValue).setLevel((((worldLevelSelect-1)*7)+3));
 			if(worldLevelSelect != nowlevel/7){
 				var mn = worldLevelSelect+1;
-				GameObject.Find("musicBox").GetComponent(music).changeClip(worldLevelSelect+1);
+				GameObject.Find("musicBox").GetComponent(music).changeClip(worldLevelSelect);
 			}
 			Application.LoadLevel("Level"+(((worldLevelSelect-1)*7)+3));
 		}
@@ -176,7 +176,7 @@ function OnGUI(){
 			GameObject.Find("pass").GetComponent(passValue).setValue((((worldLevelSelect-1)*7)+4));
 			GameObject.Find("pass").GetComponent(passValue).setLevel((((worldLevelSelect-1)*7)+4));
 			if(worldLevelSelect != nowlevel/7){
-				GameObject.Find("musicBox").GetComponent(music).changeClip(worldLevelSelect+1);
+				GameObject.Find("musicBox").GetComponent(music).changeClip(worldLevelSelect);
 			}
 			Application.LoadLevel("Level"+(((worldLevelSelect-1)*7)+4));
 		}
@@ -186,7 +186,7 @@ function OnGUI(){
 			GameObject.Find("pass").GetComponent(passValue).setValue((((worldLevelSelect-1)*7)+5));
 			GameObject.Find("pass").GetComponent(passValue).setLevel((((worldLevelSelect-1)*7)+5));
 			if(worldLevelSelect != nowlevel/7){
-				GameObject.Find("musicBox").GetComponent(music).changeClip(worldLevelSelect+1);
+				GameObject.Find("musicBox").GetComponent(music).changeClip(worldLevelSelect);
 			}
 			Application.LoadLevel("Level"+(((worldLevelSelect-1)*7)+5));
 		}
@@ -196,7 +196,7 @@ function OnGUI(){
 			GameObject.Find("pass").GetComponent(passValue).setValue((((worldLevelSelect-1)*7)+6));
 			GameObject.Find("pass").GetComponent(passValue).setLevel((((worldLevelSelect-1)*7)+6));
 			if(worldLevelSelect != nowlevel/7){
-				GameObject.Find("musicBox").GetComponent(music).changeClip(worldLevelSelect+1);
+				GameObject.Find("musicBox").GetComponent(music).changeClip(worldLevelSelect);
 			}
 			Application.LoadLevel("Level"+(((worldLevelSelect-1)*7)+6));
 		}
@@ -206,7 +206,7 @@ function OnGUI(){
 			GameObject.Find("pass").GetComponent(passValue).setValue((((worldLevelSelect-1)*7)+7));
 			GameObject.Find("pass").GetComponent(passValue).setLevel((((worldLevelSelect-1)*7)+7));
 			if(worldLevelSelect != nowlevel/7){
-				GameObject.Find("musicBox").GetComponent(music).changeClip(worldLevelSelect+1);
+				GameObject.Find("musicBox").GetComponent(music).changeClip(worldLevelSelect);
 			}
 			Application.LoadLevel("Level"+(((worldLevelSelect-1)*7)+7));
 		}
